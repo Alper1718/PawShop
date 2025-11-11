@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5hb5eo2hjawj"]
+
+[ext_resource type="Script" uid="uid://bwvcbh028ww4m" path="res://Code/Main_Menu/main_menu_display.gd" id="1_5tnr4"]
+[ext_resource type="FontFile" uid="uid://ceyl04ojpjq8e" path="res://Fonts/Ubuntu/Ubuntu-Bold.ttf" id="2_nei4n"]
+
+[node name="MainMenuDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5tnr4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 366.0
+offset_right = 719.0
+offset_bottom = 916.0
+
+[node name="WindowTypeSwitch" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_nei4n")
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+button_pressed = true
+text = "Fullscreen"
+flat = true
+
+[node name="WindowSizeSwitch" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_nei4n")
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "1920*1080"
+flat = true
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_nei4n")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+flat = true
+
+[connection signal="toggled" from="VBoxContainer/WindowTypeSwitch" to="." method="_on_window_type_switch_toggled"]
+[connection signal="toggled" from="VBoxContainer/WindowSizeSwitch" to="." method="_on_window_size_switch_toggled"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

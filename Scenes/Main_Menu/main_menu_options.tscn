@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnfyr33btwb5j"]
+
+[ext_resource type="Script" uid="uid://dugwlf55f2thw" path="res://Code/Main_Menu/main_menu_options.gd" id="1_wqm38"]
+[ext_resource type="FontFile" uid="uid://ceyl04ojpjq8e" path="res://Fonts/Ubuntu/Ubuntu-Bold.ttf" id="2_qxm5r"]
+
+[node name="Main_Menu_Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqm38")
+
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 366.0
+offset_right = 719.0
+offset_bottom = 916.0
+
+[node name="Audio" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_qxm5r")
+theme_override_font_sizes/font_size = 32
+text = "Audio"
+flat = true
+
+[node name="Display" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_qxm5r")
+theme_override_font_sizes/font_size = 32
+text = "Display"
+flat = true
+
+[node name="Back" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_qxm5r")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="OptionsContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="OptionsContainer/Display" to="." method="_on_display_pressed"]
+[connection signal="pressed" from="OptionsContainer/Back" to="." method="_on_back_pressed"]

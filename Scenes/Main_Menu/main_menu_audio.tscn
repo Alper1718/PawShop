@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://xm8wvavcfipk"]
+
+[ext_resource type="Script" uid="uid://cm4aai6pcu25l" path="res://Code/Main_Menu/main_menu_audio.gd" id="1_ssiho"]
+
+[node name="MainMenuAudio" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ssiho")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 265.0
+offset_right = 399.0
+offset_bottom = 815.0
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+value = 50.0
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+value = 100.0
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundVolumeSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+value = 100.0
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

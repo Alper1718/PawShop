@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvwx46sj8ofun"]
+
+[ext_resource type="Script" uid="uid://bxbus8hpqsfnr" path="res://Code/Main_Menu/main_menu.gd" id="1_hg3ed"]
+[ext_resource type="Texture2D" uid="uid://pnpkglk7qpdr" path="res://Assets/logo.png" id="2_jm01e"]
+[ext_resource type="Script" uid="uid://b8aa1hmxj8d5j" path="res://Code/Main_Menu/texture_rect.gd" id="3_g08es"]
+[ext_resource type="Texture2D" uid="uid://deg8hjwdu1kcw" path="res://Assets/Main_Menu/background_base.jpeg" id="4_k42k6"]
+[ext_resource type="Texture2D" uid="uid://cthvxynt62ccv" path="res://Assets/Main_Menu/background_glitch_2.jpeg" id="5_v2nl8"]
+[ext_resource type="Texture2D" uid="uid://b4rhy6eittwxp" path="res://Assets/Main_Menu/background_glitch_1.jpeg" id="6_fm4br"]
+[ext_resource type="Texture2D" uid="uid://lwiqhov5uono" path="res://Assets/Main_Menu/background_glitch_3.jpeg" id="7_eoxsl"]
+[ext_resource type="Texture2D" uid="uid://bjxxxvnl8koqu" path="res://Assets/Main_Menu/background_glitch_4.jpeg" id="8_7ifdb"]
+[ext_resource type="Texture2D" uid="uid://cibfxjwidoo1t" path="res://Assets/Main_Menu/background_glitch_5.jpeg" id="9_6adpf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hg3ed")
+
+[node name="MenuButtons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015625
+anchor_top = 1.0
+anchor_right = 0.202604
+anchor_bottom = 1.51944
+offset_top = -815.0
+offset_right = 10.0
+offset_bottom = -826.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="StartGame" type="Button" parent="MenuButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "START GAME
+"
+flat = true
+
+[node name="Options" type="Button" parent="MenuButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+flat = true
+
+[node name="QuitGame" type="Button" parent="MenuButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "QUIT GAME"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -905.0
+offset_top = 92.0
+offset_right = -587.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "THE GLUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Synema" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1788.0
+offset_top = 941.0
+offset_right = 1908.0
+offset_bottom = 1061.0
+icon = ExtResource("2_jm01e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0234375
+anchor_top = -0.037037
+anchor_right = 0.976563
+anchor_bottom = 0.962963
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 3
+stretch_mode = 3
+script = ExtResource("3_g08es")
+background_textures = Array[Texture2D]([ExtResource("4_k42k6"), ExtResource("5_v2nl8"), ExtResource("6_fm4br"), ExtResource("7_eoxsl"), ExtResource("8_7ifdb"), ExtResource("9_6adpf")])
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MenuButtons/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MenuButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MenuButtons/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="Synema" to="." method="_on_synema_pressed"]

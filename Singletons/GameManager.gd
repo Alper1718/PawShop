@@ -1,0 +1,87 @@
+extends Node
+
+var money: int = 100
+var day: int = 1
+var dogs: Array = []
+var pregnancies: Array = []
+
+const RENT_COST := 30
+const FOOD_COST := 10
+
+var current_scene: Node
+
+func _ready() -> void:
+	randomize()
+	print("GameManager ready. Starting Day ", day)
+
+func change_scene(path: String) -> void:
+	if current_scene:
+		current_scene.queue_free()
+	var next_scene = load(path).instantiate()
+	get_tree().root.add_child(next_scene)
+	current_scene = next_scene
+
+func breed(parent1: Resource, parent2: Resource) -> Dictionary:
+	var child: Dictionary = {}
+
+	for stat in ["eyes", "fur", "nose", "ears"]:
+		var avg = (parent1.get(stat) + parent2.get(stat)) / 2.0
+		var val = avg + randf_range(-1.5, 1.5)
+		if randf() < 0.1:
+			val += randf_range(-2, 2)
+		child[stat] = clampf(val, 0.0, 10.0)
+
+	child["cuteness"] = (child["eyes"] + child["fur"] + child["nose"] + child["ears"]) * 2.5
+
+	var avg_cute = (parent1.cuteness + parent2.cuteness) / 2.0
+	var base_risk = pow(avg_cute / 100.0, 2.2) * 0.75
+	var final_risk = clampf(base_risk, 0.0, 0.95)
+
+	child["stillborn"] = randf() < final_risk
+	child["gestation_days"] = round(2.0 + (avg_cute / 100.0) * 3.0)
+
+	pregnancies.append({
+		"child": child,
+		"days_left": child["gestation_days"]
+	})
+
+	return child
+
+func next_day() -> void:
+	day += 1
+	print("\nDay", day, "begins.")
+	handle_pregnancies()
+	pay_expenses()
+
+func handle_pregnancies() -> void:
+	var born_today: Array = []
+	for preg in pregnancies:
+		preg["days_left"] -= 1
+		if preg["days_left"] <= 0:
+			born_today.append(preg)
+
+	for birth in born_today:
+		pregnancies.erase(birth)
+		var pup = birth["child"]
+		if pup["stillborn"]:
+			print("A puppy was stillborn. Too cute for this world.")
+		else:
+			print("A new puppy was born!")
+			add_dog(create_dog_from_dict(pup))
+
+func pay_expenses() -> void:
+	var expenses = RENT_COST + FOOD_COST * dogs.size()
+	money -= expenses
+	print("Expenses paid:", -expenses, "→ Money left:", money)
+	if money < 0:
+		print("Bankrupt! Game Over.")
+
+func add_dog(dog: Resource) -> void:
+	dogs.append(dog)
+
+func create_dog_from_dict(data: Dictionary) -> Resource:
+	var dog = Dog.new()
+	for key in data.keys():
+		if dog.has_property(key):
+			dog.set(key, data[key])
+	return dog
