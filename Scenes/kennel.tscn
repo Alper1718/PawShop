@@ -1,13 +1,17 @@
-[gd_scene format=3 uid="uid://df0vft2odungw"]
+[gd_scene load_steps=3 format=3 uid="uid://df0vft2odungw"]
+
+[ext_resource type="Script" uid="uid://cdvdjwtocdvf7" path="res://Code/kennel.gd" id="1_p5wrj"]
+[ext_resource type="Script" uid="uid://b7lc6ec2oxhee" path="res://Code/doggo_generator_for_testing_purposes_remove.gd" id="2_46r5o"]
 
 [node name="Kennel" type="Node2D"]
+script = ExtResource("1_p5wrj")
 
 [node name="DogsInfoBox" type="VBoxContainer" parent="."]
 offset_left = 1440.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Label" type="Label" parent="DogsInfoBox"]
+[node name="NameLabel" type="Label" parent="DogsInfoBox"]
 custom_minimum_size = Vector2(26.655, 169)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
@@ -19,75 +23,70 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FeaturesColumn" type="VBoxContainer" parent="DogsInfoBox/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="DogsInfoBox/HBoxContainer/FeaturesColumn"]
-custom_minimum_size = Vector2(0, 69)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Özellik"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="DogsInfoBox/HBoxContainer/FeaturesColumn"]
-custom_minimum_size = Vector2(0, 69)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Özellik"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="DogsInfoBox/HBoxContainer/FeaturesColumn"]
-custom_minimum_size = Vector2(0, 69)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Özellik"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="DogsInfoBox/HBoxContainer/FeaturesColumn"]
-custom_minimum_size = Vector2(0, 69)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Özellik"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="DataColumn" type="VBoxContainer" parent="DogsInfoBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+[node name="EyesLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
 custom_minimum_size = Vector2(0, 69)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Veri"
+text = "Eyes:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+[node name="FurLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
 custom_minimum_size = Vector2(0, 69)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Veri"
+text = "Fur:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+[node name="NoseLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
 custom_minimum_size = Vector2(0, 69)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Veri"
+text = "Nose:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+[node name="EarsLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
 custom_minimum_size = Vector2(0, 69)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Veri"
+text = "Ears"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CutenessValueLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 69)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cuteness:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EstValueDataLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 69)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Estimated Value: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpacerLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GestationLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 69)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Gestation Left: (To Be Implemented)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -100,63 +99,85 @@ theme_override_font_sizes/font_size = 32
 text = "Breed Button"
 flat = true
 
-[node name="KennelPart" type="VBoxContainer" parent="."]
+[node name="CagesContainer" type="GridContainer" parent="."]
 offset_right = 1440.0
 offset_bottom = 1080.0
+columns = 3
 
-[node name="FirstRow" type="HBoxContainer" parent="KennelPart"]
+[node name="Dog1Button" type="Button" parent="CagesContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Dog1Button" type="Button" parent="KennelPart/FirstRow"]
-layout_mode = 2
-size_flags_horizontal = 3
 flat = true
 
-[node name="Dog2Button" type="Button" parent="KennelPart/FirstRow"]
+[node name="Dog2Button" type="Button" parent="CagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-flat = true
-
-[node name="Dog3Button" type="Button" parent="KennelPart/FirstRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-flat = true
-
-[node name="SecondRow" type="HBoxContainer" parent="KennelPart"]
-layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Dog4Button" type="Button" parent="KennelPart/SecondRow"]
-layout_mode = 2
-size_flags_horizontal = 3
 flat = true
 
-[node name="Dog5Button" type="Button" parent="KennelPart/SecondRow"]
+[node name="Dog3Button" type="Button" parent="CagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-flat = true
-
-[node name="Dog6Button" type="Button" parent="KennelPart/SecondRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-flat = true
-
-[node name="ThirdRow" type="HBoxContainer" parent="KennelPart"]
-layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Dog7Button" type="Button" parent="KennelPart/ThirdRow"]
-layout_mode = 2
-size_flags_horizontal = 3
 flat = true
 
-[node name="Dog8Button" type="Button" parent="KennelPart/ThirdRow"]
+[node name="Dog4Button" type="Button" parent="CagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 flat = true
 
-[node name="Dog9Button" type="Button" parent="KennelPart/ThirdRow"]
+[node name="Dog5Button" type="Button" parent="CagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 flat = true
+
+[node name="Dog6Button" type="Button" parent="CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog7Button" type="Button" parent="CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog8Button" type="Button" parent="CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog9Button" type="Button" parent="CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="PreviousAreaButton" type="Button" parent="."]
+offset_top = 474.0
+offset_right = 133.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "Previous"
+
+[node name="NextAreaButton" type="Button" parent="."]
+offset_left = 1263.0
+offset_top = 474.0
+offset_right = 1395.0
+offset_bottom = 544.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "Next"
+
+[node name="DoggoGeneratorForTestingPurposesRemove" type="Node" parent="."]
+script = ExtResource("2_46r5o")

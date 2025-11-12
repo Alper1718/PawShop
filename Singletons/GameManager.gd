@@ -85,3 +85,11 @@ func create_dog_from_dict(data: Dictionary) -> Resource:
 		if dog.has_property(key):
 			dog.set(key, data[key])
 	return dog
+	
+func estimate_doggo_price(doggo: Dog) -> int:
+	const BASE_MIN_PRICE := 300
+	const BASE_MAX_PRICE := 5000
+	var frac: float = clamp(doggo.cuteness / 100.0, 0.0, 1.0)
+	var price_frac := pow(frac, 2.0)
+	var raw_price := BASE_MIN_PRICE + (BASE_MAX_PRICE - BASE_MIN_PRICE) * price_frac
+	return int(ceil(raw_price))
