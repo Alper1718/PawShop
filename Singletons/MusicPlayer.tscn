@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dde8a7asf1s7e"]
+
+[ext_resource type="Script" uid="uid://blvfhy06t2wu1" path="res://Singletons/music_player.gd" id="1_mytli"]
+
+[node name="MusicPlayer" type="Node"]
+script = ExtResource("1_mytli")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

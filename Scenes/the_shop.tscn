@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://h57b0tmeqrf2"]
+
+[ext_resource type="Script" uid="uid://bae5wbvh6hhbc" path="res://Code/the_shop.gd" id="1_jd8ym"]
+[ext_resource type="Texture2D" uid="uid://bv5281gg3863s" path="res://Assets/Backgrounds/Shop_morning_background (3).jpeg" id="1_qdt25"]
+[ext_resource type="Texture2D" uid="uid://cl2s511y2sirl" path="res://Assets/Toys (3).png" id="2_2es5p"]
+[ext_resource type="Texture2D" uid="uid://dk346flqvujhp" path="res://Assets/Toys (1).png" id="3_jd8ym"]
+[ext_resource type="Texture2D" uid="uid://4b4qrgixqs6k" path="res://Assets/Toys (2).png" id="4_n8gmd"]
+[ext_resource type="Texture2D" uid="uid://dsehqenij4cye" path="res://Assets/Clock.png" id="6_n8gmd"]
+[ext_resource type="FontFile" uid="uid://bwfmdes4b86mi" path="res://Fonts/Orbitron/Orbitron-VariableFont_wght.ttf" id="7_jcjbr"]
+
+[node name="TheShop" type="Node2D"]
+script = ExtResource("1_jd8ym")
+
+[node name="ShopMorningBackground(3)" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_qdt25")
+
+[node name="Toys" type="Node" parent="."]
+
+[node name="Toys3" type="Sprite2D" parent="Toys"]
+position = Vector2(1478, 940)
+texture = ExtResource("2_2es5p")
+region_enabled = true
+region_rect = Rect2(1403.34, 806.998, 225.572, 242.281)
+
+[node name="Toys1" type="Sprite2D" parent="Toys"]
+position = Vector2(1595, 956)
+texture = ExtResource("3_jd8ym")
+region_enabled = true
+region_rect = Rect2(1470.75, 830.097, 308.36, 243.041)
+
+[node name="Toys2" type="Sprite2D" parent="Toys"]
+position = Vector2(1756, 959)
+texture = ExtResource("4_n8gmd")
+region_enabled = true
+region_rect = Rect2(1654.38, 828.645, 265.62, 238.017)
+
+[node name="ToysButton" type="Button" parent="Toys"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 1370.0
+offset_top = 839.0
+offset_right = 1892.0
+offset_bottom = 1083.0
+flat = true
+
+[node name="Clock" type="Sprite2D" parent="."]
+position = Vector2(1810, 64)
+scale = Vector2(0.263789, 0.335702)
+texture = ExtResource("6_n8gmd")
+
+[node name="TimeLabel" type="Label" parent="Clock"]
+offset_left = -166.8
+offset_top = -83.4073
+offset_right = 163.2
+offset_bottom = 73.5927
+theme_override_fonts/font = ExtResource("7_jcjbr")
+theme_override_font_sizes/font_size = 124
+text = "11:58"
+
+[connection signal="pressed" from="Toys/ToysButton" to="." method="_on_toys_button_pressed"]

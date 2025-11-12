@@ -7,6 +7,8 @@ extends Node2D
 
 var selected_doggo: Dog = null
 var cage_index_start := 0
+var breed_mode: bool= false
+var first_parent: Dog = null
 const CAGES_PER_PAGE := 9
 
 func _ready():
@@ -21,7 +23,7 @@ func update_info_panel(doggo: Dog) -> void:
 	info_panel.get_node("EyesLabel").text = "Eyes: " + str(snappedf(doggo.eyes, 0.1))
 	info_panel.get_node("FurLabel").text = "Fur: " + str(snappedf(doggo.fur,0.1))
 	info_panel.get_node("NoseLabel").text = "Nose: " + str(snappedf(doggo.nose, 0.1))
-	info_panel.get_node("EarsLabel").text = "Ears: " + str(snappedf(doggo.ears, 0.1))
+	info_panel.get_node("TailLabel").text = "Tail: " + str(snappedf(doggo.tail, 0.1))
 	info_panel.get_node("CutenessValueLabel").text = "Cuteness: " + str(int(doggo.cuteness))
 	info_panel.get_node("EstValueDataLabel").text = "Est. Value: " + str(int(GameManager.estimate_doggo_price(doggo)))
 
@@ -58,7 +60,23 @@ func update_cages() -> void:
 
 func _on_cage_pressed(index: int) -> void:
 	var doggo = GameManager.dogs[index]
-	update_info_panel(doggo)
+	if breed_mode:
+		if doggo == first_parent:
+			print("Cannot breed a doggo with itself!")
+			return
+		var child = GameManager.breed(first_parent, doggo)
+
+		if child.stillborn:
+			print("A puppy was stillborn. Too cute for this world.")
+		else:
+			print("A new puppy was born instantly!") #TODO: Implement actual day cycle.
+			GameManager.add_dog(child)
+		
+		breed_mode = false
+		first_parent = null
+	else:
+		update_info_panel(doggo)
+
 
 func _on_next_pressed() -> void:
 	var max_index = max(0, GameManager.dogs.size() - CAGES_PER_PAGE)
@@ -79,3 +97,13 @@ func animate_cages_slide(direction: int) -> void:
 		tween.tween_property(
 			cage, "position:x", cage.position.x + direction * 100, 0.2
 		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func _on_breed_button_pressed() -> void:
+	if selected_doggo == null:
+		print("Select a doggo first!")
+		return
+	
+	breed_mode = true
+	first_parent = selected_doggo
+	print("Breed mode activated. Select a second doggo to breed with", first_parent.doggo_name)

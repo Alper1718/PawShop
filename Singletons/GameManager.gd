@@ -21,31 +21,46 @@ func change_scene(path: String) -> void:
 	get_tree().root.add_child(next_scene)
 	current_scene = next_scene
 
-func breed(parent1: Resource, parent2: Resource) -> Dictionary:
-	var child: Dictionary = {}
+func breed(parent1: Dog, parent2: Dog) -> Dog:
+	var child := Dog.new()
+	child.doggo_name = "Puppy"
 
-	for stat in ["eyes", "fur", "nose", "ears"]:
-		var avg = (parent1.get(stat) + parent2.get(stat)) / 2.0
-		var val = avg + randf_range(-1.5, 1.5)
-		if randf() < 0.1:
-			val += randf_range(-2, 2)
-		child[stat] = clampf(val, 0.0, 10.0)
+	for stat in ["eyes", "fur", "nose", "tail"]:
+		var val1 = parent1.get(stat)
+		var val2 = parent2.get(stat)
+		
+		var high = max(val1, val2)
+		var low = min(val1, val2)
 
-	child["cuteness"] = (child["eyes"] + child["fur"] + child["nose"] + child["ears"]) * 2.5
+		var bias := pow(randf(), 0.5)
+		var stat_val :float= lerp(low, high, bias)
+		
+		if randf() < 0.15:
+			stat_val += randf_range(0.0, 2.0)
+		else:
+			stat_val += randf_range(-0.5, 0.5)
+		
+		stat_val = clampf(stat_val, 0.0, 10.0)
+		child.set(stat, stat_val)
 
-	var avg_cute = (parent1.cuteness + parent2.cuteness) / 2.0
-	var base_risk = pow(avg_cute / 100.0, 2.2) * 0.75
-	var final_risk = clampf(base_risk, 0.0, 0.95)
+	child.cuteness = (child.eyes + child.fur + child.nose + child.tail) * 2.5
 
-	child["stillborn"] = randf() < final_risk
-	child["gestation_days"] = round(2.0 + (avg_cute / 100.0) * 3.0)
+	var avg_cute := (parent1.cuteness + parent2.cuteness) / 2.0
+	var base_risk := pow(avg_cute / 100.0, 2.2) * 0.75
+	var final_risk := clampf(base_risk, 0.0, 0.95)
+	child.stillborn = randf() < final_risk
+	child.gestation_days = round(2.0 + (avg_cute / 100.0) * 3.0)
 
 	pregnancies.append({
 		"child": child,
-		"days_left": child["gestation_days"]
+		"days_left": child.gestation_days
 	})
 
+	print("Pregnancy started! Gestation:", child.gestation_days, "days.")
 	return child
+
+
+
 
 func next_day() -> void:
 	day += 1
@@ -55,6 +70,7 @@ func next_day() -> void:
 
 func handle_pregnancies() -> void:
 	var born_today: Array = []
+
 	for preg in pregnancies:
 		preg["days_left"] -= 1
 		if preg["days_left"] <= 0:
@@ -63,11 +79,13 @@ func handle_pregnancies() -> void:
 	for birth in born_today:
 		pregnancies.erase(birth)
 		var pup = birth["child"]
-		if pup["stillborn"]:
+
+		if pup.stillborn:
 			print("A puppy was stillborn. Too cute for this world.")
 		else:
 			print("A new puppy was born!")
-			add_dog(create_dog_from_dict(pup))
+			add_dog(pup)
+
 
 func pay_expenses() -> void:
 	var expenses = RENT_COST + FOOD_COST * dogs.size()
