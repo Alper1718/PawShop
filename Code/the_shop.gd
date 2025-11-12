@@ -1,15 +1,27 @@
 extends Node2D
 
-@onready var toys := [$Toys/Toys1, $Toys/Toys2, $Toys/Toys3]
+@onready
+var toys := [$Toys/Toys1, $Toys/Toys2, $Toys/Toys3]
+@onready
+var clock_label := $Clock/TimeLabel
 var original_scales := {}
 
 func _ready():
+	GameManager.connect("day_changed", Callable(self, "_on_day_changed"))
 	for toy in toys:
 		original_scales[toy] = toy.scale
 
 func _process(delta: float) -> void:
-	pass
+	clock_label.text = get_formatted_time()
 
+func get_formatted_time() -> String:
+	var hour_str = str(GameManager.hour).pad_zeros(2)
+	var minute_str = str(int(GameManager.minute)).pad_zeros(2)
+	return hour_str + ":" + minute_str #+ " | Day " + str(GameManager.day)
+
+
+func _on_day_changed(day: int) -> void:
+	pass
 
 func _on_toys_button_pressed() -> void:
 	$"/root/MusicPlayer".play_toy_noise()

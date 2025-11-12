@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://df0vft2odungw"]
+[gd_scene load_steps=4 format=3 uid="uid://df0vft2odungw"]
 
 [ext_resource type="Script" uid="uid://cdvdjwtocdvf7" path="res://Code/kennel.gd" id="1_p5wrj"]
 [ext_resource type="Script" uid="uid://b7lc6ec2oxhee" path="res://Code/doggo_generator_for_testing_purposes_remove.gd" id="2_46r5o"]
+[ext_resource type="Texture2D" uid="uid://dfvshn24gtm5b" path="res://Assets/KennelUI/Adsız tasarım(3).png" id="3_rcd5d"]
 
 [node name="Kennel" type="Node2D"]
 script = ExtResource("1_p5wrj")
 
 [node name="DogsInfoBox" type="VBoxContainer" parent="."]
-offset_left = 1440.0
+offset_left = 1258.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="NameLabel" type="Label" parent="DogsInfoBox"]
-custom_minimum_size = Vector2(26.655, 169)
+custom_minimum_size = Vector2(31, 287.65)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Doggo Name"
@@ -100,7 +101,7 @@ text = "Breed Button"
 flat = true
 
 [node name="CagesContainer" type="GridContainer" parent="."]
-offset_right = 1440.0
+offset_right = 1258.0
 offset_bottom = 1080.0
 columns = 3
 
@@ -181,5 +182,10 @@ text = "Next"
 
 [node name="DoggoGeneratorForTestingPurposesRemove" type="Node" parent="."]
 script = ExtResource("2_46r5o")
+
+[node name="AdsızTasarım(3)" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960, 540)
+texture = ExtResource("3_rcd5d")
 
 [connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]

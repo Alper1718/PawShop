@@ -5,14 +5,53 @@ var day: int = 1
 var dogs: Array = []
 var pregnancies: Array = []
 
+var hour: int = 8
+var minute: int = 0
+const HOURS_PER_DAY := 24
+const MINUTES_PER_HOUR := 60
+var time_speed: float = 1.0 # 1 real second = 1 in-game minute
+var _time_accumulator: float = 0.0
+
+signal day_changed
+signal minute_changed
+
 const RENT_COST := 30
 const FOOD_COST := 10
-
 var current_scene: Node
 
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
+	set_process(true)
+
+
+func _process(delta: float) -> void:
+	_time_accumulator += delta * time_speed
+	while _time_accumulator >= 1.0:
+		_time_accumulator -= 1.0
+		advance_minute()
+
+func advance_minute() -> void:
+	minute += 1
+	if minute >= MINUTES_PER_HOUR:
+		minute = 0
+		hour += 1
+	if hour >= HOURS_PER_DAY:
+		hour = 0
+		next_day()
+
+	emit_signal("minute_changed", hour, minute)
+
+func advance_time(delta: float) -> void:
+	minute += delta * time_speed
+	if minute >= MINUTES_PER_HOUR:
+		hour += int(minute / MINUTES_PER_HOUR)
+		minute = minute % MINUTES_PER_HOUR
+
+	if hour >= HOURS_PER_DAY:
+		hour = hour % HOURS_PER_DAY
+		next_day()
+
 
 func change_scene(path: String) -> void:
 	if current_scene:
@@ -67,6 +106,7 @@ func next_day() -> void:
 	print("\nDay", day, "begins.")
 	handle_pregnancies()
 	pay_expenses()
+	emit_signal("day_changed", day)
 
 func handle_pregnancies() -> void:
 	var born_today: Array = []
