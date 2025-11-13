@@ -32,9 +32,9 @@ func get_formatted_time() -> String:
 func _update_background(hour: int) -> void:
 	var target_bg: Node2D = morning_bg
 
-	if hour >= 6 and hour < 13:
+	if hour >= 6 and hour < 12:
 		target_bg = morning_bg
-	elif hour >= 13 and hour < 16:
+	elif hour >= 12 and hour < 15:
 		target_bg = evening_bg
 	else:
 		target_bg = night_bg
