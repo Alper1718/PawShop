@@ -14,14 +14,14 @@ var kennel_scene: Node = null
 
 const DOG_OFFSETS := {
 	"small": Vector2(250, 170),
-	"middle": Vector2(390, 150),
-	"big": Vector2(610, 180)
+	"middle": Vector2(135, 110),
+	"big": Vector2(1000, 450)
 }
 
 const DOG_SCALES := {
 	"small": 0.31,
-	"middle": 0.38,
-	"big": 0.31
+	"middle": 0.54,
+	"big": 0.45
 }
 
 func _ready():
@@ -46,7 +46,7 @@ func setup(dog1: Dog, dog2: Dog, kennel_ref: Node) -> void:
 	_update_info(second_panel, second_visual_container, dog2, second_offset)
 
 	var gestation_days = GameManager.estimate_gestation(dog1, dog2)
-	gestation_label.text = "Gestation Period:\n " + str(gestation_days) + " hours."
+	gestation_label.text = "Gestation Period:\n " + str(gestation_days) + " days"
 	_adjust_z_index(self)
 
 

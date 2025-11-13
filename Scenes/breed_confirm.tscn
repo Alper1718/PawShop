@@ -13,7 +13,6 @@ offset_bottom = 40.0
 script = ExtResource("1_o65qi")
 
 [node name="FirstDogInfoBox" type="VBoxContainer" parent="."]
-layout_mode = 0
 offset_left = 1440.0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -90,7 +89,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SecondDogInfoBox" type="VBoxContainer" parent="."]
-layout_mode = 0
 offset_right = 480.0
 offset_bottom = 1080.0
 
@@ -198,7 +196,6 @@ region_enabled = true
 region_rect = Rect2(102.428, 166.667, 182.766, 79.6965)
 
 [node name="CancelButton" type="Button" parent="."]
-layout_mode = 0
 offset_left = 857.8
 offset_top = 958.6
 offset_right = 982.8
