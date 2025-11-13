@@ -29,7 +29,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EyesLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
+custom_minimum_size = Vector2(0, 62.095)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Eyes:"
@@ -37,7 +37,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FurLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
+custom_minimum_size = Vector2(0, 104.305)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Fur:"
@@ -45,7 +45,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NoseLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
+custom_minimum_size = Vector2(0, 73.71)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Nose:"
@@ -53,7 +53,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TailLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
+custom_minimum_size = Vector2(0, 94.18)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Tail:"
@@ -69,7 +69,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EstValueDataLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
+custom_minimum_size = Vector2(0, 97.7)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Estimated Value: "
@@ -83,109 +83,92 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GestationLabel" type="Label" parent="DogsInfoBox/HBoxContainer/DataColumn"]
-custom_minimum_size = Vector2(0, 69)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Gestation Left: (To Be Implemented)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="BreedButton" type="Button" parent="."]
-offset_left = 1698.0
-offset_top = 896.0
-offset_right = 1903.0
-offset_bottom = 941.0
+offset_left = 1426.0
+offset_top = 855.0
+offset_right = 1742.0
+offset_bottom = 997.0
+scale = Vector2(1.12, 1.08)
 theme_override_font_sizes/font_size = 32
-text = "Breed Button"
+text = "Breed"
 flat = true
-
-[node name="CagesContainer" type="GridContainer" parent="."]
-offset_right = 1258.0
-offset_bottom = 1080.0
-columns = 3
-
-[node name="Dog1Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog2Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog3Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog4Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog5Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog6Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog7Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog8Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="Dog9Button" type="Button" parent="CagesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-flat = true
-
-[node name="PreviousAreaButton" type="Button" parent="."]
-offset_top = 474.0
-offset_right = 133.0
-offset_bottom = 544.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "Previous"
-
-[node name="NextAreaButton" type="Button" parent="."]
-offset_left = 1263.0
-offset_top = 474.0
-offset_right = 1395.0
-offset_bottom = 544.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "Next"
+metadata/_edit_use_anchors_ = true
 
 [node name="DoggoGeneratorForTestingPurposesRemove" type="Node" parent="."]
 script = ExtResource("2_46r5o")
 
-[node name="AdsızTasarım(3)" type="Sprite2D" parent="."]
+[node name="InfoPanel" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(960, 540)
 texture = ExtResource("3_rcd5d")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(1, 1)
+offset_right = 1258.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+scroll_deadzone = 1
+
+[node name="CagesContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Dog1Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog2Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog3Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog4Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog5Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog6Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog7Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog8Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+
+[node name="Dog9Button" type="Button" parent="ScrollContainer/CagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
 
 [connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
