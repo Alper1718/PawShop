@@ -85,6 +85,8 @@ func _update_info(panel: Node, visual_container: Node, doggo: Dog, custom_offset
 			sprite.centered = true
 			sprite.position = base_offset + custom_offset
 			sprite.scale = Vector2.ONE * scale_factor
+			if feature == "fur" or feature == "tail":
+						sprite.modulate = doggo.hsv
 			visual_container.add_child(sprite)
 
 

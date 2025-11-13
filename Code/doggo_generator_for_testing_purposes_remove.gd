@@ -23,4 +23,5 @@ func generate_random_doggo(index: int) -> Dog:
 	doggo.tail = randf_range(min_stat_value, max_stat_value)
 	doggo.size =  randf_range(min_stat_value, max_stat_value)
 	doggo.cuteness = (doggo.eyes + doggo.fur + doggo.nose + doggo.tail) * 2.5
+	doggo.hsv = Color(randf(), randf(), randf())
 	return doggo

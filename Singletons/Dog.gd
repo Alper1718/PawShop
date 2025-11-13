@@ -11,3 +11,4 @@ class_name Dog
 @export var stillborn: bool = false
 @export var gestation_days: int = 0
 @export var in_gestation: bool = false
+@export var hsv: Color = Color(0.0, 0.0, 1.0)

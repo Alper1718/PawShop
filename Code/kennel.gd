@@ -67,7 +67,7 @@ func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
 
 func update_info_panel(doggo: Dog) -> void:
 	selected_doggo = doggo
-	get_node("DogsInfoBox/NameLabel").text = str(doggo.size)
+	get_node("DogsInfoBox/NameLabel").text = str(doggo.doggo_name)
 	info_panel.get_node("EyesLabel").text = "Eyes: " + str(snappedf(doggo.eyes, 0.1))
 	info_panel.get_node("FurLabel").text = "Fur: " + str(snappedf(doggo.fur, 0.1))
 	info_panel.get_node("NoseLabel").text = "Nose: " + str(snappedf(doggo.nose, 0.1))
@@ -85,6 +85,7 @@ func update_info_panel(doggo: Dog) -> void:
 
 
 func update_cages() -> void:
+	_remove_duplicate_puppies()
 	for child in cages_grid.get_children():
 		child.queue_free()
 
@@ -166,8 +167,10 @@ func update_cages() -> void:
 					sprite.position = offset
 					sprite.scale = Vector2.ONE * scale_factor
 					dog_visual.add_child(sprite)
+					if feature == "fur" or feature == "tail":
+						sprite.modulate = doggo.hsv
+						
 			bg_texture.size = cages_grid.size
-
 			btn.add_child(dog_visual)
 			cages_grid.add_child(btn)
 
@@ -224,3 +227,20 @@ func _is_dog_in_gestation(doggo: Dog) -> bool:
 		if preg.has("child") and doggo == preg["child"]:
 			return true
 	return false
+
+func _remove_duplicate_puppies() -> void:
+	var seen: Array = []
+	var duplicates: Array = []
+
+	for doggo in GameManager.dogs:
+		var key := str(snapped(doggo.eyes, 0.01)) + "-" + str(snapped(doggo.fur, 0.01)) + "-" + str(snapped(doggo.nose, 0.01)) + "-" + str(snapped(doggo.tail, 0.01)) + "-" + str(snapped(doggo.size, 0.01)) + "-" + str(snapped(doggo.hsv.h, 0.01)) + "-" + str(snapped(doggo.hsv.s, 0.01)) + "-" + str(snapped(doggo.hsv.v, 0.01)) #Mmm long
+
+		
+		if key in seen:
+			duplicates.append(doggo)
+		else:
+			seen.append(key)
+	
+	for dup in duplicates:
+		GameManager.dogs.erase(dup)
+		print("Removed duplicate puppy:", dup.doggo_name)
