@@ -3,19 +3,37 @@ extends Node2D
 @onready var info_panel := $DogsInfoBox/HBoxContainer/DataColumn
 @onready var cages_grid := $ScrollContainer/CagesContainer
 @onready var cages_scroll := $ScrollContainer
+@onready var bg_texture := $ScrollContainer/BackgroundTextureRect
+
 var selected_doggo: Dog = null
 var breed_mode: bool = false
 var first_parent: Dog = null
 
 const GRID_ROWS := 3
 
+const DOG_OFFSETS := {
+	"small": Vector2(-250, 50),
+	"middle": Vector2(135, 110),
+	"big": Vector2(460, 150)
+}
+
+const DOG_SCALES := {
+	"small": 0.69,
+	"middle": 0.54,
+	"big": 0.45
+}
+
 func _ready():
 	cages_grid.columns = GRID_ROWS
 	update_cages()
+	
+func _process(delta: float) -> void:
+	var scroll_x = cages_scroll.scroll_horizontal
+	bg_texture.position.x = -scroll_x
 
 func update_info_panel(doggo: Dog) -> void:
 	selected_doggo = doggo
-	get_node("DogsInfoBox/NameLabel").text = doggo.doggo_name
+	get_node("DogsInfoBox/NameLabel").text = str(doggo.size)
 	info_panel.get_node("EyesLabel").text = "Eyes: " + str(snappedf(doggo.eyes, 0.1))
 	info_panel.get_node("FurLabel").text = "Fur: " + str(snappedf(doggo.fur, 0.1))
 	info_panel.get_node("NoseLabel").text = "Nose: " + str(snappedf(doggo.nose, 0.1))
@@ -41,7 +59,7 @@ func update_cages() -> void:
 		columns = 1
 	cages_grid.columns = columns
 
-	var button_width := 1258.0 / 3.0
+	var button_width := 1440.0 / 3.0
 	var button_height := 360.0
 
 	var total_slots := columns * rows
@@ -74,14 +92,40 @@ func update_cages() -> void:
 
 			var doggo = GameManager.dogs[dog_index]
 			var btn := Button.new()
-			btn.text = doggo.doggo_name
 			btn.name = str(dog_index)
 			btn.custom_minimum_size = Vector2(button_width, button_height)
 			btn.size_flags_horizontal = Control.SIZE_FILL
 			btn.size_flags_vertical = Control.SIZE_FILL
 			btn.connect("pressed", Callable(self, "_on_cage_pressed").bind(dog_index))
+			
+			var dog_visual := Node2D.new()
+			var features := ["tail", "fur", "nose", "eyes"]
+			
+			var size_str := ""
+			if doggo.size <= 3.33:
+				size_str = "small"
+			elif doggo.size <= 6.66:
+				size_str = "middle"
+			else:
+				size_str = "big"
+			
+			var offset = DOG_OFFSETS[size_str]
+			var scale_factor = DOG_SCALES[size_str]
+			
+			for feature in features:
+				var rating := int(ceil(doggo.get(feature) / 10.0 * 3))
+				rating = clamp(rating, 1, 3)
+				var path := "res://assets/dogs/%s_%s%d.png" % [size_str, feature, rating]
+				if ResourceLoader.exists(path):
+					var sprite := Sprite2D.new()
+					sprite.texture = load(path)
+					sprite.centered = true
+					sprite.position = offset
+					sprite.scale = Vector2.ONE * scale_factor
+					dog_visual.add_child(sprite)
+			
+			btn.add_child(dog_visual)
 			cages_grid.add_child(btn)
-
 
 func _on_cage_pressed(index: int) -> void:
 	var doggo = GameManager.dogs[index]
