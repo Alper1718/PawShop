@@ -10,3 +10,4 @@ class_name Dog
 @export var cuteness: float = 50.0
 @export var stillborn: bool = false
 @export var gestation_days: int = 0
+@export var in_gestation: bool = false

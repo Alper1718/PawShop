@@ -6,6 +6,7 @@ extends Node2D
 @onready var bg_texture := $ScrollContainer/NinePatchRect
 @onready var bg := $ScrollContainer/NinePatchRect
 @onready var bars := $ScrollContainer/MetalBarsRect
+@onready var clock_label := $Clock/TimeLabel
 
 var selected_doggo: Dog = null
 var breed_mode: bool = false
@@ -47,6 +48,8 @@ func _process(_delta: float) -> void:
 		var content_w = cages_grid.get_combined_minimum_size().x
 		if !is_equal_approx(bg.size.x, content_w):
 			_update_bg_size()
+			
+	clock_label.text = get_formatted_time()
 
 
 func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
@@ -71,6 +74,15 @@ func update_info_panel(doggo: Dog) -> void:
 	info_panel.get_node("TailLabel").text = "Tail: " + str(snappedf(doggo.tail, 0.1))
 	info_panel.get_node("CutenessValueLabel").text = "Cuteness: " + str(int(doggo.cuteness))
 	info_panel.get_node("EstValueDataLabel").text = "Est. Value: " + str(int(GameManager.estimate_doggo_price(doggo)))
+
+	var breed_button = get_node("BreedButton")
+	if _is_dog_in_gestation(doggo):
+		breed_button.disabled = true
+		breed_button.text = "In Gestation"
+	else:
+		breed_button.disabled = false
+		breed_button.text = "Breed"
+
 
 func update_cages() -> void:
 	for child in cages_grid.get_children():
@@ -193,3 +205,23 @@ func _update_bg_size() -> void:
 	var viewport_w = cages_scroll.size.x
 	var target_w = max(content_size.x, viewport_w)
 	bg.size = Vector2(target_w, cages_scroll.size.y)
+
+func get_formatted_time() -> String:
+	var hour_str = str(GameManager.hour).pad_zeros(2)
+	var minute_str = str(int(GameManager.minute)).pad_zeros(2)
+	return hour_str + ":" + minute_str #+ " | Day " + str(GameManager.day)
+	
+func _is_parent_in_gestation(doggo: Dog) -> bool:
+	for preg in GameManager.pregnancies:
+		if preg.has("parents"):
+			if doggo in preg["parents"]:
+				return true
+	return false
+	
+func _is_dog_in_gestation(doggo: Dog) -> bool:
+	for preg in GameManager.pregnancies:
+		if preg.has("parents") and doggo in preg["parents"]:
+			return true
+		if preg.has("child") and doggo == preg["child"]:
+			return true
+	return false

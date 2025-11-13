@@ -9,7 +9,7 @@ var hour: int = 8
 var minute: int = 0
 const HOURS_PER_DAY := 24
 const MINUTES_PER_HOUR := 60
-var time_speed: float = 1.0 # 1 real second = 1 in-game minute
+var time_speed: float = 20.0 # 1 real second = 1 in-game minute
 var _time_accumulator: float = 0.0
 
 signal day_changed
@@ -30,6 +30,19 @@ func _process(delta: float) -> void:
 	while _time_accumulator >= 1.0:
 		_time_accumulator -= 1.0
 		advance_minute()
+	
+	for preg in pregnancies:
+		if preg.has("hours_left"):
+			preg["hours_left"] -= delta * time_speed / 60.0
+			if preg["hours_left"] <= 0:
+				var child = preg["child"]
+				if child.stillborn:
+					print("A puppy was stillborn.")
+				else:
+					print("A new puppy was born!")
+					add_dog(child)
+				pregnancies.erase(preg)
+
 
 func advance_minute() -> void:
 	minute += 1
@@ -42,15 +55,19 @@ func advance_minute() -> void:
 
 	emit_signal("minute_changed", hour, minute)
 
-func advance_time(delta: float) -> void:
-	minute += delta * time_speed
-	if minute >= MINUTES_PER_HOUR:
-		hour += int(minute / MINUTES_PER_HOUR)
-		minute = minute % MINUTES_PER_HOUR
+func advance_time(delta_minutes: float) -> void:
+	minute += delta_minutes
+	while minute >= 60:
+		minute -= 60
+		hour += 1
+		emit_signal("hour_changed", int(hour))
+	
+	while hour >= HOURS_PER_DAY:
+		hour -= HOURS_PER_DAY
+		day += 1
+		emit_signal("day_changed", day)
+	_update_pregnancies(delta_minutes / 60.0)
 
-	if hour >= HOURS_PER_DAY:
-		hour = hour % HOURS_PER_DAY
-		next_day()
 
 
 func change_scene(path: String) -> void:
@@ -67,10 +84,8 @@ func breed(parent1: Dog, parent2: Dog) -> Dog:
 	for stat in ["eyes", "fur", "nose", "tail"]:
 		var val1 = parent1.get(stat)
 		var val2 = parent2.get(stat)
-		
 		var high = max(val1, val2)
 		var low = min(val1, val2)
-
 		var bias := pow(randf(), 0.5)
 		var stat_val :float= lerp(low, high, bias)
 		
@@ -88,17 +103,19 @@ func breed(parent1: Dog, parent2: Dog) -> Dog:
 	var base_risk := pow(avg_cute / 100.0, 2.2) * 0.75
 	var final_risk := clampf(base_risk, 0.0, 0.95)
 	child.stillborn = randf() < final_risk
-	child.gestation_days = round(2.0 + (avg_cute / 100.0) * 3.0)
+
+	var base_hours = 2.0
+	var penalty = (avg_cute / 100.0) * 2
+	var gestation_hours = base_hours + penalty
 
 	pregnancies.append({
 		"child": child,
-		"days_left": child.gestation_days
+		"parents": [parent1, parent2],
+		"hours_left": gestation_hours
 	})
 
-	print("Pregnancy started! Gestation:", child.gestation_days, "days.")
+	print("Pregnancy started! Gestation:", gestation_hours, "hours.")
 	return child
-
-
 
 
 func next_day() -> void:
@@ -112,8 +129,8 @@ func handle_pregnancies() -> void:
 	var born_today: Array = []
 
 	for preg in pregnancies:
-		preg["days_left"] -= 1
-		if preg["days_left"] <= 0:
+		preg["hours_left"] -= 1
+		if preg["hours_left"] <= 0:
 			born_today.append(preg)
 
 	for birth in born_today:
@@ -153,7 +170,25 @@ func estimate_doggo_price(doggo: Dog) -> int:
 	return int(ceil(raw_price))
 	
 static func estimate_gestation(dog1: Dog, dog2: Dog) -> int:
-	var base_days = 5
-	var cuteness_avg = (dog1.cuteness + dog2.cuteness) / 2.0
-	var penalty = int(clamp(cuteness_avg / 20.0, 0, 5))
-	return base_days + penalty
+	var base_hours = 2.0
+	var avg_cute = (dog1.cuteness + dog2.cuteness) / 2.0
+	var penalty = (avg_cute / 100.0) * 5.0
+	var gestation_hours = base_hours + penalty
+	
+	return base_hours + penalty
+
+func _update_pregnancies(delta_hours: float) -> void:
+	var born: Array = []
+	for preg in pregnancies:
+		preg["hours_left"] -= delta_hours
+		if preg["hours_left"] <= 0:
+			born.append(preg)
+
+	for p in born:
+		pregnancies.erase(p)
+		var pup = p["child"]
+		if pup.stillborn:
+			print("A puppy was stillborn. Too cute for this world.")
+		else:
+			print("A new puppy was born!")
+			add_dog(pup)

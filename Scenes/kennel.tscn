@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://df0vft2odungw"]
+[gd_scene load_steps=9 format=3 uid="uid://df0vft2odungw"]
 
 [ext_resource type="Script" uid="uid://cdvdjwtocdvf7" path="res://Code/kennel.gd" id="1_p5wrj"]
 [ext_resource type="Script" uid="uid://b7lc6ec2oxhee" path="res://Code/doggo_generator_for_testing_purposes_remove.gd" id="2_46r5o"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cyx2bulngqrlx" path="res://Assets/KennelUI/Adsız tasarım(5).png" id="3_rcd5d"]
 [ext_resource type="Texture2D" uid="uid://cvh4vn4xgmgbs" path="res://Assets/KennelUI/Adsız tasarım(6).png" id="3_rltyw"]
 [ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="6_52w57"]
+[ext_resource type="Texture2D" uid="uid://dsehqenij4cye" path="res://Assets/Clock.png" id="7_wk4nd"]
+[ext_resource type="FontFile" uid="uid://bwfmdes4b86mi" path="res://Fonts/Orbitron/Orbitron-VariableFont_wght.ttf" id="8_3irva"]
 
 [node name="Kennel" type="Node2D"]
 script = ExtResource("1_p5wrj")
@@ -194,5 +196,22 @@ texture = ExtResource("3_rcd5d")
 position = Vector2(1866, 894)
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("6_52w57")
+
+[node name="Clock" type="Sprite2D" parent="."]
+modulate = Color(0.913725, 0.529412, 0.321569, 1)
+position = Vector2(1828, 32)
+scale = Vector2(0.263789, 0.335702)
+texture = ExtResource("7_wk4nd")
+
+[node name="TimeLabel" type="Label" parent="Clock"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -166.8
+offset_top = -83.4073
+offset_right = 163.2
+offset_bottom = 73.5927
+theme_override_fonts/font = ExtResource("8_3irva")
+theme_override_font_sizes/font_size = 124
+text = "11:58"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
