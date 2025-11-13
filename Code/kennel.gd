@@ -3,13 +3,17 @@ extends Node2D
 @onready var info_panel := $DogsInfoBox/HBoxContainer/DataColumn
 @onready var cages_grid := $ScrollContainer/CagesContainer
 @onready var cages_scroll := $ScrollContainer
-@onready var bg_texture := $ScrollContainer/BackgroundTextureRect
+@onready var bg_texture := $ScrollContainer/NinePatchRect
+@onready var bg := $ScrollContainer/NinePatchRect
+@onready var bars := $ScrollContainer/MetalBarsRect
 
 var selected_doggo: Dog = null
 var breed_mode: bool = false
 var first_parent: Dog = null
 
 const GRID_ROWS := 3
+const SCROLL_AREA_SIZE := Vector2(1258, 1080)
+const TILE_WIDTH := 1440.0
 
 const DOG_OFFSETS := {
 	"small": Vector2(-250, 50),
@@ -25,11 +29,38 @@ const DOG_SCALES := {
 
 func _ready():
 	cages_grid.columns = GRID_ROWS
+	_update_bg_size()
 	update_cages()
 	
-func _process(delta: float) -> void:
-	var scroll_x = cages_scroll.scroll_horizontal
-	bg_texture.position.x = -scroll_x
+func _process(_delta: float) -> void:
+	var scroll_x: float = float(cages_scroll.scroll_horizontal)
+	var wrapped_x: float = fmod(scroll_x, TILE_WIDTH)
+
+	bg_texture.position.x = -wrapped_x
+	bg.position.x = -wrapped_x
+	bars.position.x = -wrapped_x
+
+	_update_tiling(bg_texture, bg)
+	_update_tiling(bars, null)
+
+	if is_instance_valid(cages_grid):
+		var content_w = cages_grid.get_combined_minimum_size().x
+		if !is_equal_approx(bg.size.x, content_w):
+			_update_bg_size()
+
+
+func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
+	var texture_w: float = TILE_WIDTH
+	if secondary_node:
+		secondary_node.size.x = texture_w
+	primary_node.size.x = texture_w * 2
+
+	var scroll_offset: float = fmod(float(cages_scroll.scroll_horizontal), texture_w)
+	primary_node.position.x = -scroll_offset
+	if secondary_node:
+		secondary_node.position.x = -scroll_offset
+
+
 
 func update_info_panel(doggo: Dog) -> void:
 	selected_doggo = doggo
@@ -123,27 +154,30 @@ func update_cages() -> void:
 					sprite.position = offset
 					sprite.scale = Vector2.ONE * scale_factor
 					dog_visual.add_child(sprite)
-			
+			bg_texture.size = cages_grid.size
+
 			btn.add_child(dog_visual)
 			cages_grid.add_child(btn)
 
 func _on_cage_pressed(index: int) -> void:
 	var doggo = GameManager.dogs[index]
+	
 	if breed_mode:
 		if doggo == first_parent:
 			print("Cannot breed a doggo with itself!")
 			return
-		var child = GameManager.breed(first_parent, doggo)
-		if child.stillborn:
-			print("A puppy was stillborn. Too cute for this world.")
-		else:
-			print("A new puppy was born instantly!") # TODO: day cycle
-			GameManager.add_dog(child)
+		
+		# Open the breed confirmation page
+		var breed_confirm_scene := preload("res://Scenes/breed_confirm.tscn")
+		var breed_page := breed_confirm_scene.instantiate()
+		get_tree().root.add_child(breed_page)
+		breed_page.setup(first_parent, doggo, self)
+		
 		breed_mode = false
 		first_parent = null
-		update_cages()
 	else:
 		update_info_panel(doggo)
+
 
 func _on_breed_button_pressed() -> void:
 	if selected_doggo == null:
@@ -153,3 +187,9 @@ func _on_breed_button_pressed() -> void:
 	breed_mode = true
 	first_parent = selected_doggo
 	print("Breed mode activated. Select a second doggo to breed with", first_parent.doggo_name)
+
+func _update_bg_size() -> void:
+	var content_size = cages_grid.get_combined_minimum_size()
+	var viewport_w = cages_scroll.size.x
+	var target_w = max(content_size.x, viewport_w)
+	bg.size = Vector2(target_w, cages_scroll.size.y)

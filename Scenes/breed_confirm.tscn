@@ -1,0 +1,230 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2fu7drmjsh3f"]
+
+[ext_resource type="Texture2D" uid="uid://0jtn3asca33q" path="res://Assets/KennelUI/BreedScene.png" id="1_2bik1"]
+[ext_resource type="Script" uid="uid://dcd8dkyeco73p" path="res://Code/breed_confirm.gd" id="1_o65qi"]
+[ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="2_q8dm6"]
+[ext_resource type="FontFile" uid="uid://v1sc7dw30p6c" path="res://Fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_o65qi"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_o65qi")
+
+[node name="FirstDogInfoBox" type="VBoxContainer" parent="."]
+offset_left = 1440.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="NameLabel" type="Label" parent="FirstDogInfoBox"]
+custom_minimum_size = Vector2(31, 287.65)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Doggo Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FirstDogInfoBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DataColumn" type="VBoxContainer" parent="FirstDogInfoBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EyesLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 62.095)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eyes:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FurLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 104.305)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Fur:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoseLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 73.71)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Nose:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TailLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 94.18)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Tail:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CutenessValueLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 69)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cuteness:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EstValueDataLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 97.7)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Estimated Value: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpacerLabel" type="Label" parent="FirstDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondDogInfoBox" type="VBoxContainer" parent="."]
+offset_right = 480.0
+offset_bottom = 1080.0
+
+[node name="NameLabel" type="Label" parent="SecondDogInfoBox"]
+custom_minimum_size = Vector2(31, 287.65)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Doggo Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SecondDogInfoBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DataColumn" type="VBoxContainer" parent="SecondDogInfoBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EyesLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 62.095)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eyes:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FurLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 104.305)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Fur:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoseLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 73.71)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Nose:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TailLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 94.18)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Tail:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CutenessValueLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 69)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cuteness:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EstValueDataLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 97.7)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Estimated Value: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpacerLabel" type="Label" parent="SecondDogInfoBox/HBoxContainer/DataColumn"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BreedScene" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960, 540)
+scale = Vector2(1.32, 1.32)
+texture = ExtResource("1_2bik1")
+
+[node name="ConfirmButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(980.4, 880.3)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_q8dm6")
+region_enabled = true
+region_rect = Rect2(102.428, 166.667, 182.766, 79.6965)
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 857.4
+offset_top = 840.3
+offset_right = 982.4
+offset_bottom = 885.3
+scale = Vector2(1.92408, 1.75999)
+theme_override_fonts/font = ExtResource("3_o65qi")
+theme_override_font_sizes/font_size = 32
+text = "Confirm"
+flat = true
+
+[node name="BackButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(980.8, 998.6)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_q8dm6")
+region_enabled = true
+region_rect = Rect2(102.428, 166.667, 182.766, 79.6965)
+
+[node name="CancelButton" type="Button" parent="."]
+offset_left = 857.8
+offset_top = 958.6
+offset_right = 982.8
+offset_bottom = 1003.6
+scale = Vector2(1.92408, 1.75999)
+theme_override_fonts/font = ExtResource("3_o65qi")
+theme_override_font_sizes/font_size = 32
+text = "Cancel"
+flat = true
+
+[node name="GestationLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 13.0
+offset_right = 1091.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 32
+text = "Gestation Time:
+5 Hours
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FirstDogVisual" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SecondDogVisual" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

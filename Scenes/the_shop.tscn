@@ -56,5 +56,6 @@ offset_bottom = 73.5927
 theme_override_fonts/font = ExtResource("7_jcjbr")
 theme_override_font_sizes/font_size = 124
 text = "11:58"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Toys/ToysButton" to="." method="_on_toys_button_pressed"]

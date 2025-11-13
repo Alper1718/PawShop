@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://df0vft2odungw"]
+[gd_scene load_steps=7 format=3 uid="uid://df0vft2odungw"]
 
 [ext_resource type="Script" uid="uid://cdvdjwtocdvf7" path="res://Code/kennel.gd" id="1_p5wrj"]
 [ext_resource type="Script" uid="uid://b7lc6ec2oxhee" path="res://Code/doggo_generator_for_testing_purposes_remove.gd" id="2_46r5o"]
+[ext_resource type="Texture2D" uid="uid://dhtyxjfpbgo2x" path="res://Assets/KennelUI/Adsız tasarım(7).png" id="3_orsyx"]
 [ext_resource type="Texture2D" uid="uid://cyx2bulngqrlx" path="res://Assets/KennelUI/Adsız tasarım(5).png" id="3_rcd5d"]
 [ext_resource type="Texture2D" uid="uid://cvh4vn4xgmgbs" path="res://Assets/KennelUI/Adsız tasarım(6).png" id="3_rltyw"]
+[ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="6_52w57"]
 
 [node name="Kennel" type="Node2D"]
 script = ExtResource("1_p5wrj")
@@ -85,10 +87,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BreedButton" type="Button" parent="."]
-offset_left = 1426.0
-offset_top = 855.0
-offset_right = 1742.0
-offset_bottom = 997.0
+z_index = 1
+offset_left = 1498.0
+offset_top = 839.0
+offset_right = 1814.0
+offset_bottom = 981.0
 scale = Vector2(1.12, 1.08)
 theme_override_font_sizes/font_size = 32
 text = "Breed"
@@ -167,15 +170,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 flat = true
 
-[node name="BackgroundTextureRect" type="TextureRect" parent="ScrollContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ScrollContainer"]
 z_index = -1
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("3_rltyw")
-stretch_mode = 1
+axis_stretch_horizontal = 1
+
+[node name="MetalBarsRect" type="NinePatchRect" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_orsyx")
+axis_stretch_horizontal = 1
 
 [node name="AdsızTasarım(5)" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(960, 540)
 texture = ExtResource("3_rcd5d")
+
+[node name="BreedButton2" type="Sprite2D" parent="."]
+position = Vector2(1866, 894)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("6_52w57")
 
 [connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
