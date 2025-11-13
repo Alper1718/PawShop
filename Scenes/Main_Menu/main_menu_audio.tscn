@@ -12,51 +12,136 @@ grow_vertical = 2
 script = ExtResource("1_ssiho")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 265.0
-offset_right = 399.0
-offset_bottom = 815.0
-
-[node name="MasterLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+offset_left = 380.0
+offset_top = 366.0
+offset_right = 680.0
+offset_bottom = 915.995
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer" groups=["audio_labels"]]
+layout_mode = 2
 text = "Master"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer"]
+[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer" groups=["audio_sliders"]]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_stretch_ratio = 7.45
 value = 50.0
 
-[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+
+[node name="Control3" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control5" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control6" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control7" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control8" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control9" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control10" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control11" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer" groups=["audio_labels"]]
+layout_mode = 2
 text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer"]
+[node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer" groups=["audio_sliders"]]
 layout_mode = 2
-size_flags_vertical = 2
 value = 100.0
 
-[node name="SoundLabel" type="Label" parent="VBoxContainer"]
+[node name="Control12" type="Control" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+
+[node name="Control13" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control14" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control15" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control16" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control17" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control18" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control19" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control20" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control21" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer" groups=["audio_labels"]]
+layout_mode = 2
 text = "Sounds"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SoundVolumeSlider" type="HSlider" parent="VBoxContainer"]
+[node name="SoundVolumeSlider" type="HSlider" parent="VBoxContainer" groups=["audio_sliders"]]
 layout_mode = 2
-size_flags_vertical = 2
 value = 100.0
+
+[node name="Control22" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control23" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control24" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control25" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control26" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control27" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control28" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control29" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control30" type="Control" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 text = "Back"
 flat = true
