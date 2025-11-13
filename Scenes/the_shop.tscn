@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://h57b0tmeqrf2"]
+[gd_scene load_steps=10 format=3 uid="uid://h57b0tmeqrf2"]
 
 [ext_resource type="Script" uid="uid://bae5wbvh6hhbc" path="res://Code/the_shop.gd" id="1_jd8ym"]
 [ext_resource type="Texture2D" uid="uid://bv5281gg3863s" path="res://Assets/Backgrounds/Shop_morning_background (3).jpeg" id="1_qdt25"]
 [ext_resource type="Texture2D" uid="uid://cl2s511y2sirl" path="res://Assets/Toys (3).png" id="2_2es5p"]
 [ext_resource type="Texture2D" uid="uid://dk346flqvujhp" path="res://Assets/Toys (1).png" id="3_jd8ym"]
+[ext_resource type="Texture2D" uid="uid://dadk12b5aoa37" path="res://Assets/Backgrounds/Shop_evening_background.jpeg" id="3_vdyid"]
+[ext_resource type="Texture2D" uid="uid://cuihoxe6my0q6" path="res://Assets/Backgrounds/Shop_night_background (1).jpeg" id="4_2r8aa"]
 [ext_resource type="Texture2D" uid="uid://4b4qrgixqs6k" path="res://Assets/Toys (2).png" id="4_n8gmd"]
 [ext_resource type="Texture2D" uid="uid://dsehqenij4cye" path="res://Assets/Clock.png" id="6_n8gmd"]
 [ext_resource type="FontFile" uid="uid://bwfmdes4b86mi" path="res://Fonts/Orbitron/Orbitron-VariableFont_wght.ttf" id="7_jcjbr"]
@@ -11,9 +13,17 @@
 [node name="TheShop" type="Node2D"]
 script = ExtResource("1_jd8ym")
 
-[node name="ShopMorningBackground(3)" type="Sprite2D" parent="."]
+[node name="ShopMorningBackground" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("1_qdt25")
+
+[node name="ShopEveningBackground" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("3_vdyid")
+
+[node name="ShopNightBackground" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("4_2r8aa")
 
 [node name="Toys" type="Node" parent="."]
 

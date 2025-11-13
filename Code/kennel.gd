@@ -179,7 +179,6 @@ func _on_cage_pressed(index: int) -> void:
 			print("Cannot breed a doggo with itself!")
 			return
 		
-		# Open the breed confirmation page
 		var breed_confirm_scene := preload("res://Scenes/breed_confirm.tscn")
 		var breed_page := breed_confirm_scene.instantiate()
 		get_tree().root.add_child(breed_page)

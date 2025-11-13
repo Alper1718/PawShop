@@ -9,7 +9,7 @@ var hour: int = 8
 var minute: int = 0
 const HOURS_PER_DAY := 24
 const MINUTES_PER_HOUR := 60
-var time_speed: float = 20.0 # 1 real second = 1 in-game minute
+var time_speed: float = 20.0 #TODO
 var _time_accumulator: float = 0.0
 
 signal day_changed
