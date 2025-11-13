@@ -88,19 +88,19 @@ z_index = -2
 position = Vector2(960, 540)
 texture = ExtResource("4_vqcro")
 
-[node name="MainMenuButton" type="Sprite2D" parent="."]
+[node name="MainMenuButton" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
 position = Vector2(533, 641)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_l1hio")
 
-[node name="MainMenuButton2" type="Sprite2D" parent="."]
+[node name="MainMenuButton2" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
 position = Vector2(533, 459)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_l1hio")
 
-[node name="MainMenuButton3" type="Sprite2D" parent="."]
+[node name="MainMenuButton3" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
 position = Vector2(533, 827)
 scale = Vector2(0.6, 0.6)
