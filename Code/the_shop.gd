@@ -16,7 +16,6 @@ extends Node2D
 var original_scales := {}
 var current_bg: Node2D = null
 var current_customer: Dictionary = {}
-var customers_queue: Array = []
 const TRANSITION_DURATION := 3.0
 
 func _ready():
@@ -35,45 +34,35 @@ func _ready():
 		evening_bg.modulate.a = 0.0
 		night_bg.modulate.a = 0.0
 		_update_background(GameManager.hour)
-	customers_queue = [
-		{
-			"name": "Teyze",
-			"sprite_path": "res://Assets/Customers/Teyze.jpeg",
-			"feature": "eyes",
-			"min_value": 5.0,
-			"max_price": 900,
-			"dialogues": {
-				"opening": "I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
-				"happy": "Begendim!",
-				"sad": "So sad..."
-			}
-		},
-		{
-			"name": "Ergen",
-			"sprite_path": "res://Assets/Customers/Ergen.jpeg",
-			"feature": "cuteness",
-			"min_value": 60.0,
-			"max_price": 1700,
-			"dialogues": {
-				"opening": "Hello! I'm looking for a dog with {feature} ≥ {value}. My max budget is ${price}.",
-				"happy": "Akıllı olur aklını alırım",
-				"sad": "Takarım bıçağı görürsün."
-			}
-		}
-	]
-	_show_next_customer()
+	
+	if GameManager.request_meeted == true:
+		current_customer = GameManager.customers_queue.pop_front()
+		_show_next_customer()
+		GameManager.request_meeted = false
+	else:
+		current_customer = GameManager.customers_queue[0]
+		_load_customer()
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
 	_update_background(GameManager.hour)
 	
 func _show_next_customer():
-	if customers_queue.is_empty():
+	print("Called")
+	if GameManager.customers_queue.is_empty():
 		customer_panel.visible = false
+		print("No customers left")
 		return
 	
-	current_customer = customers_queue.pop_front()
+	current_customer = GameManager.customers_queue.pop_front()
+	if current_customer == null:
+		print("No customers left")
+	print(current_customer["name"])
 	customer_panel.visible = true
+	
+	_load_customer()
+	
+func _load_customer():
 	
 	if ResourceLoader.exists(current_customer.sprite_path):
 		customer_sprite.texture = load(current_customer.sprite_path)

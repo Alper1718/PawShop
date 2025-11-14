@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://v1sc7dw30p6c" path="res://Fonts/Ubuntu/Ubuntu-Regular.ttf" id="9_3irva"]
 
 [node name="Kennel" type="Node2D"]
+z_index = 2
 script = ExtResource("1_p5wrj")
 
 [node name="DogsInfoBox" type="VBoxContainer" parent="."]

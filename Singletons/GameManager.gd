@@ -24,6 +24,36 @@ var current_scene: Node
 
 var fullscreen = true
 
+var customers_queue = [
+		{
+			"name": "Teyze",
+			"sprite_path": "res://Assets/Customers/Teyze.jpeg",
+			"feature": "eyes",
+			"min_value": 5.0,
+			"max_price": 900,
+			"dialogues": {
+				"opening": "I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
+				"happy": "Begendim!",
+				"sad": "So sad..."
+			}
+		},
+		{
+			"name": "Ergen",
+			"sprite_path": "res://Assets/Customers/Ergen.jpeg",
+			"feature": "cuteness",
+			"min_value": 60.0,
+			"max_price": 1700,
+			"dialogues": {
+				"opening": "Hello! I'm looking for a dog with {feature} ≥ {value}. My max budget is ${price}.",
+				"happy": "Akıllı olur aklını alırım",
+				"sad": "Takarım bıçağı görürsün."
+			}
+		}
+	]
+	
+var request_meeted = false
+#var first_customer = true
+
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)

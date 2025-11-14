@@ -282,20 +282,26 @@ func _on_choose_button_pressed() -> void:
 		}
 		GameManager.dogs.erase(selected_doggo)
 		_end_selection_mode()
+		z_index = -2
+		queue_free()
 		get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
 	else:
 		print("Selected dog does not meet customer's requirements.")
 
 func _meets_request(dog: Dog, request: Dictionary) -> bool:
 	if request == null:
-		return false
+		GameManager.request_meeted = false
+		return GameManager.request_meeted
 	var feature = request.get("feature", "cuteness")
 	var required = request.get("min_value", request.get("value", 0))
 	if feature == "cuteness":
-		return dog.cuteness >= float(required)
+		GameManager.request_meeted = dog.cuteness >= float(required)
+		return GameManager.request_meeted
 	if dog.has_property(feature):
-		return dog.get(feature) >= float(required)
-	return false
+		GameManager.request_meeted = dog.get(feature) >= float(required)
+		return GameManager.request_meeted
+	GameManager.request_meeted = false
+	return GameManager.request_meeted
 
 func _end_selection_mode() -> void:
 	select_mode = false
@@ -354,3 +360,5 @@ func _remove_duplicate_puppies() -> void:
 func _on_switch_scene_button_pressed() -> void:
 	GameManager.just_came_from_kennel = true
 	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
+	z_index = -1
+	# queue_free()
