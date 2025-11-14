@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfkujsjp0gom8"
-path="res://.godot/imported/Teyze.jpeg-b42103a71a583d23619af6679483018e.ctex"
+uid="uid://bbbo82j2kwvyc"
+path="res://.godot/imported/6g1.png-c08d2bdcbf952d72a4990a4df41873a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Customers/Teyze.jpeg"
-dest_files=["res://.godot/imported/Teyze.jpeg-b42103a71a583d23619af6679483018e.ctex"]
+source_file="res://Assets/Customers/6g1.png"
+dest_files=["res://.godot/imported/6g1.png-c08d2bdcbf952d72a4990a4df41873a1.ctex"]
 
 [params]
 
