@@ -6,8 +6,17 @@ extends Node2D
 @onready var evening_bg := $ShopEveningBackground
 @onready var night_bg := $ShopNightBackground
 
+@onready var customer_panel := $CustomerPanel
+@onready var customer_sprite := $CustomerPanel/Sprite2D
+@onready var speech_label := $CustomerPanel/SpeechBubble/Label
+@onready var give_button := $CustomerPanel/VBoxContainer/GiveButton
+@onready var reject_button := $CustomerPanel/VBoxContainer/RejectButton
+@onready var raise_button := $CustomerPanel/VBoxContainer/RaiseButton
+
 var original_scales := {}
 var current_bg: Node2D = null
+var current_customer: Dictionary = {}
+var customers_queue: Array = []
 const TRANSITION_DURATION := 3.0
 
 func _ready():
@@ -26,15 +35,126 @@ func _ready():
 		evening_bg.modulate.a = 0.0
 		night_bg.modulate.a = 0.0
 		_update_background(GameManager.hour)
+	customers_queue = [
+		{
+			"name": "Teyze",
+			"sprite_path": "res://Assets/Customers/Teyze.jpeg",
+			"feature": "eyes",
+			"min_value": 5.0,
+			"max_price": 900,
+			"dialogues": {
+				"opening": "I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
+				"happy": "Begendim!",
+				"sad": "So sad..."
+			}
+		},
+		{
+			"name": "Ergen",
+			"sprite_path": "res://Assets/Customers/Ergen.jpeg",
+			"feature": "cuteness",
+			"min_value": 60.0,
+			"max_price": 1700,
+			"dialogues": {
+				"opening": "Hello! I'm looking for a dog with {feature} ≥ {value}. My max budget is ${price}.",
+				"happy": "Akıllı olur aklını alırım",
+				"sad": "Takarım bıçağı görürsün."
+			}
+		}
+	]
+	_show_next_customer()
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
 	_update_background(GameManager.hour)
+	
+func _show_next_customer():
+	if customers_queue.is_empty():
+		customer_panel.visible = false
+		return
+	
+	current_customer = customers_queue.pop_front()
+	customer_panel.visible = true
+	
+	if ResourceLoader.exists(current_customer.sprite_path):
+		customer_sprite.texture = load(current_customer.sprite_path)
+
+	speech_label.text = current_customer.dialogues.opening.format({
+		"feature": current_customer.feature.capitalize(),
+		"value": str(current_customer.min_value),
+		"price": str(current_customer.max_price)
+	})
+	
+	var give_callable = Callable(self, "_on_give_button_pressed")
+	var reject_callable = Callable(self, "_on_reject_button_pressed")
+	var raise_callable = Callable(self, "_on_raise_button_pressed")
+
+	# Disconnect if connected
+	if give_button.is_connected("pressed", give_callable):
+		give_button.disconnect("pressed", give_callable)
+	give_button.pressed.connect(give_callable)
+
+	if reject_button.is_connected("pressed", reject_callable):
+		reject_button.disconnect("pressed", reject_callable)
+	reject_button.pressed.connect(reject_callable)
+
+	if raise_button.is_connected("pressed", raise_callable):
+		raise_button.disconnect("pressed", raise_callable)
+	raise_button.pressed.connect(raise_callable)
+
+	give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
+	reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
+	raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
+
+
+func _on_give_button_pressed():
+	var kennel_scene := preload("res://Scenes/Kennel.tscn")
+	var kennel_page := kennel_scene.instantiate()
+	get_tree().root.add_child(kennel_page)
+	kennel_page.select_mode = true
+	kennel_page.selection_callback = Callable(self, "_on_dog_selected")
+
+
+func _on_dog_selected(dog: Dog):
+	var feature = current_customer.feature
+	var required_value = current_customer.min_value
+	var max_price = current_customer.max_price
+
+	var meets = false
+	if feature == "cuteness":
+		meets = dog.cuteness >= required_value
+	else:
+		meets = dog.get(feature) >= required_value
+
+	if meets:
+		speech_label.text = current_customer.dialogues.happy
+		print("Customer is happy! You sold the dog for $%s" % max_price)
+		GameManager.dogs.erase(dog)
+	else:
+		speech_label.text = current_customer.dialogues.sad
+		print("Customer rejected the dog. You earned nothing.")
+
+	await get_tree().create_timer(1.0).timeout
+	_show_next_customer()
+
+
+func _on_reject_button_pressed():
+	speech_label.text = current_customer.dialogues.sad
+	print("You told the customer you don't have a dog matching their criteria.")
+	await get_tree().create_timer(1.0).timeout
+	_show_next_customer()
+
+
+func _on_raise_button_pressed():
+	var new_price = int(current_customer.max_price * 1.5)
+	speech_label.text = "I'll offer to pay $%s instead." % new_price
+	print("Raised price to $%s" % new_price)
+	await get_tree().create_timer(1.0).timeout
+	_show_next_customer()
 
 func get_formatted_time() -> String:
 	var hour_str = str(GameManager.hour).pad_zeros(2)
 	var minute_str = str(int(GameManager.minute)).pad_zeros(2)
-	return hour_str + ":" + minute_str #+ " | Day " + str(GameManager.day)
+	return hour_str + ":" + minute_str
 
 func _update_background(hour: int) -> void:
 	var target_bg: Node2D = morning_bg

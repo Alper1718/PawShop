@@ -7,10 +7,15 @@ extends Node2D
 @onready var bg := $ScrollContainer/NinePatchRect
 @onready var bars := $ScrollContainer/MetalBarsRect
 @onready var clock_label := $Clock/TimeLabel
+@onready var breed_button := $BreedButton
+@onready var choose_button := $ChooseButton
 
 var selected_doggo: Dog = null
 var breed_mode: bool = false
 var first_parent: Dog = null
+
+var select_mode: bool = false
+var selection_callback = null
 
 const GRID_ROWS := 3
 const SCROLL_AREA_SIZE := Vector2(1258, 1080)
@@ -32,7 +37,12 @@ func _ready():
 	cages_grid.columns = GRID_ROWS
 	_update_bg_size()
 	update_cages()
-	
+	if is_instance_valid(choose_button):
+		choose_button.visible = false
+		choose_button.connect("pressed", Callable(self, "_on_choose_button_pressed"))
+	if is_instance_valid(breed_button):
+		breed_button.connect("pressed", Callable(self, "_on_breed_button_pressed"))
+
 func _process(_delta: float) -> void:
 	var scroll_x: float = float(cages_scroll.scroll_horizontal)
 	var wrapped_x: float = fmod(scroll_x, TILE_WIDTH)
@@ -67,7 +77,7 @@ func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
 
 func update_info_panel(doggo: Dog) -> void:
 	selected_doggo = doggo
-	get_node("DogsInfoBox/NameLabel").text = str(doggo.doggo_name)
+	get_node("DogsInfoBox/NameLabel").text = str(selected_doggo.doggo_name)
 	info_panel.get_node("EyesLabel").text = "Eyes: " + str(snappedf(doggo.eyes, 0.1))
 	info_panel.get_node("FurLabel").text = "Fur: " + str(snappedf(doggo.fur, 0.1))
 	info_panel.get_node("NoseLabel").text = "Nose: " + str(snappedf(doggo.nose, 0.1))
@@ -75,19 +85,24 @@ func update_info_panel(doggo: Dog) -> void:
 	info_panel.get_node("CutenessValueLabel").text = "Cuteness: " + str(int(doggo.cuteness))
 	info_panel.get_node("EstValueDataLabel").text = "Est. Value: " + str(int(GameManager.estimate_doggo_price(doggo))) + "€"
 
-	var breed_button = get_node("BreedButton")
+	if is_instance_valid(breed_button):
+		breed_button.visible = not select_mode
 
-	if breed_mode:
-		breed_button.disabled = false
-		breed_button.text = "Select Second Dog"
-		return
+	if is_instance_valid(choose_button):
+		choose_button.visible = select_mode and selected_doggo != null
 
-	if _is_dog_in_gestation(doggo):
-		breed_button.disabled = true
-		breed_button.text = "In Gestation"
-	else:
-		breed_button.disabled = false
-		breed_button.text = "Breed"
+	if not select_mode:
+		if breed_mode:
+			breed_button.disabled = false
+			breed_button.text = "Select Second Dog"
+			return
+
+		if _is_dog_in_gestation(doggo):
+			breed_button.disabled = true
+			breed_button.text = "In Gestation"
+		else:
+			breed_button.disabled = false
+			breed_button.text = "Breed"
 
 
 func update_cages() -> void:
@@ -196,8 +211,8 @@ func _on_cage_pressed(index: int) -> void:
 		breed_mode = false
 		first_parent = null
 		
-		var breed_button = get_node("BreedButton")
-		breed_button.text = "Breed"
+		var breed_button_local = get_node("BreedButton")
+		breed_button_local.text = "Breed"
 	else:
 		update_info_panel(doggo)
 
@@ -211,10 +226,69 @@ func _on_breed_button_pressed() -> void:
 	breed_mode = true
 	first_parent = selected_doggo
 
-	var breed_button = get_node("BreedButton")
-	breed_button.text = "Select Second Dog"
+	var breed_button_local = get_node("BreedButton")
+	breed_button_local.text = "Select Second Dog"
 
 	print("Breed mode activated. Select a second dog to breed with", first_parent.doggo_name)
+
+func set_select_mode(enabled: bool, callback = null) -> void:
+	select_mode = enabled
+	selection_callback = callback
+	if is_instance_valid(breed_button):
+		breed_button.visible = not select_mode
+	if is_instance_valid(choose_button):
+		choose_button.visible = select_mode and selected_doggo != null
+
+func _on_choose_button_pressed() -> void:
+	if selected_doggo == null:
+		print("No dog selected.")
+		return
+
+	if selection_callback != null:
+		selection_callback.call(selected_doggo)
+		_end_selection_mode()
+		return
+
+	if not Engine.has_singleton("GameManager") and typeof(GameManager) == TYPE_NIL:
+		pass
+
+	if not GameManager.has("pending_customer"):
+		print("No pending customer set on GameManager and no callback provided.")
+		return
+
+	var request = GameManager.pending_customer
+	if _meets_request(selected_doggo, request):
+		GameManager.pending_sale = {
+			"dog": selected_doggo,
+			"customer": request
+		}
+		GameManager.dogs.erase(selected_doggo)
+		_end_selection_mode()
+		get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
+	else:
+		print("Selected dog does not meet customer's requirements.")
+
+func _meets_request(dog: Dog, request: Dictionary) -> bool:
+	if request == null:
+		return false
+	var feature = request.get("feature", "cuteness")
+	var required = request.get("min_value", request.get("value", 0))
+	if feature == "cuteness":
+		return dog.cuteness >= float(required)
+	if dog.has_property(feature):
+		return dog.get(feature) >= float(required)
+	return false
+
+func _end_selection_mode() -> void:
+	select_mode = false
+	selection_callback = null
+	if is_instance_valid(choose_button):
+		choose_button.visible = false
+	if is_instance_valid(breed_button):
+		breed_button.visible = true
+	selected_doggo = null
+	update_info_panel(selected_doggo)
+	update_cages()
 
 func _update_bg_size() -> void:
 	var content_size = cages_grid.get_combined_minimum_size()
@@ -247,8 +321,7 @@ func _remove_duplicate_puppies() -> void:
 	var duplicates: Array = []
 
 	for doggo in GameManager.dogs:
-		var key := str(snapped(doggo.eyes, 0.01)) + "-" + str(snapped(doggo.fur, 0.01)) + "-" + str(snapped(doggo.nose, 0.01)) + "-" + str(snapped(doggo.tail, 0.01)) + "-" + str(snapped(doggo.size, 0.01)) + "-" + str(snapped(doggo.hsv.h, 0.01)) + "-" + str(snapped(doggo.hsv.s, 0.01)) + "-" + str(snapped(doggo.hsv.v, 0.01)) #Mmm long
-
+		var key := str(snapped(doggo.eyes, 0.01)) + "-" + str(snapped(doggo.fur, 0.01)) + "-" + str(snapped(doggo.nose, 0.01)) + "-" + str(snapped(doggo.tail, 0.01)) + "-" + str(snapped(doggo.size, 0.01)) + "-" + str(snapped(doggo.hsv.h, 0.01)) + "-" + str(snapped(doggo.hsv.s, 0.01)) + "-" + str(snapped(doggo.hsv.v, 0.01))
 		
 		if key in seen:
 			duplicates.append(doggo)

@@ -231,5 +231,19 @@ text = "Breed."
 flat = true
 metadata/_edit_use_anchors_ = true
 
+[node name="ChooseButton" type="Button" parent="."]
+visible = false
+z_index = 1
+offset_left = 1560.0
+offset_top = 868.0
+offset_right = 1876.0
+offset_bottom = 1010.0
+scale = Vector2(0.76, 0.68)
+theme_override_fonts/font = ExtResource("9_3irva")
+theme_override_font_sizes/font_size = 48
+text = "Choose"
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="SwitchSceneButton" to="." method="_on_switch_scene_button_pressed"]
 [connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
