@@ -3,7 +3,9 @@ extends Control
 signal display_back_pressed
 
 func _ready() -> void:
-	pass
+	var display_settings = GameManager._load_display_settings()
+	$VBoxContainer/WindowTypeSwitch.text = "Fullscreen" if display_settings["fullscreen"] else "Windowed"
+	$VBoxContainer/WindowSizeSwitch.text = "1920*1080" if display_settings["resolution"] == Vector2(1920, 1080) else "1280*720"
 
 func _process(_delta: float) -> void:
 	pass
@@ -16,9 +18,15 @@ func _on_window_type_switch_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 		$VBoxContainer/WindowTypeSwitch.text = "Fullscreen"
+		GameManager.fullscreen = true
+		GameManager._save_display_settings(GameManager.fullscreen, DisplayServer.window_get_size())
+		
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 		$VBoxContainer/WindowTypeSwitch.text = "Windowed"
+		GameManager.fullscreen = false
+		GameManager._save_display_settings(GameManager.fullscreen, DisplayServer.window_get_size())
+		
 
 
 
@@ -31,3 +39,7 @@ func _on_window_size_switch_toggled(toggled_on: bool) -> void:
 		target_resolution = Vector2(1920, 1080)
 		$VBoxContainer/WindowSizeSwitch.text = "1920*1080"
 	DisplayServer.window_set_size(target_resolution)
+	GameManager._save_display_settings(GameManager.fullscreen, DisplayServer.window_get_size())
+	
+
+	
