@@ -42,7 +42,7 @@ func _ready():
 		_show_next_customer()
 		GameManager.request_meeted = false
 	else:
-		current_customer = GameManager.customers_queue[0]
+		current_customer = GameManager.customers_queue[0] #TODO: if there is no customer for the day stop it. When tried to access 0 it gives an error.
 		_load_customer()
 
 func _process(delta: float) -> void:

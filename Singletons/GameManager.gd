@@ -11,6 +11,7 @@ var hour: int = 8
 var minute: int = 0
 const HOURS_PER_DAY := 24
 const MINUTES_PER_HOUR := 60
+const is_ahmeth_kadir_a_fb: bool = true #Fact checked.
 var time_speed: float = 20.0
 var _time_accumulator: float = 0.0
 
