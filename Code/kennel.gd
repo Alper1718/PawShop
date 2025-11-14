@@ -39,11 +39,9 @@ func _ready():
 	update_cages()
 	if is_instance_valid(choose_button):
 		choose_button.visible = false
-		if not choose_button.is_connected("pressed", Callable(self, "_on_choose_button_pressed")):
-			choose_button.connect("pressed", Callable(self, "_on_choose_button_pressed"))
+		choose_button.connect("pressed", Callable(self, "_on_choose_button_pressed"))
 	if is_instance_valid(breed_button):
-		if not breed_button.is_connected("pressed", Callable(self, "_on_breed_button_pressed")):
-			breed_button.connect("pressed", Callable(self, "_on_breed_button_pressed"))
+		breed_button.connect("pressed", Callable(self, "_on_breed_button_pressed"))
 
 func _process(_delta: float) -> void:
 	var scroll_x: float = float(cages_scroll.scroll_horizontal)
