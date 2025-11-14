@@ -88,7 +88,6 @@ func _show_next_customer():
 	var reject_callable = Callable(self, "_on_reject_button_pressed")
 	var raise_callable = Callable(self, "_on_raise_button_pressed")
 
-	# Disconnect if connected
 	if give_button.is_connected("pressed", give_callable):
 		give_button.disconnect("pressed", give_callable)
 	give_button.pressed.connect(give_callable)

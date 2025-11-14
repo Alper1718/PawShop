@@ -76,6 +76,9 @@ func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
 
 
 func update_info_panel(doggo: Dog) -> void:
+	if doggo == null:
+		_clear_info_panel()
+		return
 	selected_doggo = doggo
 	get_node("DogsInfoBox/NameLabel").text = str(selected_doggo.doggo_name)
 	info_panel.get_node("EyesLabel").text = "Eyes: " + str(snappedf(doggo.eyes, 0.1))
@@ -104,6 +107,21 @@ func update_info_panel(doggo: Dog) -> void:
 			breed_button.disabled = false
 			breed_button.text = "Breed"
 
+func _clear_info_panel():
+	get_node("DogsInfoBox/NameLabel").text = "-"
+	info_panel.get_node("EyesLabel").text = "Eyes: -"
+	info_panel.get_node("FurLabel").text = "Fur: -"
+	info_panel.get_node("NoseLabel").text = "Nose: -"
+	info_panel.get_node("TailLabel").text = "Tail: -"
+	info_panel.get_node("CutenessValueLabel").text = "Cuteness: -"
+	info_panel.get_node("EstValueDataLabel").text = "Est. Value: -"
+
+	if is_instance_valid(breed_button):
+		breed_button.disabled = true
+		breed_button.text = "Breed"
+
+	if is_instance_valid(choose_button):
+		choose_button.visible = false
 
 func update_cages() -> void:
 	_remove_duplicate_puppies()
