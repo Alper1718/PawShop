@@ -22,6 +22,8 @@ const RENT_COST := 30
 const FOOD_COST := 10
 var current_scene: Node
 
+var fullscreen = true
+
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
@@ -174,3 +176,26 @@ func change_scene(path: String) -> void:
 	var next_scene = load(path).instantiate()
 	get_tree().root.add_child(next_scene)
 	current_scene = next_scene
+	
+func _save_display_settings(fullscreen: bool, resolution: Vector2) -> Error:
+	var config = ConfigFile.new()
+	var err = config.load("res://settings.cfg")
+	
+	config.set_value("display", "fullscreen", fullscreen)
+	config.set_value("display", "resolution", resolution)
+	
+	config.save("res://settings.cfg")
+	
+	return err
+	
+func _load_display_settings() -> Dictionary:
+	var config = ConfigFile.new()
+	var err = config.load("res://settings.cfg")
+	if err != OK:
+		return {"fullscreen": true, "resolution": Vector2(1920, 1080)}
+		print("Error loading display settings.s")
+	
+	return {
+		"fullscreen": config.get_value("display", "fullscreen", true),
+		"resolution": config.get_value("display", "resolution", Vector2(1920, 1080))
+	}

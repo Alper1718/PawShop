@@ -7,6 +7,15 @@ var is_options_open :bool = false
 
 func _ready():
 	GameManager.time_paused = true
+	var display_settings = GameManager._load_display_settings()
+	if display_settings["fullscreen"] == true:
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+		GameManager.fullscreen = true
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+		GameManager.fullscreen = false
+		
+	DisplayServer.window_set_size(display_settings["resolution"])
 
 func _process(delta: float) -> void:
 	pass
