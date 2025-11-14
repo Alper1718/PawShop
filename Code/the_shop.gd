@@ -19,6 +19,8 @@ var current_customer: Dictionary = {}
 const TRANSITION_DURATION := 3.0
 
 func _ready():
+	if GameManager.is_connected("day_changed", Callable(self, "_on_day_changed")):
+		GameManager.disconnect("day_changed", Callable(self, "_on_day_changed"))
 	GameManager.connect("day_changed", Callable(self, "_on_day_changed"))
 	for toy in toys:
 		original_scales[toy] = toy.scale
@@ -89,9 +91,9 @@ func _load_customer():
 		raise_button.disconnect("pressed", raise_callable)
 	raise_button.pressed.connect(raise_callable)
 
-	give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
-	reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
-	raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
+	#give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
+	#reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
+	#raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
 
 
 func _on_give_button_pressed():
