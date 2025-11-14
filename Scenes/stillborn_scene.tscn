@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0773xto4kx36"]
+
+[ext_resource type="Texture2D" uid="uid://cyxjgwow7ditg" path="res://Assets/AssetsForTheTrashScene/trash_closed.jpeg" id="1_jp6o6"]
+[ext_resource type="Script" uid="uid://8xia2sa78nfs" path="res://Code/stillborn_scene.gd" id="1_jy32o"]
+[ext_resource type="Texture2D" uid="uid://byg2cs10vlud1" path="res://Assets/AssetsForTheTrashScene/trash_open.jpeg" id="2_jy32o"]
+[ext_resource type="Texture2D" uid="uid://bmedspcktlt0l" path="res://Assets/AssetsForTheTrashScene/Kopekcik.png" id="3_cf3g4"]
+[ext_resource type="Script" uid="uid://c2lcn6k3wprs4" path="res://Code/stillborn/puppy.gd" id="5_cf3g4"]
+
+[node name="StillbornScene" type="Node2D"]
+script = ExtResource("1_jy32o")
+
+[node name="TrashClosed" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_jp6o6")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1085.0
+flat = true
+
+[node name="TrashOpen" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_jy32o")
+
+[node name="Puppy" type="Sprite2D" parent="."]
+position = Vector2(193, 807)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("3_cf3g4")
+region_enabled = true
+region_rect = Rect2(743.916, 321.41, 467.852, 722.664)
+script = ExtResource("5_cf3g4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 672.0
+offset_top = 1013.0
+offset_right = 1366.0
+offset_bottom = 1050.0
+theme_override_font_sizes/font_size = 32
+text = "The puppy was stillborn. Too cute for this world."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

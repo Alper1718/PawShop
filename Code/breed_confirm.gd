@@ -96,7 +96,7 @@ func _on_confirm_pressed() -> void:
 	
 	var child = GameManager.breed(parent1, parent2)
 	if child.stillborn:
-		print("A puppy was stillborn. Too cute for this world.")
+		get_tree().change_scene_to_file("res://Scenes/stillborn_scene.tscn")
 	else:
 		print("A new puppy was born!")
 		GameManager.add_dog(child)
