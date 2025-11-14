@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvwx46sj8ofun"]
+[gd_scene load_steps=7 format=3 uid="uid://dvwx46sj8ofun"]
 
 [ext_resource type="Script" uid="uid://bxbus8hpqsfnr" path="res://Code/Main_Menu/main_menu.gd" id="1_hg3ed"]
 [ext_resource type="FontFile" uid="uid://ceyl04ojpjq8e" path="res://Fonts/Ubuntu/Ubuntu-Bold.ttf" id="2_exjb5"]
 [ext_resource type="Texture2D" uid="uid://pnpkglk7qpdr" path="res://Assets/logo.png" id="2_jm01e"]
 [ext_resource type="Texture2D" uid="uid://beephch21rvmh" path="res://Assets/Main_Menu/Main_menu_background.jpeg" id="4_vqcro"]
 [ext_resource type="Texture2D" uid="uid://dx3wa34ci44gd" path="res://Assets/Main_Menu/Main_menu_button.png" id="5_l1hio"]
+[ext_resource type="Texture2D" uid="uid://dnpwvwccu5kyh" path="res://Assets/Main_Menu/Untitled_Artwork.png" id="6_vqcro"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -22,9 +23,9 @@ anchor_left = 0.0708333
 anchor_top = 1.00463
 anchor_right = 0.257812
 anchor_bottom = 1.52407
-offset_left = 214.0
+offset_left = 211.0
 offset_top = -719.0
-offset_right = 224.0
+offset_right = 221.0
 offset_bottom = -730.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -54,24 +55,6 @@ theme_override_font_sizes/font_size = 32
 text = "QUIT GAME"
 flat = true
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -788.0
-offset_top = 113.0
-offset_right = -75.0
-offset_bottom = 292.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_exjb5")
-theme_override_font_sizes/font_size = 64
-text = "Doggo BReedıng
- sım"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
 [node name="Synema" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1788.0
@@ -90,21 +73,26 @@ texture = ExtResource("4_vqcro")
 
 [node name="MainMenuButton" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
-position = Vector2(533, 641)
+position = Vector2(530, 641)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_l1hio")
 
 [node name="MainMenuButton2" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
-position = Vector2(533, 459)
+position = Vector2(530, 459)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_l1hio")
 
 [node name="MainMenuButton3" type="Sprite2D" parent="." groups=["menu_sprites"]]
 z_index = -1
-position = Vector2(533, 827)
+position = Vector2(530, 827)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_l1hio")
+
+[node name="UntitledArtwork" type="Sprite2D" parent="."]
+position = Vector2(530, 191)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("6_vqcro")
 
 [connection signal="pressed" from="MenuButtons/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MenuButtons/Options" to="." method="_on_options_pressed"]
