@@ -228,7 +228,7 @@ offset_bottom = 1010.0
 scale = Vector2(0.76, 0.68)
 theme_override_fonts/font = ExtResource("9_3irva")
 theme_override_font_sizes/font_size = 48
-text = "Breed."
+text = "Breed"
 flat = true
 metadata/_edit_use_anchors_ = true
 
