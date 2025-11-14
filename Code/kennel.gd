@@ -9,6 +9,7 @@ extends Node2D
 @onready var clock_label := $Clock/TimeLabel
 @onready var breed_button := $BreedButton
 @onready var choose_button := $ChooseButton
+@onready var breed_button_sprite := $BreedButton2
 
 var selected_doggo: Dog = null
 var breed_mode: bool = false
@@ -39,9 +40,14 @@ func _ready():
 	update_cages()
 	if is_instance_valid(choose_button):
 		choose_button.visible = false
-		choose_button.connect("pressed", Callable(self, "_on_choose_button_pressed"))
+		if not choose_button.is_connected("pressed", Callable(self, "_on_choose_button_pressed")):
+			choose_button.connect("pressed", Callable(self, "_on_choose_button_pressed"))
 	if is_instance_valid(breed_button):
-		breed_button.connect("pressed", Callable(self, "_on_breed_button_pressed"))
+		if not breed_button.is_connected("pressed", Callable(self, "_on_breed_button_pressed")):
+			breed_button.connect("pressed", Callable(self, "_on_breed_button_pressed"))
+		if GameManager.give_mode == true:
+			breed_button.visible = false
+			breed_button_sprite.visible = false
 
 func _process(_delta: float) -> void:
 	var scroll_x: float = float(cages_scroll.scroll_horizontal)
@@ -90,14 +96,17 @@ func update_info_panel(doggo: Dog) -> void:
 
 	if is_instance_valid(breed_button):
 		breed_button.visible = not select_mode
+		breed_button_sprite.visible = not select_mode
 
 	if is_instance_valid(choose_button):
 		choose_button.visible = select_mode and selected_doggo != null
+		breed_button_sprite.visible = select_mode and selected_doggo != null
 
 	if not select_mode:
 		if breed_mode:
 			breed_button.disabled = false
 			breed_button.text = "Select Second Dog"
+			breed_button_sprite.visible = true
 			return
 
 		if _is_dog_in_gestation(doggo):
@@ -106,6 +115,7 @@ func update_info_panel(doggo: Dog) -> void:
 		else:
 			breed_button.disabled = false
 			breed_button.text = "Breed"
+			breed_button_sprite.visible = true
 
 func _clear_info_panel():
 	get_node("DogsInfoBox/NameLabel").text = "-"
@@ -231,6 +241,7 @@ func _on_cage_pressed(index: int) -> void:
 		
 		var breed_button_local = get_node("BreedButton")
 		breed_button_local.text = "Breed"
+		breed_button_sprite.visible = true
 	else:
 		update_info_panel(doggo)
 
@@ -254,8 +265,10 @@ func set_select_mode(enabled: bool, callback = null) -> void:
 	selection_callback = callback
 	if is_instance_valid(breed_button):
 		breed_button.visible = not select_mode
+		breed_button_sprite.visible = not select_mode
 	if is_instance_valid(choose_button):
 		choose_button.visible = select_mode and selected_doggo != null
+		breed_button_sprite.visible = select_mode and selected_doggo != null
 
 func _on_choose_button_pressed() -> void:
 	if selected_doggo == null:
@@ -308,8 +321,10 @@ func _end_selection_mode() -> void:
 	selection_callback = null
 	if is_instance_valid(choose_button):
 		choose_button.visible = false
+		breed_button_sprite.visible = false
 	if is_instance_valid(breed_button):
 		breed_button.visible = true
+		breed_button_sprite.visible = true
 	selected_doggo = null
 	update_info_panel(selected_doggo)
 	update_cages()

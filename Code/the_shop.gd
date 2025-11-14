@@ -19,6 +19,8 @@ var current_customer: Dictionary = {}
 const TRANSITION_DURATION := 3.0
 
 func _ready():
+	if GameManager.is_connected("day_changed", Callable(self, "_on_day_changed")):
+		GameManager.disconnect("day_changed", Callable(self, "_on_day_changed"))
 	GameManager.connect("day_changed", Callable(self, "_on_day_changed"))
 	for toy in toys:
 		original_scales[toy] = toy.scale
@@ -89,17 +91,19 @@ func _load_customer():
 		raise_button.disconnect("pressed", raise_callable)
 	raise_button.pressed.connect(raise_callable)
 
-	give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
-	reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
-	raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
+	#give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
+	#reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
+	#raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
 
 
 func _on_give_button_pressed():
+	GameManager.give_mode = true
 	var kennel_scene := preload("res://Scenes/Kennel.tscn")
 	var kennel_page := kennel_scene.instantiate()
 	get_tree().root.add_child(kennel_page)
 	kennel_page.select_mode = true
 	kennel_page.selection_callback = Callable(self, "_on_dog_selected")
+	
 
 
 func _on_dog_selected(dog: Dog):
@@ -200,4 +204,5 @@ func _instant_set_background(hour: int) -> void:
 	current_bg.modulate.a = 1.0
 
 func _on_switch_scene_button_pressed() -> void:
+	GameManager.give_mode = false
 	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")

@@ -53,6 +53,7 @@ var customers_queue = [
 	
 var request_meeted = false
 #var first_customer = true
+var give_mode = false
 
 func _ready() -> void:
 	randomize()
