@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://df0vft2odungw"]
+[gd_scene load_steps=10 format=3 uid="uid://df0vft2odungw"]
 
 [ext_resource type="Script" uid="uid://cdvdjwtocdvf7" path="res://Code/kennel.gd" id="1_p5wrj"]
 [ext_resource type="Script" uid="uid://b7lc6ec2oxhee" path="res://Code/doggo_generator_for_testing_purposes_remove.gd" id="2_46r5o"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="6_52w57"]
 [ext_resource type="Texture2D" uid="uid://dsehqenij4cye" path="res://Assets/Clock.png" id="7_wk4nd"]
 [ext_resource type="FontFile" uid="uid://bwfmdes4b86mi" path="res://Fonts/Orbitron/Orbitron-VariableFont_wght.ttf" id="8_3irva"]
+[ext_resource type="FontFile" uid="uid://v1sc7dw30p6c" path="res://Fonts/Ubuntu/Ubuntu-Regular.ttf" id="9_3irva"]
 
 [node name="Kennel" type="Node2D"]
 script = ExtResource("1_p5wrj")
@@ -87,20 +88,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="BreedButton" type="Button" parent="."]
-z_index = 1
-offset_left = 1497.0
-offset_top = 802.0
-offset_right = 1813.0
-offset_bottom = 944.0
-scale = Vector2(1.12, 1.08)
-theme_override_font_sizes/font_size = 32
-text = "
-
-Breed"
-flat = true
-metadata/_edit_use_anchors_ = true
 
 [node name="DoggoGeneratorForTestingPurposesRemove" type="Node" parent="."]
 script = ExtResource("2_46r5o")
@@ -231,5 +218,18 @@ theme_override_font_sizes/font_size = 48
 text = "Go To Shop"
 flat = true
 
-[connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
+[node name="BreedButton" type="Button" parent="."]
+z_index = 1
+offset_left = 1560.0
+offset_top = 868.0
+offset_right = 1876.0
+offset_bottom = 1010.0
+scale = Vector2(0.76, 0.68)
+theme_override_fonts/font = ExtResource("9_3irva")
+theme_override_font_sizes/font_size = 48
+text = "Breed."
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="SwitchSceneButton" to="." method="_on_switch_scene_button_pressed"]
+[connection signal="pressed" from="BreedButton" to="." method="_on_breed_button_pressed"]
