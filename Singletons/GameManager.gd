@@ -5,7 +5,7 @@ var day: int = 1
 var dogs: Array = []
 var pregnancies: Array = []
 var just_came_from_kennel := false
-
+var time_paused: bool = false
 
 var hour: int = 8
 var minute: int = 0
@@ -28,6 +28,8 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(delta: float) -> void:
+	if time_paused:
+		return
 	_time_accumulator += delta * time_speed
 	while _time_accumulator >= 1.0:
 		_time_accumulator -= 1.0
@@ -92,6 +94,10 @@ func breed(parent1: Dog, parent2: Dog) -> Dog:
 	var inherited_v = clampf(lerp(parent1.hsv.v, parent2.hsv.v, 0.5) + randf_range(-0.05, 0.05), 0.0, 1.0)
 	child.hsv = Color.from_hsv(inherited_h, inherited_s, inherited_v)
 
+	var size_avg = (parent1.size + parent2.size) / 2.0
+	var size_variation = randf_range(-0.2, 0.2)
+	child.size = clampf(size_avg + size_variation, 0.1, 10.0)
+
 	var gestation_hours = 2.0 + ((parent1.cuteness + parent2.cuteness) / 200.0) * 2.0
 	pregnancies.append({
 		"child": child,
@@ -102,8 +108,9 @@ func breed(parent1: Dog, parent2: Dog) -> Dog:
 	for dog in [parent1, parent2, child]:
 		dog.set_meta("in_gestation", true)
 
-	print("Pregnancy started! Gestation:", gestation_hours, "hours.")
+	print("Pregnancy started! Gestation:", gestation_hours, "hours. Child size:", child.size)
 	return child
+
 
 func _update_pregnancies(delta_hours: float) -> void:
 	var born: Array = []

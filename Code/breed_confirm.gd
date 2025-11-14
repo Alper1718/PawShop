@@ -57,7 +57,7 @@ func _update_info(panel: Node, visual_container: Node, doggo: Dog, custom_offset
 	panel.get_node("TailLabel").text = "Tail: " + str(snappedf(doggo.tail, 0.1))
 	panel.get_node("CutenessValueLabel").text = "Cuteness: " + str(int(doggo.cuteness))
 	panel.get_node("EstValueDataLabel").text = "Est. Value: " + str(int(GameManager.estimate_doggo_price(doggo)))
-	panel.get_parent().get_parent().get_node("NameLabel").text = str(doggo.size)
+	panel.get_parent().get_parent().get_node("NameLabel").text = doggo.doggo_name
 	
 	for child in visual_container.get_children():
 		child.queue_free()

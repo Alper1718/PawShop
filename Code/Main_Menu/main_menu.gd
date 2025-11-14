@@ -5,15 +5,17 @@ var options_scene: PackedScene = preload("res://Scenes/Main_Menu/main_menu_optio
 var options_instance: Node
 var is_options_open :bool = false
 
-func _ready() -> void:
-	pass
+func _ready():
+	GameManager.time_paused = true
 
 func _process(delta: float) -> void:
 	pass
 
 
 func _on_start_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/classroom_1.tscn")
+	GameManager.time_paused = false
+
+	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")
 
 
 func _on_options_pressed() -> void:
