@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://h57b0tmeqrf2"]
+[gd_scene load_steps=11 format=3 uid="uid://h57b0tmeqrf2"]
 
 [ext_resource type="Script" uid="uid://bae5wbvh6hhbc" path="res://Code/the_shop.gd" id="1_jd8ym"]
 [ext_resource type="Texture2D" uid="uid://bv5281gg3863s" path="res://Assets/Backgrounds/Shop_morning_background (3).jpeg" id="1_qdt25"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://4b4qrgixqs6k" path="res://Assets/Toys (2).png" id="4_n8gmd"]
 [ext_resource type="Texture2D" uid="uid://dsehqenij4cye" path="res://Assets/Clock.png" id="6_n8gmd"]
 [ext_resource type="FontFile" uid="uid://bwfmdes4b86mi" path="res://Fonts/Orbitron/Orbitron-VariableFont_wght.ttf" id="7_jcjbr"]
+[ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="10_2r8aa"]
 
 [node name="TheShop" type="Node2D"]
 script = ExtResource("1_jd8ym")
@@ -68,4 +69,20 @@ theme_override_font_sizes/font_size = 124
 text = "11:58"
 metadata/_edit_use_anchors_ = true
 
+[node name="ShopButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(1170.9, 998.75)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("10_2r8aa")
+
+[node name="SwitchSceneButton" type="Button" parent="."]
+offset_left = 871.9
+offset_top = 970.75
+offset_right = 1187.9
+offset_bottom = 1112.75
+scale = Vector2(0.76, 0.679998)
+theme_override_font_sizes/font_size = 48
+text = "Go To Kennel"
+flat = true
+
 [connection signal="pressed" from="Toys/ToysButton" to="." method="_on_toys_button_pressed"]
+[connection signal="pressed" from="SwitchSceneButton" to="." method="_on_switch_scene_button_pressed"]

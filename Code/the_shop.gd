@@ -8,7 +8,7 @@ extends Node2D
 
 var original_scales := {}
 var current_bg: Node2D = null
-const TRANSITION_DURATION := 2.0
+const TRANSITION_DURATION := 3.0
 
 func _ready():
 	GameManager.connect("day_changed", Callable(self, "_on_day_changed"))
@@ -18,7 +18,14 @@ func _ready():
 	evening_bg.modulate.a = 0.0
 	night_bg.modulate.a = 0.0
 
-	_update_background(GameManager.hour)
+	if GameManager.just_came_from_kennel:
+		_instant_set_background(GameManager.hour)
+		GameManager.just_came_from_kennel = false
+	else:
+		morning_bg.modulate.a = 0.0
+		evening_bg.modulate.a = 0.0
+		night_bg.modulate.a = 0.0
+		_update_background(GameManager.hour)
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
@@ -69,3 +76,20 @@ func _on_toys_button_pressed() -> void:
 		var squish_scale = original_scales[toy] * Vector2(1.1, 0.8)
 		tween.tween_property(toy, "scale", squish_scale, 0.06)
 		tween.tween_property(toy, "scale", original_scales[toy], 0.08)
+
+func _instant_set_background(hour: int) -> void:
+	morning_bg.modulate.a = 0.0
+	evening_bg.modulate.a = 0.0
+	night_bg.modulate.a = 0.0
+
+	if hour >= 6 and hour < 12:
+		current_bg = morning_bg
+	elif hour >= 12 and hour < 15:
+		current_bg = evening_bg
+	else:
+		current_bg = night_bg
+
+	current_bg.modulate.a = 1.0
+
+func _on_switch_scene_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")

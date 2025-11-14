@@ -76,6 +76,12 @@ func update_info_panel(doggo: Dog) -> void:
 	info_panel.get_node("EstValueDataLabel").text = "Est. Value: " + str(int(GameManager.estimate_doggo_price(doggo)))
 
 	var breed_button = get_node("BreedButton")
+
+	if breed_mode:
+		breed_button.disabled = false
+		breed_button.text = "Select Second Dog"
+		return
+
 	if _is_dog_in_gestation(doggo):
 		breed_button.disabled = true
 		breed_button.text = "In Gestation"
@@ -189,8 +195,12 @@ func _on_cage_pressed(index: int) -> void:
 		
 		breed_mode = false
 		first_parent = null
+		
+		var breed_button = get_node("BreedButton")
+		breed_button.text = "Breed"
 	else:
 		update_info_panel(doggo)
+
 
 
 func _on_breed_button_pressed() -> void:
@@ -200,7 +210,11 @@ func _on_breed_button_pressed() -> void:
 	
 	breed_mode = true
 	first_parent = selected_doggo
-	print("Breed mode activated. Select a second doggo to breed with", first_parent.doggo_name)
+
+	var breed_button = get_node("BreedButton")
+	breed_button.text = "Select Second Dog"
+
+	print("Breed mode activated. Select a second dog to breed with", first_parent.doggo_name)
 
 func _update_bg_size() -> void:
 	var content_size = cages_grid.get_combined_minimum_size()
@@ -244,3 +258,8 @@ func _remove_duplicate_puppies() -> void:
 	for dup in duplicates:
 		GameManager.dogs.erase(dup)
 		print("Removed duplicate puppy:", dup.doggo_name)
+
+
+func _on_switch_scene_button_pressed() -> void:
+	GameManager.just_came_from_kennel = true
+	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
