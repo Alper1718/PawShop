@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func _on_start_game_pressed() -> void:
 	GameManager.time_paused = false
 
-	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")
+	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
 
 
 func _on_options_pressed() -> void:
