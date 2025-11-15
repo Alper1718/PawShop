@@ -25,32 +25,9 @@ var current_scene: Node
 
 var fullscreen = true
 
-var customers_queue = [
-		{
-			"name": "Weirdo",
-			"sprite_path": "res://Assets/Customers/3g2.png",
-			"feature": "fur",
-			"min_value": 6.0,
-			"max_price": 1200,
-			"dialogues": {
-				"opening": "Heheh, good morning. I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
-				"happy": "Begendim!",
-				"sad": "So sad..."
-			}
-		},
-		{
-			"name": "Goth",
-			"sprite_path": "res://Assets/Customers/4g1.png",
-			"feature": "cuteness",
-			"min_value": 60.0,
-			"max_price": 1700,
-			"dialogues": {
-				"opening": "Hello! I'm looking for a dog with {feature} ≥ {value}. My max budget is ${price}.",
-				"happy": "Akıllı olur aklını alırım",
-				"sad": "Takarım bıçağı görürsün."
-			}
-		}
-	]
+const customer_json_path: String = "res://customer_queue.json"
+var customer_arr : Array
+var customers_queue : Array[Customer] 
 	
 var request_meeted = false
 #var first_customer = true
@@ -59,6 +36,9 @@ var give_mode = false
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
+	customer_arr = _load_JSON(customer_json_path)
+	for entry in customer_arr:
+		customers_queue.append(CustomerFunctions.generate_customer(entry))
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -231,3 +211,10 @@ func _load_display_settings() -> Dictionary:
 		"fullscreen": config.get_value("display", "fullscreen", true),
 		"resolution": config.get_value("display", "resolution", Vector2(1920, 1080))
 	}
+	
+func _load_JSON(path: String) -> Array:
+	var json_as_text = FileAccess.get_file_as_string(path)
+	var json_as_array = JSON.parse_string(json_as_text)
+	if json_as_array:
+		return json_as_array
+	return Array()

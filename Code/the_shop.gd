@@ -15,7 +15,7 @@ extends Node2D
 
 var original_scales := {}
 var current_bg: Node2D = null
-var current_customer: Dictionary = {}
+var current_customer: Customer
 var _typing_seq := 0
 const TRANSITION_DURATION := 3.0
 
@@ -78,14 +78,15 @@ func _show_next_customer():
 	
 func _load_customer():
 	
-	if ResourceLoader.exists(current_customer.sprite_path):
-		customer_sprite.texture = load(current_customer.sprite_path) #TODO: make the customer appear the size it should be. Adjusting its scale with a constant is enough since Öykü already made the Assets proportionally the same size. Try setting the y value of its position.
+	if ResourceLoader.exists(current_customer.asset_path):
+		customer_sprite.texture = load(current_customer.asset_path) #TODO: make the customer appear the size it should be. Adjusting its scale with a constant is enough since Öykü already made the Assets proportionally the same size. Try setting the y value of its position.
 
-	var opening_text = current_customer.dialogues.opening.format({
+	'''var opening_text = current_customer.dialogues.opening.format({
 		"feature": current_customer.feature.capitalize(),
 		"value": str(current_customer.min_value),
 		"price": str(current_customer.max_price)
-	})
+	})''' # TODO formattable texts
+	var opening_text = CustomerFunctions.get_opening(current_customer, CustomerFunctions.get_random_opening_index())
 	_type_text(speech_label, opening_text)
 	
 	var give_callable = Callable(self, "_on_give_button_pressed")

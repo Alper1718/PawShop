@@ -312,12 +312,12 @@ func _on_choose_button_pressed() -> void:
 	else:
 		print("Selected dog does not meet customer's requirements.")
 
-func _meets_request(dog: Dog, request: Dictionary) -> bool:
+func _meets_request(dog: Dog, request: Customer) -> bool:
 	if request == null:
 		GameManager.request_meeted = false
 		return GameManager.request_meeted
-	var feature = request.get("feature", "cuteness")
-	var required = request.get("min_value", request.get("value", 0))
+	var feature = request.feature
+	var required = request.min_value
 	if feature == "cuteness":
 		GameManager.request_meeted = dog.cuteness >= float(required)
 		return GameManager.request_meeted
