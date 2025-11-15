@@ -94,7 +94,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CustomerPanel"]
-position = Vector2(700, 0)
+position = Vector2(700, 500)
 scale = Vector2(0.5, 0.5)
 
 [node name="SpeechBubble" type="Sprite2D" parent="CustomerPanel"]

@@ -9,6 +9,7 @@ extends Node2D
 @onready var clock_label := $Clock/TimeLabel
 @onready var breed_button := $BreedButton
 @onready var choose_button := $ChooseButton
+@onready var switch_scene_button := $SwitchSceneButton
 @onready var breed_button_sprite := $BreedButton2
 
 var selected_doggo: Dog = null
@@ -101,6 +102,7 @@ func update_info_panel(doggo: Dog) -> void:
 	if is_instance_valid(choose_button):
 		choose_button.visible = select_mode and selected_doggo != null
 		breed_button_sprite.visible = select_mode and selected_doggo != null
+		choose_button.disabled = !_meets_request(doggo, GameManager.customers_queue[0])
 
 	if not select_mode:
 		if breed_mode:
@@ -276,6 +278,8 @@ func _on_choose_button_pressed() -> void:
 		return
 
 	if selection_callback != null:
+		switch_scene_button.disabled = true
+		choose_button.disabled = true
 		GameManager.request_meeted = true
 		z_index = -2
 		selection_callback.call(selected_doggo)
@@ -293,6 +297,8 @@ func _on_choose_button_pressed() -> void:
 
 	var request = GameManager.pending_customer
 	if _meets_request(selected_doggo, request):
+		switch_scene_button.disabled = true
+		choose_button.disabled = true
 		GameManager.pending_sale = {
 			"dog": selected_doggo,
 			"customer": request
@@ -315,7 +321,7 @@ func _meets_request(dog: Dog, request: Dictionary) -> bool:
 	if feature == "cuteness":
 		GameManager.request_meeted = dog.cuteness >= float(required)
 		return GameManager.request_meeted
-	if dog.has_property(feature):
+	if dog.get(feature):
 		GameManager.request_meeted = dog.get(feature) >= float(required)
 		return GameManager.request_meeted
 	GameManager.request_meeted = false
@@ -381,4 +387,4 @@ func _on_switch_scene_button_pressed() -> void:
 	GameManager.just_came_from_kennel = true
 	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
 	z_index = -1
-	queue_free()
+	# queue_free()

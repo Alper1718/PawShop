@@ -27,20 +27,20 @@ var fullscreen = true
 
 var customers_queue = [
 		{
-			"name": "Teyze",
-			"sprite_path": "res://Assets/Customers/1g2.png",
-			"feature": "eyes",
-			"min_value": 5.0,
-			"max_price": 900,
+			"name": "Weirdo",
+			"sprite_path": "res://Assets/Customers/3g2.png",
+			"feature": "fur",
+			"min_value": 6.0,
+			"max_price": 1200,
 			"dialogues": {
-				"opening": "I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
+				"opening": "Heheh, good morning. I want a dog with {feature} ≥ {value}! I can pay up to ${price}.",
 				"happy": "Begendim!",
 				"sad": "So sad..."
 			}
 		},
 		{
-			"name": "Ergen",
-			"sprite_path": "res://Assets/Customers/Ergen.jpeg",
+			"name": "Goth",
+			"sprite_path": "res://Assets/Customers/4g1.png",
 			"feature": "cuteness",
 			"min_value": 60.0,
 			"max_price": 1700,
