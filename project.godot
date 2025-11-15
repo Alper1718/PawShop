@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GNGameJam"
 run/main_scene="uid://dvwx46sj8ofun"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
 

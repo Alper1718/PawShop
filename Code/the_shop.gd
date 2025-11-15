@@ -49,49 +49,28 @@ func _ready():
 		night_bg.modulate.a = 0.0
 		_update_background(GameManager.hour)
 	
-	if GameManager.request_meeted == true:
-		GameManager.customers_queue.remove_at(0)
-		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0]
-			GameManager.request_meeted = false
-			_show_next_customer()
-			
-	else:
-		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0]
-			_load_customer()
-	
 	if GameManager.request_meeted:
 		GameManager.customers_queue.remove_at(0)
-		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0]
-			GameManager.request_meeted = false
-			_show_next_customer()
-	else:
-		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0]
-			if _openings.size() == 0:
-				_openings = current_customer.get_openings()
-				_current_opening_index = 0
+		GameManager.request_meeted = false
+	
+	if !GameManager.customers_queue.is_empty():
+		current_customer = GameManager.customers_queue[0]
+		_openings.clear()
+		_current_opening_index = 0
+		_load_customer()
 
-				_load_customer()
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	clock_label.text = get_formatted_time()
 	_update_background(GameManager.hour)
 	
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		if customer_panel.visible and not _typing_in_progress:
+		if customer_panel.visible and not _typing_in_progress and not waiting_for_offer:
 			_show_next_opening()
 
 	
 func _please():
-	GameManager.customers_queue.remove_at(0)
-	if !GameManager.customers_queue.is_empty():
-		current_customer = GameManager.customers_queue[0]
-		GameManager.request_meeted = false
-		_show_next_customer()
+	_advance_to_next_customer()
 	
 func _show_next_customer():
 	print("Called")
@@ -126,9 +105,9 @@ func _load_customer():
 
 	_show_next_opening()
 
+func _show_next_customer_buttons():
 	var give_callable = Callable(self, "_on_give_button_pressed")
 	var reject_callable = Callable(self, "_on_reject_button_pressed")
-	var raise_callable = Callable(self, "_on_raise_button_pressed")
 
 	if give_button.is_connected("pressed", give_callable):
 		give_button.disconnect("pressed", give_callable)
@@ -138,6 +117,8 @@ func _load_customer():
 		reject_button.disconnect("pressed", reject_callable)
 	reject_button.pressed.connect(reject_callable)
 
+	$CustomerPanel/VBoxContainer.visible = true
+
 func _show_next_opening():
 	if waiting_for_offer:
 		return
@@ -146,7 +127,7 @@ func _show_next_opening():
 		_current_opening_index += 1
 
 	if _current_opening_index >= _openings.size():
-		$CustomerPanel/VBoxContainer.visible = true
+		_show_next_customer_buttons()
 		return
 
 	_typing_in_progress = true
@@ -168,9 +149,17 @@ func _on_give_button_pressed():
 	kennel_page.back_callback = Callable(self, "_on_kennel_back_pressed")
 
 	customer_panel.visible = false
+	waiting_for_offer = false
 
 func _on_kennel_back_pressed():
 	customer_panel.visible = true
+	if _selected_dog:
+		SecondPhase.visible = true
+		price_input.visible = true
+		price_offer_button.visible = true
+	else:
+		SecondPhase.visible = false
+
 
 
 func _on_dog_selected(dog: Dog):
@@ -188,24 +177,19 @@ func _on_dog_selected(dog: Dog):
 		SecondPhase.visible = true
 		price_input.visible = true
 		price_offer_button.visible = true
-		speech_label.text = "This dog matches your requirements! What will you offer?"
+		await _type_text(speech_label, "This dog matches your requirements! What will you offer?")
 		waiting_for_offer = true
 	else:
 		await _type_text(speech_label, current_customer.dialogues.sad)
-		GameManager.dogs.erase(dog)
 		await get_tree().create_timer(1.0).timeout
-		_show_next_customer()
+		_advance_to_next_customer()
 
 
 func _on_reject_button_pressed():
 	await _type_text(speech_label, current_customer.dialogues.sad)
 	print("You told the customer you don't have a dog matching their criteria.")
 	await get_tree().create_timer(1.0).timeout
-	GameManager.customers_queue.remove_at(0)
-	if !GameManager.customers_queue.is_empty():
-		current_customer = GameManager.customers_queue[0]
-		GameManager.request_meeted = false
-		_show_next_customer()
+	_advance_to_next_customer()
 
 
 func _on_raise_button_pressed():
@@ -214,7 +198,20 @@ func _on_raise_button_pressed():
 	await _type_text(speech_label, raise_text)
 	print("Raised price to $%s" % new_price)
 	await get_tree().create_timer(1.0).timeout
-	_show_next_customer()
+	_advance_to_next_customer()
+
+
+func _advance_to_next_customer() -> void:
+	if !GameManager.customers_queue.is_empty():
+		GameManager.customers_queue.remove_at(0)
+	if !GameManager.customers_queue.is_empty():
+		current_customer = GameManager.customers_queue[0]
+		_openings.clear()
+		_current_opening_index = 0
+		_load_customer()
+	else:
+		customer_panel.visible = false
+		print("No more customers!")
 
 
 func _type_text(label, text: String, speed: float = 0.02) -> void:
@@ -252,7 +249,7 @@ func _update_background(hour: int) -> void:
 
 		current_bg = target_bg
 
-func _on_day_changed(day: int) -> void:
+func _on_day_changed(_day: int) -> void:
 	pass
 
 func _on_toys_button_pressed() -> void:
@@ -299,7 +296,7 @@ func _on_offer_button_pressed() -> void:
 	if offer_text.is_valid_integer():
 		offer_amount = int(offer_text)
 	else:
-		speech_label.text = "Please enter a valid number!"
+		await _type_text(speech_label, "Please enter a valid number!")
 		return
 
 	var dog = _selected_dog
@@ -323,4 +320,4 @@ func _on_offer_button_pressed() -> void:
 	_selected_dog = null
 	waiting_for_offer = false
 	await get_tree().create_timer(1.0).timeout
-	_show_next_customer()
+	_advance_to_next_customer()

@@ -13,6 +13,7 @@ const MINUTES_PER_HOUR := 60
 const is_ahmeth_kadir_a_fb: bool = true #Fact checked.
 var time_speed: float = 20.0
 var _time_accumulator: float = 0.0
+var current_opening_index: int = 0
 
 signal day_changed
 signal minute_changed

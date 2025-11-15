@@ -75,6 +75,7 @@ func _on_back_button_pressed():
 		back_callback.call()
 	queue_free()
 
+
 func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
 	var texture_w: float = TILE_WIDTH
 	if secondary_node:
