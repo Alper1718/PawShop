@@ -94,7 +94,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CustomerPanel"]
-position = Vector2(739, 699)
+position = Vector2(700, 0)
+scale = Vector2(0.5, 0.5)
 
 [node name="SpeechBubble" type="Sprite2D" parent="CustomerPanel"]
 position = Vector2(1258, 294)
@@ -107,7 +108,7 @@ offset_left = -785.0
 offset_top = -332.5
 offset_right = 870.0
 offset_bottom = 117.5
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 

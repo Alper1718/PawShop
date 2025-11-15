@@ -8,7 +8,7 @@ extends Node2D
 
 @onready var customer_panel := $CustomerPanel
 @onready var customer_sprite := $CustomerPanel/Sprite2D
-@onready var speech_label := $CustomerPanel/SpeechBubble/Label
+@onready var speech_label := $CustomerPanel/SpeechBubble/Label #TODO: adjust the speech label text size
 @onready var give_button := $CustomerPanel/VBoxContainer/GiveButton
 @onready var reject_button := $CustomerPanel/VBoxContainer/RejectButton
 @onready var raise_button := $CustomerPanel/VBoxContainer/RaiseButton
@@ -16,6 +16,7 @@ extends Node2D
 var original_scales := {}
 var current_bg: Node2D = null
 var current_customer: Dictionary = {}
+var _typing_seq := 0
 const TRANSITION_DURATION := 3.0
 
 func _ready():
@@ -71,13 +72,14 @@ func _show_next_customer():
 func _load_customer():
 	
 	if ResourceLoader.exists(current_customer.sprite_path):
-		customer_sprite.texture = load(current_customer.sprite_path)
+		customer_sprite.texture = load(current_customer.sprite_path) #TODO: make the customer appear the size it should be. Adjusting its scale with a constant is enough since Öykü already made the Assets proportionally the same size. Try setting the y value of its position.
 
-	speech_label.text = current_customer.dialogues.opening.format({
+	var opening_text = current_customer.dialogues.opening.format({
 		"feature": current_customer.feature.capitalize(),
 		"value": str(current_customer.min_value),
 		"price": str(current_customer.max_price)
 	})
+	_type_text(speech_label, opening_text)
 	
 	var give_callable = Callable(self, "_on_give_button_pressed")
 	var reject_callable = Callable(self, "_on_reject_button_pressed")
@@ -118,11 +120,11 @@ func _on_dog_selected(dog: Dog):
 		meets = dog.get(feature) >= required_value
 
 	if meets:
-		speech_label.text = current_customer.dialogues.happy
+		await _type_text(speech_label, current_customer.dialogues.happy)
 		print("Customer is happy! You sold the dog for $%s" % max_price)
 		GameManager.dogs.erase(dog)
 	else:
-		speech_label.text = current_customer.dialogues.sad
+		await _type_text(speech_label, current_customer.dialogues.sad)
 		print("Customer rejected the dog. You earned nothing.")
 
 	await get_tree().create_timer(1.0).timeout
@@ -130,7 +132,7 @@ func _on_dog_selected(dog: Dog):
 
 
 func _on_reject_button_pressed():
-	speech_label.text = current_customer.dialogues.sad
+	await _type_text(speech_label, current_customer.dialogues.sad)
 	print("You told the customer you don't have a dog matching their criteria.")
 	await get_tree().create_timer(1.0).timeout
 	_show_next_customer()
@@ -138,10 +140,22 @@ func _on_reject_button_pressed():
 
 func _on_raise_button_pressed():
 	var new_price = int(current_customer.max_price * 1.5)
-	speech_label.text = "I'll offer to pay $%s instead." % new_price
+	var raise_text := "I'll offer to pay $%s instead." % new_price
+	await _type_text(speech_label, raise_text)
 	print("Raised price to $%s" % new_price)
 	await get_tree().create_timer(1.0).timeout
 	_show_next_customer()
+
+
+func _type_text(label, text: String, speed: float = 0.02) -> void:
+	_typing_seq += 1
+	var my_seq = _typing_seq
+	label.text = ""
+	for i in range(1, text.length() + 1):
+		if my_seq != _typing_seq:
+			return
+		label.text = text.substr(0, i)
+		await get_tree().create_timer(speed).timeout
 
 func get_formatted_time() -> String:
 	var hour_str = str(GameManager.hour).pad_zeros(2)
