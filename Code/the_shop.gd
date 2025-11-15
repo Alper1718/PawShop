@@ -42,9 +42,9 @@ func _ready():
 		GameManager.customers_queue.remove_at(0)
 		if !GameManager.customers_queue.is_empty():
 			current_customer = GameManager.customers_queue[0]
-			_show_next_customer()
-		else:
 			GameManager.request_meeted = false
+			_show_next_customer()
+			
 	else:
 		if !GameManager.customers_queue.is_empty():
 			current_customer = GameManager.customers_queue[0] #TODO: What do you think will happen when the last customer is gone? It will respawn. Also it is not a criteria for the customer to be happy for it to be removed from the list.
@@ -52,7 +52,14 @@ func _ready():
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
-	_update_background(GameManager.hour)
+	_update_background(GameManager.hour)	
+	
+func _please():
+	GameManager.customers_queue.remove_at(0)
+	if !GameManager.customers_queue.is_empty():
+		current_customer = GameManager.customers_queue[0]
+		GameManager.request_meeted = false
+		_show_next_customer()
 	
 func _show_next_customer():
 	print("Called")
@@ -135,7 +142,11 @@ func _on_reject_button_pressed():
 	await _type_text(speech_label, current_customer.dialogues.sad)
 	print("You told the customer you don't have a dog matching their criteria.")
 	await get_tree().create_timer(1.0).timeout
-	_show_next_customer()
+	GameManager.customers_queue.remove_at(0)
+	if !GameManager.customers_queue.is_empty():
+		current_customer = GameManager.customers_queue[0]
+		GameManager.request_meeted = false
+		_show_next_customer()
 
 
 func _on_raise_button_pressed():
