@@ -8,8 +8,13 @@ class_name Customer
 @export var feature: String
 @export var min_value: float
 @export var max_price: int
+@export var will_accept_paying_more: bool
 @export var dialogues: Dictionary = {
-	"opening" : "",
-	"happy" : "",
-	"sad" : ""
-}
+		"opening1": "",
+		"opening2": "",
+		"opening3": "",
+		"sad": "",
+		"sad2": "",
+		"happy": "",
+		"pazarlik": ""
+		}

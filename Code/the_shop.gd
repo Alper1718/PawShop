@@ -43,10 +43,10 @@ func _ready():
 			current_customer = GameManager.customers_queue[0]
 			_show_next_customer()
 		else:
-		GameManager.request_meeted = false
+			GameManager.request_meeted = false
 	else:
 		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0]
+			current_customer = GameManager.customers_queue[0] #TODO: What do you think will happen when the last customer is gone? It will respawn. Also it is not a criteria for the customer to be happy for it to be removed from the list.
 			_load_customer()
 
 func _process(delta: float) -> void:
@@ -94,10 +94,6 @@ func _load_customer():
 	if raise_button.is_connected("pressed", raise_callable):
 		raise_button.disconnect("pressed", raise_callable)
 	raise_button.pressed.connect(raise_callable)
-
-	#give_button.pressed.connect(Callable(self, "_on_give_button_pressed"))
-	#reject_button.pressed.connect(Callable(self, "_on_reject_button_pressed"))
-	#raise_button.pressed.connect(Callable(self, "_on_raise_button_pressed"))
 
 
 func _on_give_button_pressed():

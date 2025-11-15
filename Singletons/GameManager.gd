@@ -28,7 +28,7 @@ var fullscreen = true
 var customers_queue = [
 		{
 			"name": "Teyze",
-			"sprite_path": "res://Assets/Customers/Teyze.jpeg",
+			"sprite_path": "res://Assets/Customers/1g2.png",
 			"feature": "eyes",
 			"min_value": 5.0,
 			"max_price": 900,
