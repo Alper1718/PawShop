@@ -38,12 +38,16 @@ func _ready():
 		_update_background(GameManager.hour)
 	
 	if GameManager.request_meeted == true:
-		current_customer = GameManager.customers_queue.pop_front()
-		_show_next_customer()
+		GameManager.customers_queue.remove_at(0)
+		if !GameManager.customers_queue.is_empty():
+			current_customer = GameManager.customers_queue[0]
+			_show_next_customer()
+		else:
 		GameManager.request_meeted = false
 	else:
-		current_customer = GameManager.customers_queue[0] #TODO: if there is no customer for the day stop it. When tried to access 0 it gives an error.
-		_load_customer()
+		if !GameManager.customers_queue.is_empty():
+			current_customer = GameManager.customers_queue[0]
+			_load_customer()
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
@@ -56,7 +60,7 @@ func _show_next_customer():
 		print("No customers left")
 		return
 	
-	current_customer = GameManager.customers_queue.pop_front()
+	# current_customer = GameManager.customers_queue.pop_front()
 	if current_customer == null:
 		print("No customers left")
 	print(current_customer["name"])

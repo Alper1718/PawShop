@@ -276,7 +276,11 @@ func _on_choose_button_pressed() -> void:
 		return
 
 	if selection_callback != null:
+		GameManager.request_meeted = true
+		z_index = -2
 		selection_callback.call(selected_doggo)
+		get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
+		queue_free()
 		_end_selection_mode()
 		return
 
@@ -296,8 +300,9 @@ func _on_choose_button_pressed() -> void:
 		GameManager.dogs.erase(selected_doggo)
 		_end_selection_mode()
 		z_index = -2
-		queue_free()
+		GameManager.request_meeted = true
 		get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
+		queue_free()
 	else:
 		print("Selected dog does not meet customer's requirements.")
 
@@ -376,4 +381,4 @@ func _on_switch_scene_button_pressed() -> void:
 	GameManager.just_came_from_kennel = true
 	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
 	z_index = -1
-	# queue_free()
+	queue_free()
