@@ -152,7 +152,7 @@
 	
 	{
 		"asset_path": "res://Assets/Customers/4g1.png",
-		"name": "",
+		"name": "Actualdogfanmaybe",
 		"day": 4,
 		"is_first": true,
 		"feature": "",
@@ -169,23 +169,6 @@
 		     }
 	},
 	
-	{
-		"asset_path": "res://Assets/Customers/4g1.png",
-		"name": "",
-		"day": 4,
-		"is_first": true,
-		"feature": "",
-		"min_value": 0.0,
-		"max_price": 0,
-		"will_accept_paying_more": false,
-		"dialogues": {
-		       "opening1": "Hello! Your shop looks veeerry cool!"
-		       "opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha.."
-			 "opening3": "They say animal's 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!"
-			 "sad": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. "
-			"happy": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!"
-			 "pazarlik": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
-		     }
-	},
+
 
 ]
