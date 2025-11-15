@@ -17,8 +17,8 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 GameManager="*res://Singletons/GameManager.gd"
-CustomerFunctions="*res://Singletons/CustomerFunctions.gd"
 MusicPlayer="*res://Singletons/MusicPlayer.tscn"
+CustomerFunctions="*res://Singletons/CustomerFunctions.gd"
 
 [display]
 

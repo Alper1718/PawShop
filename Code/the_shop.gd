@@ -8,7 +8,7 @@ extends Node2D
 
 @onready var customer_panel := $CustomerPanel
 @onready var customer_sprite := $CustomerPanel/Sprite2D
-@onready var speech_label := $CustomerPanel/SpeechBubble/Label #TODO: adjust the speech label text size
+@onready var speech_label := $CustomerPanel/SpeechBubble/Label
 @onready var give_button := $CustomerPanel/VBoxContainer/GiveButton
 @onready var reject_button := $CustomerPanel/VBoxContainer/RejectButton
 @onready var raise_button := $CustomerPanel/VBoxContainer/RaiseButton
@@ -79,7 +79,7 @@ func _show_next_customer():
 func _load_customer():
 	
 	if ResourceLoader.exists(current_customer.asset_path):
-		customer_sprite.texture = load(current_customer.asset_path) #TODO: make the customer appear the size it should be. Adjusting its scale with a constant is enough since Öykü already made the Assets proportionally the same size. Try setting the y value of its position.
+		customer_sprite.texture = load(current_customer.asset_path)
 
 	'''var opening_text = current_customer.dialogues.opening.format({
 		"feature": current_customer.feature.capitalize(),

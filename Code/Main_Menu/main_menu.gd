@@ -14,7 +14,7 @@ func _ready():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 		GameManager.fullscreen = false
-		
+	MusicPlayer.play_music()
 	DisplayServer.window_set_size(display_settings["resolution"])
 
 func _process(delta: float) -> void:

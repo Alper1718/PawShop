@@ -6,7 +6,6 @@ var dogs: Array = []
 var pregnancies: Array = []
 var just_came_from_kennel := false
 var time_paused: bool = false
-
 var hour: int = 8
 var minute: int = 0
 const HOURS_PER_DAY := 24
@@ -40,6 +39,7 @@ func _ready() -> void:
 	for entry in customer_arr:
 		customers_queue.append(CustomerFunctions.generate_customer(entry))
 	set_process(true)
+	
 
 func _process(delta: float) -> void:
 	if time_paused:
