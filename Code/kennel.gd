@@ -293,7 +293,6 @@ func _on_choose_button_pressed() -> void:
 
 	var request = GameManager.pending_customer
 	if _meets_request(selected_doggo, request):
-		print('meth') # yeah literally TODO (pls delete this before release🙏)
 		GameManager.pending_sale = {
 			"dog": selected_doggo,
 			"customer": request
