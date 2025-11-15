@@ -62,6 +62,11 @@ func _ready():
 func _process(_delta: float) -> void:
 	clock_label.text = get_formatted_time()
 	_update_background(GameManager.hour)
+	if not has_node("DaySummaryOverlay") and (
+		GameManager.hour >= GameManager.WORK_HOURS_END or
+		GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY
+	):
+		_show_day_summary()
 	
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -202,6 +207,10 @@ func _on_raise_button_pressed():
 
 
 func _advance_to_next_customer() -> void:
+	GameManager.customers_served_today += 1
+	if GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY:
+		_show_day_summary()
+		return
 	if !GameManager.customers_queue.is_empty():
 		GameManager.customers_queue.remove_at(0)
 	if !GameManager.customers_queue.is_empty():
@@ -321,3 +330,63 @@ func _on_offer_button_pressed() -> void:
 	waiting_for_offer = false
 	await get_tree().create_timer(1.0).timeout
 	_advance_to_next_customer()
+	
+func _show_day_summary():
+	var overlay := $DaySummaryOverlay
+	var fade := overlay.get_node("Fade")
+	var image := overlay.get_node("SummaryImage")
+	var text := overlay.get_node("SummaryText")
+
+	GameManager.time_paused = true
+	overlay.visible = true
+	text.visible = true
+
+	var gm = GameManager
+	var rent = gm.RENT_COST
+	var food = gm.FOOD_COST * gm.dogs.size()
+	var needs = 20
+	var total_expenses = rent + food + needs
+	var final_balance = gm.money - total_expenses
+
+	var summary = {
+		"day": gm.day,
+		"money": gm.money,
+		"rent": rent,
+		"food": food,
+		"needs": needs,
+		"balance": final_balance
+	}
+
+	text.get_node("DayLabel").text = "Day %d Summary" % summary.day
+	text.get_node("SavingsLabel").text = "Savings: €0"
+	text.get_node("RentLabel").text = "Rent: -€0"
+	text.get_node("FoodLabel").text = "Dog Care: -€0"
+	text.get_node("NeedsLabel").text = "Personal Needs: -€0"
+	text.get_node("TotalLabel").text = "Balance: €0"
+
+	image.modulate.a = 0.0
+	fade.modulate.a = 0.0
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(fade, "modulate:a", 0.6, 1.5)
+	tween.tween_property(image, "modulate:a", 1.0, 2.0)
+	await tween.finished
+
+	await _animate_summary_numbers(text, summary)
+
+func _animate_summary_numbers(text: VBoxContainer, data: Dictionary) -> void:
+	var duration := 1.0
+	var steps := 30
+	var delay := duration / steps
+
+	for i in range(1, steps + 1):
+		var t = float(i) / steps
+		text.get_node("SavingsLabel").text = "Savings: €%d" % int(lerp(0, data.money, t))
+		text.get_node("RentLabel").text = "Rent: -€%d" % int(lerp(0, data.rent, t))
+		text.get_node("FoodLabel").text = "Dog Care: -€%d" % int(lerp(0, data.food, t))
+		text.get_node("NeedsLabel").text = "Personal Needs: -€%d" % int(lerp(0, data.needs, t))
+		text.get_node("TotalLabel").text = "Balance: €%d" % int(lerp(0, data.balance, t))
+		await get_tree().create_timer(delay).timeout
+
+	GameManager.money = data.balance

@@ -5,21 +5,24 @@ var day: int = 1
 var dogs: Array = []
 var pregnancies: Array = []
 var just_came_from_kennel := false
-var time_paused: bool = false
+var time_paused: bool = false # ZA WARUDO
 var hour: int = 8
 var minute: int = 0
-const HOURS_PER_DAY := 24
+const HOURS_PER_DAY := 24										#HOW MANY MORE FLAGS :witheringrose:
 const MINUTES_PER_HOUR := 60
 const is_ahmeth_kadir_a_fb: bool = true #Fact checked.
-var time_speed: float = 20.0
+var time_speed: float = 100 # Made in Heaven
 var _time_accumulator: float = 0.0
 var current_opening_index: int = 0
+var customers_served_today: int = 0
+const MAX_CUSTOMERS_PER_DAY := 2
+const WORK_HOURS_END := 18
 
 signal day_changed
 signal minute_changed
 signal hour_changed
 
-const RENT_COST := 30
+const RENT_COST := 300
 const FOOD_COST := 10
 var current_scene: Node
 
@@ -30,7 +33,6 @@ var customer_arr : Array
 var customers_queue : Array[Customer] 
 	
 var request_meeted = false
-#var first_customer = true
 var give_mode = false
 
 func _ready() -> void:
@@ -57,6 +59,9 @@ func _process(delta: float) -> void:
 	while _time_accumulator >= 1.0:
 		_time_accumulator -= 1.0
 		advance_minute()
+	if hour >= WORK_HOURS_END and not has_node("/root/DaySummary"):
+		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
+
 
 func advance_minute() -> void:
 	minute += 1
@@ -86,9 +91,11 @@ func advance_time(delta_minutes: float) -> void:
 
 func next_day() -> void:
 	day += 1
+	customers_served_today = 0
 	print("\nDay", day, "begins.")
 	pay_expenses()
 	emit_signal("day_changed", day)
+
 
 func breed(parent1: Dog, parent2: Dog) -> Dog:
 	var child := Dog.new()
