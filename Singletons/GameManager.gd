@@ -35,9 +35,17 @@ var give_mode = false
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
-	customer_arr = _load_JSON(customer_json_path)
-	for entry in customer_arr:
-		customers_queue.append(CustomerFunctions.generate_customer(entry))
+	
+	var raw_customers := _load_JSON(customer_json_path)
+	customers_queue = []
+
+	for entry in raw_customers:
+		if typeof(entry) == TYPE_DICTIONARY:
+			var cust := Customer.from_dict(entry)
+			customers_queue.append(cust)
+		else:
+			print("Skipping non-dictionary entry in customer JSON")
+
 	set_process(true)
 	
 
@@ -213,8 +221,12 @@ func _load_display_settings() -> Dictionary:
 	}
 	
 func _load_JSON(path: String) -> Array:
-	var json_as_text = FileAccess.get_file_as_string(path)
-	var json_as_array = JSON.parse_string(json_as_text)
-	if json_as_array:
-		return json_as_array
-	return Array()
+	var text: String
+	var err : Error
+	if not FileAccess.file_exists(path):
+		push_error("Customer JSON not found: %s" % path)
+		return []
+	
+	text = FileAccess.get_file_as_string(path)
+	var parsed = JSON.parse_string(text)
+	return parsed

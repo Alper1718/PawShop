@@ -16,8 +16,10 @@ var selected_doggo: Dog = null
 var breed_mode: bool = false
 var first_parent: Dog = null
 
+
 var select_mode: bool = false
 var selection_callback = null
+var back_callback: Callable
 
 const GRID_ROWS := 3
 const SCROLL_AREA_SIZE := Vector2(1258, 1080)
@@ -68,6 +70,10 @@ func _process(_delta: float) -> void:
 			
 	clock_label.text = get_formatted_time()
 
+func _on_back_button_pressed():
+	if back_callback:
+		back_callback.call()
+	queue_free()
 
 func _update_tiling(primary_node: Control, secondary_node: Control) -> void:
 	var texture_w: float = TILE_WIDTH

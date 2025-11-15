@@ -5,18 +5,27 @@ extends Node2D
 @onready var morning_bg := $ShopMorningBackground
 @onready var evening_bg := $ShopEveningBackground
 @onready var night_bg := $ShopNightBackground
-
+@onready var SecondPhase := $CustomerPanel/SecondPhase
 @onready var customer_panel := $CustomerPanel
 @onready var customer_sprite := $CustomerPanel/Sprite2D
 @onready var speech_label := $CustomerPanel/SpeechBubble/Label
 @onready var give_button := $CustomerPanel/VBoxContainer/GiveButton
 @onready var reject_button := $CustomerPanel/VBoxContainer/RejectButton
-@onready var raise_button := $CustomerPanel/VBoxContainer/RaiseButton
+@onready var price_input := $CustomerPanel/SecondPhase/PriceInput 
+@onready var price_offer_button := $CustomerPanel/SecondPhase/OfferButton
 
+var waiting_for_offer: bool = false
 var original_scales := {}
 var current_bg: Node2D = null
 var current_customer: Customer
 var _typing_seq := 0
+var _openings: Array = []
+var _current_opening_index: int = 0
+var _typing_in_progress: bool = false
+var _selected_dog: Dog = null
+var returning_from_kennel: bool = false
+
+
 const TRANSITION_DURATION := 3.0
 
 func _ready():
@@ -28,6 +37,8 @@ func _ready():
 	morning_bg.modulate.a = 0.0
 	evening_bg.modulate.a = 0.0
 	night_bg.modulate.a = 0.0
+	price_input.visible = false
+	price_offer_button.visible = false
 
 	if GameManager.just_came_from_kennel:
 		_instant_set_background(GameManager.hour)
@@ -47,12 +58,33 @@ func _ready():
 			
 	else:
 		if !GameManager.customers_queue.is_empty():
-			current_customer = GameManager.customers_queue[0] #TODO: What do you think will happen when the last customer is gone? It will respawn. Also it is not a criteria for the customer to be happy for it to be removed from the list.
+			current_customer = GameManager.customers_queue[0]
 			_load_customer()
+	
+	if GameManager.request_meeted:
+		GameManager.customers_queue.remove_at(0)
+		if !GameManager.customers_queue.is_empty():
+			current_customer = GameManager.customers_queue[0]
+			GameManager.request_meeted = false
+			_show_next_customer()
+	else:
+		if !GameManager.customers_queue.is_empty():
+			current_customer = GameManager.customers_queue[0]
+			if _openings.size() == 0:
+				_openings = current_customer.get_openings()
+				_current_opening_index = 0
+
+				_load_customer()
 
 func _process(delta: float) -> void:
 	clock_label.text = get_formatted_time()
-	_update_background(GameManager.hour)	
+	_update_background(GameManager.hour)
+	
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if customer_panel.visible and not _typing_in_progress:
+			_show_next_opening()
+
 	
 func _please():
 	GameManager.customers_queue.remove_at(0)
@@ -77,18 +109,23 @@ func _show_next_customer():
 	_load_customer()
 	
 func _load_customer():
-	
+	$CustomerPanel/VBoxContainer.visible = false
+
+	if current_customer == null:
+		push_error("No current_customer to load")
+		return
+
 	if ResourceLoader.exists(current_customer.asset_path):
 		customer_sprite.texture = load(current_customer.asset_path)
+	else:
+		customer_sprite.texture = null
 
-	'''var opening_text = current_customer.dialogues.opening.format({
-		"feature": current_customer.feature.capitalize(),
-		"value": str(current_customer.min_value),
-		"price": str(current_customer.max_price)
-	})''' # TODO formattable texts
-	var opening_text = CustomerFunctions.get_opening(current_customer, CustomerFunctions.get_random_opening_index())
-	_type_text(speech_label, opening_text)
-	
+	if _openings.size() == 0:
+		_openings = current_customer.get_openings()
+		_current_opening_index = 0
+
+	_show_next_opening()
+
 	var give_callable = Callable(self, "_on_give_button_pressed")
 	var reject_callable = Callable(self, "_on_reject_button_pressed")
 	var raise_callable = Callable(self, "_on_raise_button_pressed")
@@ -101,42 +138,63 @@ func _load_customer():
 		reject_button.disconnect("pressed", reject_callable)
 	reject_button.pressed.connect(reject_callable)
 
-	if raise_button.is_connected("pressed", raise_callable):
-		raise_button.disconnect("pressed", raise_callable)
-	raise_button.pressed.connect(raise_callable)
+func _show_next_opening():
+	if waiting_for_offer:
+		return
 
+	while _current_opening_index < _openings.size() and _openings[_current_opening_index].strip_edges() == "":
+		_current_opening_index += 1
+
+	if _current_opening_index >= _openings.size():
+		$CustomerPanel/VBoxContainer.visible = true
+		return
+
+	_typing_in_progress = true
+	await _type_text(speech_label, _openings[_current_opening_index].strip_edges())
+	_typing_in_progress = false
+
+	_current_opening_index += 1
 
 func _on_give_button_pressed():
 	GameManager.give_mode = true
+
 	var kennel_scene := preload("res://Scenes/Kennel.tscn")
 	var kennel_page := kennel_scene.instantiate()
 	get_tree().root.add_child(kennel_page)
+
 	kennel_page.select_mode = true
 	kennel_page.selection_callback = Callable(self, "_on_dog_selected")
-	
+
+	kennel_page.back_callback = Callable(self, "_on_kennel_back_pressed")
+
+	customer_panel.visible = false
+
+func _on_kennel_back_pressed():
+	customer_panel.visible = true
 
 
 func _on_dog_selected(dog: Dog):
 	var feature = current_customer.feature
 	var required_value = current_customer.min_value
-	var max_price = current_customer.max_price
-
+	
 	var meets = false
 	if feature == "cuteness":
 		meets = dog.cuteness >= required_value
 	else:
 		meets = dog.get(feature) >= required_value
-
+	
 	if meets:
-		await _type_text(speech_label, current_customer.dialogues.happy)
-		print("Customer is happy! You sold the dog for $%s" % max_price)
-		GameManager.dogs.erase(dog)
+		_selected_dog = dog
+		SecondPhase.visible = true
+		price_input.visible = true
+		price_offer_button.visible = true
+		speech_label.text = "This dog matches your requirements! What will you offer?"
+		waiting_for_offer = true
 	else:
 		await _type_text(speech_label, current_customer.dialogues.sad)
-		print("Customer rejected the dog. You earned nothing.")
-
-	await get_tree().create_timer(1.0).timeout
-	_show_next_customer()
+		GameManager.dogs.erase(dog)
+		await get_tree().create_timer(1.0).timeout
+		_show_next_customer()
 
 
 func _on_reject_button_pressed():
@@ -232,3 +290,37 @@ func _instant_set_background(hour: int) -> void:
 func _on_switch_scene_button_pressed() -> void:
 	GameManager.give_mode = false
 	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")
+
+
+func _on_offer_button_pressed() -> void:
+	var offer_text = price_input.text.strip_edges()
+	var offer_amount: int = 0
+
+	if offer_text.is_valid_integer():
+		offer_amount = int(offer_text)
+	else:
+		speech_label.text = "Please enter a valid number!"
+		return
+
+	var dog = _selected_dog
+	if dog == null:
+		push_error("No dog selected for the offer!")
+		return
+	var estimated_price = GameManager.estimate_doggo_price(dog)
+	var max_tolerance = int(estimated_price * 1.2)
+
+	if offer_amount <= max_tolerance:
+		await _type_text(speech_label, current_customer.dialogues.happy)
+		GameManager.money += offer_amount
+		GameManager.dogs.erase(dog)
+		print("Customer bought the dog for $%s" % offer_amount)
+	else:
+		await _type_text(speech_label, "Hmm, that's too much! I can't pay that.")
+
+	price_input.visible = false
+	price_offer_button.visible = false
+	SecondPhase.visible = false
+	_selected_dog = null
+	waiting_for_offer = false
+	await get_tree().create_timer(1.0).timeout
+	_show_next_customer()

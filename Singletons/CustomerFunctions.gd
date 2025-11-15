@@ -1,7 +1,7 @@
 extends Node
 
-const default_opening : String = "Hello there!"
-const default_sad : String = "Ohh.. That's... sad."
+const default_opening : String = "swdewwe!"
+const default_sad : String = "wrwe"
 
 func _ready() -> void:
 	pass

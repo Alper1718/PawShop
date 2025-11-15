@@ -4,14 +4,14 @@
 		"name": "Goth",
 		"day": 1,
 		"is_first": true,
-		"feature": "",
+		"feature": "fur",
 		"min_value": 0.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
 			"opening1": " Um, hi.. Oh, am I the first customer..? Uh.. Okay, I can do this I guess.. You’ve got a nice place. ",
 			"opening2": " Uhh.. So I’m looking for a dog. A calm one. And um.. Fur makes my nose run, so… Maybe one with less fur? Hard to clean up after too..
-It doesn’t have to be super pretty or anything.. But uh, I guess cute ears could be nice.",
+It doesn’t have to be super pretty or anything...",
 			"opening3": "",
 			"sad1": "Oh, um, that’s okay. Bye",
 			"sad2": "",

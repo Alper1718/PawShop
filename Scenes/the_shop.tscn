@@ -126,22 +126,15 @@ offset_right = 1506.0
 offset_bottom = 816.0
 
 [node name="GiveButtonSprite" type="Sprite2D" parent="CustomerPanel/VBoxContainer"]
-position = Vector2(246, 71)
-scale = Vector2(2.83478, 1.3)
+position = Vector2(240.8, 102.22)
+scale = Vector2(2.83478, 2.58)
 texture = ExtResource("10_2r8aa")
 region_enabled = true
 region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
 
 [node name="RejectButtonSprite" type="Sprite2D" parent="CustomerPanel/VBoxContainer"]
-position = Vector2(246, 217.21)
-scale = Vector2(2.83478, 1.3)
-texture = ExtResource("10_2r8aa")
-region_enabled = true
-region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
-
-[node name="RaiseButtonSprite" type="Sprite2D" parent="CustomerPanel/VBoxContainer"]
-position = Vector2(246, 362.505)
-scale = Vector2(2.83478, 1.3)
+position = Vector2(240.8, 318.7)
+scale = Vector2(2.83478, 2.58)
 texture = ExtResource("10_2r8aa")
 region_enabled = true
 region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
@@ -160,17 +153,50 @@ theme_override_font_sizes/font_size = 32
 text = "Sorry, we don't have that."
 flat = true
 
-[node name="RaiseButton" type="Button" parent="CustomerPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 32
-text = "Raise the price by 20%"
-flat = true
-
 [node name="Tezgah" type="Sprite2D" parent="CustomerPanel"]
 z_index = 1
 position = Vector2(961, 539)
 texture = ExtResource("12_2edsc")
 
+[node name="SecondPhase" type="HBoxContainer" parent="CustomerPanel"]
+visible = false
+layout_mode = 0
+offset_left = 1037.0
+offset_top = 382.0
+offset_right = 1526.36
+offset_bottom = 599.0
+
+[node name="PriceInput" type="LineEdit" parent="CustomerPanel/SecondPhase"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+alignment = 1
+max_length = 4
+
+[node name="OfferButton" type="Button" parent="CustomerPanel/SecondPhase"]
+z_index = 1
+custom_minimum_size = Vector2(185.88, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Offer"
+
+[node name="GiveButtonSprite" type="Sprite2D" parent="CustomerPanel/SecondPhase"]
+position = Vector2(109, 111)
+scale = Vector2(1.71478, 2.58)
+texture = ExtResource("10_2r8aa")
+region_enabled = true
+region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
+
+[node name="GiveButtonSprite2" type="Sprite2D" parent="CustomerPanel/SecondPhase"]
+position = Vector2(404, 111)
+scale = Vector2(1.2, 2.58)
+texture = ExtResource("10_2r8aa")
+region_enabled = true
+region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
+
 [connection signal="pressed" from="Toys/ToysButton" to="." method="_on_toys_button_pressed"]
 [connection signal="pressed" from="SwitchSceneButton" to="." method="_on_switch_scene_button_pressed"]
+[connection signal="pressed" from="CustomerPanel/SecondPhase/OfferButton" to="." method="_on_offer_button_pressed"]
