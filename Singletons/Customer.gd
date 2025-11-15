@@ -13,7 +13,7 @@ class_name Customer
 		"opening1": "",
 		"opening2": "",
 		"opening3": "",
-		"sad": "",
+		"sad1": "",
 		"sad2": "",
 		"happy": "",
 		"pazarlik": ""

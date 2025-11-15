@@ -1,0 +1,84 @@
+[
+	{
+		"asset_path": "res://Assets/Customers/1g1.png",
+		"name": "Goth",
+		"day": 1,
+		"is_first": true,
+		"feature": "",
+		"min_value": 0.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": " Um, hi.. Oh, am I the first customer..? Uh.. Okay, I can do this I guess.. You’ve got a nice place. ",
+			"opening2": " Uhh.. So I’m looking for a dog. A calm one. And um.. Fur makes my nose run, so… Maybe one with less fur? Hard to clean up after too..
+It doesn’t have to be super pretty or anything.. But uh, I guess cute ears could be nice.",
+			"opening3": "",
+			"sad1": "Oh, um, that’s okay. Bye",
+			"sad2": "",
+			"happy": "Aww.. It's adorable. Thank you. Um, how much does it cost?",
+			"pazarlik": "Oh.. Okay, I'm sorry.. Um, how much more do I have to pay? Alright, here you go.. Bye."
+		}
+	},
+	
+	{
+		"asset_path": "res://Assets/Customers/1g2.png",
+		"name": "Nana",
+		"day": 1,
+		"is_first": false,
+		"feature": "",
+		"min_value": 0.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Hello there― goodness, I went through hell and back just trying to walk through this street. People really have no respect for their elders! Gah, if only my knees weren't hurting..",
+			"opening2": "You look very healthy though, how old are you? You remind me so much of my grandchild!",
+			"opening3": "Well, the kid’s birthday's next week. They grow up so fast nowadays, it's already been 11 years! I've been trying to find a good gift and when I passed by your store, I figured a dog would be an amazing choice. One with big eyes and a teeny tiny nose, just like my grandchild! Haha! ",
+			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
+			"sad2": "",
+			"happy": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
+			"pazarlik": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go."
+		}
+	},
+	
+	{
+		"asset_path": "res://Assets/Customers/2g1.png",
+		"name": "Powy",
+		"day": 2,
+		"is_first": true,
+		"feature": "",
+		"min_value": 0.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Hello dear! Such a nice weather, isn't it? Beautiful, like my old dog's eyes.. Even thinking about it brings me to tears..",
+			"opening2": "Oh, of course, I'm sorry... I’d gotten my dog from a petshop just like this. It had the prettiest eyes ever.. big and doe-like. This is going to sound selfish of me, but I'd really appreciate a dog with eyes like its.",
+			"opening3": "",
+			"sad1": "Now that's a shame.. still, thank you for your patience love. Seems I've got other stores I need to check...",
+			"sad2": "",
+			"happy": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
+			"pazarlik": "Oh? How much more do I need to pay? That's no problem, here you go."
+		}
+	},
+	
+	{
+		"asset_path": "res://Assets/Customers/2g2_5g2.png",
+		"name": "Chinese",
+		"day": 2,
+		"is_first": false,
+		"feature": "",
+		"min_value": 0.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "So many flavors.. Uh, hello! Do you have any, um.. What kind of dogs do you have?",
+			"opening2": "I.. I need a pet. To, um... To keep me company, you know.. In the kitchen. Haha...",
+			"opening3": "A big dog is good, very good.. For a meal. O-Oh, I mean... I eat a lot too ― as you can see ― haha. So.. only a dog as big as me should keep me company, right? Haha.. Ha.",
+			"sad1": "Y-You don't? Oh, okay... I can get another one then. No? But.. Why? This is a petshop,  I mean.. I think I should be able to-",
+			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, thought..",
+			"happy": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
+			"pazarlik": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
+		}
+	}
+
+
+]
