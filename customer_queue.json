@@ -127,28 +127,7 @@
 			"pazarlik2": "O-Okay, I'll take that, hehe.."
 			}
 	},
-	
-	{
-		"asset_path": "res://Assets/Customers/3g2.png",
-		"name": "MLPfan",
-		"day": 3,
-		"is_first": false,
-		"feature": "",
-		"min_value": 0.0,
-		"max_price": 0,
-		"will_accept_paying_more": false,
-		"dialogues": {
-		       "opening1": "Hehe... Hehehe.. I love dogs.. So much..."
-		       "opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them.."
-			 "opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle.."
-			"opening4": "Can i have one of your dogs, please..?"
-			"happy": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you."
-			"sad1": "H-huh? W-Well... I can take another then. You don't ..want me to have puppy..? B-But why?? I'll take very good care of them, I promise..!"
-			"sad2": "S-Still no..? Whatever."
-			"pazarlik1": "M-More? I already paid so much... What's the lowest you'll go?"
-			"pazarlik2": "O-Okay, I'll take that, hehe.."
-			}
-	},
+
 	
 	{
 		"asset_path": "res://Assets/Customers/4g1.png",
