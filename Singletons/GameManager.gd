@@ -11,7 +11,7 @@ var minute: int = 0
 const HOURS_PER_DAY := 24										#HOW MANY MORE FLAGS :witheringrose:
 const MINUTES_PER_HOUR := 60
 const is_ahmeth_kadir_a_fb: bool = true #Fact checked.
-var time_speed: float = 100 # Made in Heaven
+var time_speed: float = 2 # Made in Heaven
 var _time_accumulator: float = 0.0
 var current_opening_index: int = 0
 var customers_served_today: int = 0
@@ -221,7 +221,6 @@ func _load_display_settings() -> Dictionary:
 	var err = config.load("res://settings.cfg")
 	if err != OK:
 		return {"fullscreen": true, "resolution": Vector2(1920, 1080)}
-		print("Error loading display settings.s")
 	
 	return {
 		"fullscreen": config.get_value("display", "fullscreen", true),
