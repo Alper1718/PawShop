@@ -12,6 +12,7 @@ var bin_y_max := 530
 func _ready():
 	trash_open.visible = false
 	puppy.visible = false
+	GameManager.stillborn_count += 1
 
 func _process(delta):
 	if Input.is_action_just_released("mouse_left"):
@@ -38,4 +39,8 @@ func _on_puppy_dropped_in_bin():
 	tween.tween_property(trash_open, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	await tween.finished
+	if GameManager.stillborn_count >= 2:
+		GameManager.ending = "stillborn"
+		GameManager.time_speed = 0
+		get_tree().change_scene_to_file('res://Scenes/Endings/still_born_ending.tscn')
 	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")

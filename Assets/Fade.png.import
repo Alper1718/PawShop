@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbt2bqyl5h824"
-path="res://.godot/imported/DayEnd.png-91e1eb7b997f70ffb2d2659053ef92c2.ctex"
+uid="uid://bx3d5nqpr2in2"
+path="res://.godot/imported/Fade.png-232d6a476f04865688fc753c5f40bded.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/DayEnd.png"
-dest_files=["res://.godot/imported/DayEnd.png-91e1eb7b997f70ffb2d2659053ef92c2.ctex"]
+source_file="res://Assets/Fade.png"
+dest_files=["res://.godot/imported/Fade.png-232d6a476f04865688fc753c5f40bded.ctex"]
 
 [params]
 

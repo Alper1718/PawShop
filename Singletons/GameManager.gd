@@ -37,6 +37,10 @@ var customers_queue : Array[Customer]
 var request_meeted = false
 var give_mode = false
 
+var stillborn_count = 0
+var bankrupt_count = 0
+var ending: String = "default"
+
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
@@ -92,11 +96,20 @@ func advance_time(delta_minutes: float) -> void:
 	_update_pregnancies(delta_hours)
 
 func next_day() -> void:
+	if ending == "default" and day >= 6:
+		time_speed = 0
+		get_tree().change_scene_to_file("res://Scenes/Endings/alternate_ending.tscn")
+		return
 	day += 1
 	customers_served_today = 0
 	print("\nDay", day, "begins.")
 	pay_expenses()
+	if bankrupt_count >= 2:
+		ending = 'bankrupt'
+		time_speed = 0
+		get_tree().change_scene_to_file("res://Scenes/Endings/bankrupt_ending.tscn")
 	emit_signal("day_changed", day)
+	
 
 
 func breed(parent1: Dog, parent2: Dog) -> Dog:
@@ -198,7 +211,8 @@ func pay_expenses() -> void:
 	money -= expenses
 	print("Expenses paid:", -expenses, "→ Money left:", money)
 	if money < 0:
-		print("Bankrupt! Game Over.")
+		bankrupt_count += 1
+		# print("Bankrupt! Game Over.") Not appropriate
 
 func change_scene(path: String) -> void:
 	if current_scene:

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvjqqd3ev4dj3"]
+
+[ext_resource type="Script" uid="uid://dvijf4bxb0yee" path="res://Code/Endings/bankrupt_ending.gd" id="1_joveh"]
+[ext_resource type="Texture2D" uid="uid://t0dgtaft31mb" path="res://Assets/Endings/bankrupt.jpg" id="2_nums4"]
+[ext_resource type="Texture2D" uid="uid://bx3d5nqpr2in2" path="res://Assets/Fade.png" id="2_w765a"]
+
+[node name="Bankrupt" type="Node2D"]
+script = ExtResource("1_joveh")
+
+[node name="Fade" type="Sprite2D" parent="."]
+texture = ExtResource("2_w765a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(1.2, 1.1999999)
+texture = ExtResource("2_nums4")

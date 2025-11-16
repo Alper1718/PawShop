@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc8ivrscs8fnb"]
+
+[ext_resource type="Script" uid="uid://2b2tlul1hrby" path="res://Code/Endings/alternate_ending.gd" id="1_a3fon"]
+[ext_resource type="Texture2D" uid="uid://bclql0u6t3qyl" path="res://Assets/Endings/alternative3.jpg" id="2_kaot0"]
+[ext_resource type="Texture2D" uid="uid://bx3d5nqpr2in2" path="res://Assets/Fade.png" id="2_uacx1"]
+[ext_resource type="Texture2D" uid="uid://dhie0yfd3072v" path="res://Assets/Endings/alternative2.jpg" id="3_uacx1"]
+[ext_resource type="Texture2D" uid="uid://bp8xpplkhrfcs" path="res://Assets/Endings/alternative1.jpg" id="4_xkb37"]
+
+[node name="AlternateEnding" type="Node2D"]
+script = ExtResource("1_a3fon")
+
+[node name="Fade" type="Sprite2D" parent="."]
+texture = ExtResource("2_uacx1")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(960, 540)
+scale = Vector2(1.1999998, 1.2)
+texture = ExtResource("2_kaot0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(960.00006, 540)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_uacx1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960.00006, 539.99994)
+scale = Vector2(1.2, 1.2000002)
+texture = ExtResource("4_xkb37")
