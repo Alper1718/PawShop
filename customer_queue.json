@@ -4,20 +4,19 @@
 		"name": "Goth",
 		"day": 1,
 		"is_first": true,
-		"feature": "fur",
-		"min_value": 0.0,
+		"feature": "tail",
+		"min_value": 3.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			"opening1": " Um, hi.. Oh, am I the first customer..? Uh.. Okay, I can do this I guess.. You’ve got a nice place. ",
-			"opening2": " Uhh.. So I’m looking for a dog. A calm one. And um.. Fur makes my nose run, so… Maybe one with less fur? Hard to clean up after too.. It doesn’t have to be super pretty or anything...",
-			"opening3": "",
-			"sad1": "Oh, um, that’s okay. Bye",
-			"sad2": "",
-			"happy1": "Aww.. It's adorable. Thank you. Um, how much does it cost?",
-			"pazarlik1": "Oh.. Okay, I'm sorry.. Um, how much more do I have to pay? Alright, here you go.. Bye."
+		"opening1": " Um, hi.. Oh, am I the first customer..? Uh.. Okay, I can do this I guess.. You’ve got a nice place. ",
+		"opening2": " Uhh.. So I’m looking for a dog. A calm one. And um.. Fur makes my nose run, so… Maybe one with less fur? Hard to clean up after too.. It doesn’t have to be super pretty or anything.. But uh, I guess a cute tail could be nice. ",
+		"happy1": "Aww.. It's adorable. Thank you. Um, how much does it cost?",
+		"sad1": "Oh, um, that’s okay. Bye.",
+		"pazarlik1": "Oh.. Okay, I'm sorry.. Um, how much more do I have to pay? Alright, here you go.. Bye. "
 		}
 	},
+	
 	{
 		"asset_path": "res://Assets/Customers/1g2.png",
 		"name": "Nana",
@@ -28,15 +27,15 @@
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			"opening1": "Hello there— goodness, I went through hell and back just trying to walk through this street. People really have no respect for their elders! Gah, if only my knees weren't hurting..",
+			 "opening1": " Hello there― goodness, I went through hell and back just trying to walk through this street. People really have no respect for their elders! Gah, if only my knees weren't hurting.. ",
 			"opening2": "You look very healthy though, how old are you? You remind me so much of my grandchild!",
 			"opening3": "Well, the kid’s birthday's next week. They grow up so fast nowadays, it's already been 11 years! I've been trying to find a good gift and when I passed by your store, I figured a dog would be an amazing choice. One with big eyes, just like my grandchild! Haha! ",
-			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
-			"sad2": "",
 			"happy1": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
-			"pazarlik1": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go."
-		}
+			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
+			"pazarlik1": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go. " 
+		    }
 	},
+	
 	{
 		"asset_path": "res://Assets/Customers/2g1.png",
 		"name": "Powy",
@@ -47,15 +46,14 @@
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			"opening1": "Hello dear! Such a nice weather, isn't it? Beautiful, like my old dog's eyes.. Even thinking about it brings me to tears..",
-			"opening2": "Oh, of course, I'm sorry... I’d gotten my dog from a petshop just like this. It had the prettiest eyes ever.. big and doe-like. This is going to sound selfish of me, but I'd really appreciate a dog with eyes like its.",
-			"opening3": "",
+		       "opening1": "Hello dear! Such a nice weather, isn't it? Beautiful, like my old dog's eyes.. Even thinking about it brings me to tears..",
+		       "opening2": "Oh, of course, I'm sorry... I’d gotten my dog from a petshop just like this. It had the prettiest eyes ever.. big and doe-like. This is going to sound selfish of me, but I'd really appreciate a dog with eyes like its.",
+		       "happy1": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
 			"sad1": "Now that's a shame.. still, thank you for your patience love. Seems I've got other stores I need to check...",
-			"sad2": "",
-			"happy1": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
-			"pazarlik1": "Oh? How much more do I need to pay? That's no problem, here you go."
-		}
+			"pazarlik1": "Oh? How much more do I need to pay? That's no problem, here you go."
+			}
 	},
+	
 	{
 		"asset_path": "res://Assets/Customers/2g2_5g2.png",
 		"name": "DevourerOfDogs",
@@ -70,11 +68,12 @@
 			"opening2": "I.. I need a pet. To, um... To keep me company, you know.. In the kitchen. Haha...",
 			"opening3": "A big dog is good, very good.. For a meal. O-Oh, I mean... I eat a lot too ― as you can see ― haha. So.. only a dog as big as me should keep me company, right? Haha.. Ha.",
 			"sad1": "Y-You don't? Oh, okay... I can get another one then. No? But.. Why? This is a petshop,  I mean.. I think I should be able to-",
-			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, though..",
+			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, thought.. ",
 			"happy1": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
-			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
-		}
+			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
+		     }
 	},
+	
 	{
 		"asset_path": "res://Assets/Customers/3g1.png",
 		"name": "AnnoyingAssGuy",
@@ -98,8 +97,12 @@
 			"happy3": "Whatever, where do I scan my card? Make it quick or I'm dropping you to two stars.",
 			"pazarlik1": "Nuh uhh~ I don't wanna hear it! -chew chew- Bold of you ask for more. It's an accessory, not Aladdin's magic lamp?",
 			"pazarlik2": "Tch, you know what, just take this. I'm losing braincells just from looking at you.. "
-		}
+		    }
+
 	},
+	
+
+	
 	{
 		"asset_path": "res://Assets/Customers/3g2.png",
 		"name": "MLPfan",
@@ -119,8 +122,9 @@
 			"sad2": "S-Still no..? Whatever.",
 			"pazarlik1": "M-More? I already paid so much... What's the lowest you'll go?",
 			"pazarlik2": "O-Okay, I'll take that, hehe.."
-		}
+			}
 	},
+	
 	{
 		"asset_path": "res://Assets/Customers/4g1.png",
 		"name": "actualdogfan",
@@ -137,8 +141,71 @@
 			"sad1": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
 			"happy1": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
 			"pazarlik1": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
-			 }
-	}
+		     }
+	},
+	
+	
+	{
+		"asset_path": "res://Assets/Customers/4g2.png",
+		"name": "Person",
+		"day": 4,
+		"is_first": false,
+		"feature": "cuteness",
+		"min_value": 3.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Oh, hey. Nice shop I guess, haha.",
+			"opening2": "Uh, I need a dog I guess. I’m spending the money that I was gonna use for topping up, so this is like really important. I want, uh.. Something cheap and cute, you know.",
+			"opening3": "You have those right? Tiny nose, good fur, all that.”And um, like zero responsibility. Eat little, sleep a lot, walk itself, you know, haha.",
+			"opening4": "And uh, I have a question… People say they can’t but like, can they drink beer and stuff? I hope they can ‘cuz I only have that in my place, haha.",        
+			"opening5": "Anyway, like I said, I can’t do much work. It should manage itself. It’s already vaccinated, right? They won’t get sick? Hope it’s life will be longer than Luna, haha..",
+			"happy1": "Eh, it’s good, I guess. Can’t you get me a cuter one? I know I didn’t pay enough, but..",
+			"happy2": "Ugh, fine, it’ll do.. Why’s everything so expensive? Could’ve gotten video games instead of this thing.. Take the money already, damnit.",
+			"sad1": "Are you serious?? Like, isn’t this a petshop? You have to have it!",
+			"sad2": "Can you like, call another store? Ask them instead? Tsk, whatever. This place sucks ass dude..",
+			"pazarlik1": "WHAT?? I said cheap for a reason! I-I don’t have that much! That’s like…highkey robbery!",
+			"pazarlik2": "A damn dog can’t be worth like, five video games right? Shouldn’t be! Can’t you go lower? Come on, I need it!",
+			"pazarlik3": "Ugh, fine. Damn scammer…”
+		    }
+	},
+	
+	{
+		"asset_path": "res://Assets/Customers/5g1.png",
+		"name": "WorkedAtBlizzard",
+		"day": 5,
+		"is_first": true,
+		"feature": "cuteness",
+		"min_value": 3.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Aye, afternoon to yer good self! The store's mighty fine, haha!",
+			"opening2": "Listen 'ere keeper, I look fo' me treasure. That pesky woman, thinks me passion will begone with a few pills..",
+			"opening3": "This grand treasure, they call a hound. Me treasure be loyal. Eyes be brighter than shiniest of coins. Nose be a sharp as mine. Ears, big ears to track the storms, haha!",
+			"sad1": "Arrr, how come? Other folk be gettin' their treasure just fine! Aye, this port don't hold me treasure then..",
+			"happy1": "Aye aye aye, now that's real treasure! A keeper fo' certain, haha! Now, how be I payin' fo' me treasure?",
+			"pazarlik1": "Aye, you seek more? The beast's hard to let go of fo' shore but ye can take yer pay. The hound's mine now."
+		      }
+	},
+	
+	{
+		"asset_path": "res://Assets/Customers/2g2_5g2.png",
+		"name": "DevourerOfDogs",
+		"day": 5,
+		"is_first": false,
+		"feature": "size",
+		"min_value": 6.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Must eat... Hello again...",
+			"opening2": "A dog... A-Any dog. My.. My other dog gets lonely. It needs another dog. Another meat.. Give me the dog... the bigger the meati-..meerier, I meant merrier.. ",
+			"happy1": "O-Oh looks.. Looks delicious... Thank you, thank you very much... Tasty, worth a feast.. Take the money...",
+			"sad1": "Why..? My other dog will get lonely if you don't give me the dog.. Please.. No? O-Okay okay, I'll leave.. Just don't tell anybody about this. ",
+			"pazarlik1": "I told you last time that I can't pay more, but... Sigh, fine, j-just take it.. Cheaper than other stores.."
+		       }
+	},
 
 
 ]
