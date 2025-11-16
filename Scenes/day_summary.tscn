@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://djkeah5r6q475"]
+[gd_scene load_steps=3 format=3 uid="uid://djkeah5r6q475"]
 
 [ext_resource type="Texture2D" uid="uid://cbt2bqyl5h824" path="res://Assets/DayEnd.png" id="1_47my3"]
+[ext_resource type="Script" uid="uid://bt7l53m7d7h3g" path="res://Code/day_summary.gd" id="1_g7p7o"]
 
 [node name="DaySummary" type="Node2D"]
+script = ExtResource("1_g7p7o")
 
 [node name="Fade" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -62,3 +64,9 @@ layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 32
 text = "Savings"
+
+[node name="Button" type="Button" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
