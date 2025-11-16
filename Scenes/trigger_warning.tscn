@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjyi66gi7d8vx"]
+
+[ext_resource type="Script" uid="uid://cduxsawh5xudd" path="res://Scenes/trigger_warning.gd" id="1_e351x"]
+[ext_resource type="Texture2D" uid="uid://b3f1mreybuyqj" path="res://Assets/Main_Menu/PHOTO-2025-11-13-16-32-49.png" id="2_5synt"]
+
+[node name="TriggerWarning" type="Node2D"]
+script = ExtResource("1_e351x")
+
+[node name="Photo20251113163249" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_5synt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -81.5
+offset_right = 70.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

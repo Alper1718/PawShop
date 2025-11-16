@@ -11,7 +11,7 @@ func _ready():
 
 	var dogs_data = [
 		{
-			"name": "Mochi",
+			"name": "Ringo",
 			"eyes": 8.5, "fur": 6.2, "nose": 7.3, "tail": 5.0, "size": 3.5,
 			"hsv": Color.from_hsv(0.12, 0.3, 0.9)
 		},
