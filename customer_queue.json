@@ -116,7 +116,7 @@
 			"opening1": "Hehe... Hehehe.. I love dogs.. So much...",
 			"opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
 			"opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle..",
-			"opening4": "Can i have one of your dogs, please..?",
+			"opening4": "Can I have one of your dogs, please..?",
 			"happy1": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you.",
 			"sad1": "H-huh? W-Well... I can take another then. You don't ..want me to have puppy..? B-But why?? I'll take very good care of them, I promise..!",
 			"sad2": "S-Still no..? Whatever.",
@@ -137,7 +137,7 @@
 		"dialogues": {
 			"opening1": "Hello! Your shop looks veeerry cool!",
 			"opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha..",
-			"opening3": "They say animal's 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!",
+			"opening3": "They say animals are 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!",
 			"sad1": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
 			"happy1": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
 			"pazarlik1": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
@@ -175,7 +175,7 @@
 		"name": "WorkedAtBlizzard",
 		"day": 5,
 		"is_first": true,
-		"feature": "cuteness",
+		"feature": "eyes",
 		"min_value": 3.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
@@ -206,6 +206,54 @@
 			"pazarlik1": "I told you last time that I can't pay more, but... Sigh, fine, j-just take it.. Cheaper than other stores.."
 		       }
 	},
+	
+	{
+		"asset_path": "res://Assets/Customers/6g1.png",
+		"name": "WantsGuard",
+		"day": 6,
+		"is_first": true,
+		"feature": "size",
+		"min_value": 6.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "Hey.",
+			"opening2": "I need a guard dog. Big dog. Um.. dark fur. Good nose. Can you be quick? I need to leave before junkies gather around the street.",
+			"happy1": "Thanks. Feels weird, trying to protect myself from people just like me.",
+			"sad1": "You don't have a single big dog? ...Tch, should've saved money instead of... Sigh. Okay. Bye.",
+			"pazarlik1": "This is the lowest you'll go? ...Fine. Pot has to wait, I guess.."
+		     }
+	},
 
+	{
+		"asset_path": "res://Assets/Customers/6g2.png",
+		"name": "",
+		"day": 6,
+		"is_first": false,
+		"feature": "size",
+		"min_value": 6.0,
+		"max_price": 0,
+		"will_accept_paying_more": false,
+		"dialogues": {
+			"opening1": "So this is the place? Peh, trashy. You, where's your boss? Need to talk to him. What are you, deaf? ",
+			"opening2": "Go get me your boss like a good employee. ..You're the boss? Hah! They let anyone become a boss nowadays, hahahaha!",
+			"opening3": "You should've been scrubbing toilets, lickin' a real boss' boot if you're lucky.. Alright now twat, listen up.",
+			"opening4": "Get me the big dogs. All of 'em. I'm gonna be straight with you, they'll be my personal corpse dispensers once I'm through with 'em.",
+			"opening5": "Their little bellies are so so full, huh? Hah! Weak asses. All playtime and expensive food. Tch..",
+			"opening6": "Better get used to feelin' full with carcass. They're useless shit otherwise. Hahahahaha!",
+			"opening7": "What, you wanna join your doggies in my backyard or something? Teeth at carcass with them? Hahahaha!",
+			"opening8": "See the store across from ya? Delicious food. I wonder where the taste comes from... Hahahaha!",
+			"opening9": "You gonna listen or you gonna lick my boot? Hahahaha! Get me my fuckin' dogs!",
+			"happy1": "This all you've got? Good. Hahaha... I'll set your ass on fire if I find out you're lyin' to me. To me",
+			"happy2": "Can this thing even bite, huh? Or can it only chew the cute ass food you give them?",
+			"happy3": "You really haven't learnt who I am yet, huh? It better be useful, or I'll ruin this cute little shop you've got forever. 'Kay?",
+			"sad1": "Haha... HAHAHAHAHA! The hell ya mean you don't? You're a damn petshop! You really don't know who I am, huh?",
+			"sad2": "You've got some backbone, I'll give ya that.? Hahahaha! But..",
+			"sad3": "Fine, you'll pay for this. Keep your eyes peeled for your poor little doggies!",
+			"pazarlik1": "Oho, you're a brave one, aren't you? I can appreciate that. Hahaha! You're lucky I gave you money as it is. Even luckier that I don't shoot you dead right here. Dipshit.",
+			"pazarlik2": "I'll give you five more, not a penny above that. Ask for more and I'll crack your skull open. You'll get around fine here if you just do as I say, kid.",
+			"pazarlik3": "Wait 'till I teach you your last lesson. You can't escape from this that easy! HAHAHAHA!"
+		      }
+	},
 
 ]
