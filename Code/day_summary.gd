@@ -16,6 +16,7 @@ var ready_for_exit = false
 func _ready() -> void:
 	print('boom')
 	GameManager.time_paused = true
+	GameManager.hour = 0
 	button.disabled = true
 	var rent = GameManager.RENT_COST
 	var food = GameManager.FOOD_COST * GameManager.dogs.size()
@@ -33,11 +34,13 @@ func _ready() -> void:
 		"balance": final_balance
 	}
 	
-	money_label.text = "€%s" % summary["money"] if summary['money'] >= 0 else "-€%s" % abs(summary["money"])
+	'''money_label.text = "€%s" % summary["money"] if summary['money'] >= 0 else "-€%s" % abs(summary["money"])
 	rent_label.text = "-€%s" % summary["rent"]
 	needs_label.text = "-€%s" % summary["needs"]
 	food_label.text = "-€%s" % summary["food"] if summary['food'] < 0 else "€%s" % summary["food"]
-	total_label.text = "€%s" % summary["balance"] if summary['balance'] >= 0 else "-€%s" % abs(summary["balance"])
+	total_label.text = "€%s" % summary["balance"] if summary['balance'] >= 0 else "-€%s" % abs(summary["balance"])'''
+	
+	$SavingsLabel.text = '#%s' % summary['day']
 	
 	for i in range(1, steps+1):
 		
@@ -64,5 +67,8 @@ func _input(event: InputEvent) -> void:
 	'''
 
 func _on_button_pressed() -> void:
-	GameManager.let_that_sink_in = false
+	# GameManager.let_that_sink_in = false
 	get_tree().change_scene_to_file("res://Scenes/the_shop.tscn")
+	GameManager.day_summary_shown = false
+	queue_free()
+	
