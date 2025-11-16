@@ -39,6 +39,7 @@ var _typing_in_progress: bool = false
 var _selected_dog: Dog = null
 
 var _skip_typing: bool = false
+var _customer_locked_for_typing: bool = false
 
 
 const TRANSITION_DURATION := 3.0
@@ -167,28 +168,25 @@ func _load_customer():
 
 	$CustomerPanel/VBoxContainer.visible = false
 
-
 	if current_customer == null:
-
 		push_error("No current_customer to load")
-
 		return
 
-
 	if ResourceLoader.exists(current_customer.asset_path):
-
 		customer_sprite.texture = load(current_customer.asset_path)
-
 	else:
-
 		customer_sprite.texture = null
 
+	_openings = current_customer.get_openings()
 
-	if _openings.size() == 0:
+	GameManager.current_opening_index = 0
+	speech_label.text = ""
+	_typing_seq = 0
+	_typing_in_progress = false
 
-		_openings = current_customer.get_openings()
-
-
+	customer_panel.visible = true
+	print("Loading customer; queue size:", GameManager.customers_queue.size(), "opening_index:", GameManager.current_opening_index)
+	await get_tree().create_timer(0.05).timeout
 	_show_next_opening()
 
 
@@ -297,7 +295,12 @@ func _on_dog_selected(dog: Dog):
 		var estimated_price = GameManager.estimate_doggo_price(dog)
 
 		var happy_text = CustomerFunctions.get_happy(current_customer)
+		print("[DEBUG] happy_text length:", happy_text.length(), "raw:", happy_text)
+		speech_label.visible = true
+		_customer_locked_for_typing = true
+		print("[DEBUG] about to await _type_text (happy)")
 		await _type_text(speech_label, happy_text)
+		print("[DEBUG] finished awaiting _type_text (happy)")
 
 		GameManager.money += estimated_price
 		GameManager.dogs.erase(dog)
@@ -306,26 +309,38 @@ func _on_dog_selected(dog: Dog):
 		_selected_dog = null
 		
 		await get_tree().create_timer(1.0).timeout
+		_customer_locked_for_typing = false
 		_advance_to_next_customer()
 	else:
-		var random_sad_index = CustomerFunctions.get_random_sad_index()
+		var random_sad_index = CustomerFunctions.get_random_sad_index(current_customer)
 		var sad_text = CustomerFunctions.get_sad(current_customer, random_sad_index)
+		print("[DEBUG] sad_text length:", sad_text.length(), "raw:", sad_text)
+		speech_label.visible = true
+		_customer_locked_for_typing = true
+		print("[DEBUG] about to await _type_text (sad)")
 		await _type_text(speech_label, sad_text)
+		print("[DEBUG] finished awaiting _type_text (sad)")
 
 		await get_tree().create_timer(1.0).timeout
+		_customer_locked_for_typing = false
 		_advance_to_next_customer()
 
 
 
 func _on_reject_button_pressed():
 	$CustomerPanel/VBoxContainer.visible = false 
-	var random_sad_index = CustomerFunctions.get_random_sad_index()
+	var random_sad_index = CustomerFunctions.get_random_sad_index(current_customer)
 	var sad_text = CustomerFunctions.get_sad(current_customer, random_sad_index)
-	
+	print("[DEBUG] reject sad_text length:", sad_text.length(), "raw:", sad_text)
+	speech_label.visible = true
+	_customer_locked_for_typing = true
+	print("[DEBUG] about to await _type_text (reject)")
 	await _type_text(speech_label, sad_text)
+	print("[DEBUG] finished awaiting _type_text (reject)")
 
 	print("You told the customer you don't have a dog matching their criteria.")
 	await get_tree().create_timer(1.0).timeout
+	_customer_locked_for_typing = false
 	_advance_to_next_customer()
 
 
@@ -347,42 +362,46 @@ func _on_raise_button_pressed():
 
 
 func _advance_to_next_customer() -> void:
+	while _customer_locked_for_typing:
+		await get_tree().create_timer(0.05).timeout
 
 	GameManager.customers_served_today += 1
 
 	if GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY:
-
 		_show_day_summary()
-
 		return
 
 	if !GameManager.customers_queue.is_empty():
-
 		GameManager.customers_queue.remove_at(0)
 
 	if !GameManager.customers_queue.is_empty():
-
 		current_customer = GameManager.customers_queue[0]
 
-		_openings.clear()
-
+		_openings = current_customer.get_openings()
 		GameManager.current_opening_index = 0
+		_typing_seq = 0
+		_skip_typing = false
+		_typing_in_progress = false
+		_selected_dog = null
+		SecondPhase.visible = false
+		$CustomerPanel/VBoxContainer.visible = false
+		speech_label.text = ""
 
+		await get_tree().create_timer(0.5).timeout
 		_load_customer()
-
 	else:
-
 		customer_panel.visible = false
-
 		print("No more customers!")
 
 
 
-func _type_text(label: Label, text: String, speed: float = 0.02) -> void:
 
+func _type_text(label: Label, text: String, speed: float = 0.02) -> void:
 	_typing_seq += 1
 
 	var my_seq = _typing_seq
+
+	print("[TYPE] start seq:", my_seq, "text_len:", text.length())
 
 	label.text = ""
 
@@ -390,16 +409,12 @@ func _type_text(label: Label, text: String, speed: float = 0.02) -> void:
 
 	_skip_typing = false
 
-
 	for i in range(1, text.length() + 1):
 
 		if my_seq != _typing_seq:
-
 			if _skip_typing:
-
 				label.text = text
-
-				break
+			return
 
 		label.text = text.substr(0, i)
 
@@ -409,6 +424,8 @@ func _type_text(label: Label, text: String, speed: float = 0.02) -> void:
 	_typing_in_progress = false
 
 	_skip_typing = false
+
+	print("[TYPE] finished seq:", my_seq)
 
 
 
@@ -526,7 +543,7 @@ func _on_switch_scene_button_pressed() -> void:
 	
 
 func _show_day_summary():
-	var overlay := $DaySummaryOverlay
+	var overlay := $DaySummary
 	# var fade := overlay.get_node("Fade")
 	var image := overlay.get_node("SummaryImage")
 	var text := overlay.get_node("SummaryText")

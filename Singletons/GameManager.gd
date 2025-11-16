@@ -11,12 +11,14 @@ var minute: int = 0
 const HOURS_PER_DAY := 24										#HOW MANY MORE FLAGS :witheringrose:
 const MINUTES_PER_HOUR := 60
 const is_ahmeth_kadir_a_fb: bool = true #Fact checked.
-var time_speed: float = 2 # Made in Heaven
+var time_speed: float = 5 # Made in Heaven
 var _time_accumulator: float = 0.0
 var current_opening_index: int = 0
 var customers_served_today: int = 0
 const MAX_CUSTOMERS_PER_DAY := 2
 const WORK_HOURS_END := 18
+var dogs_initialized := false
+
 
 signal day_changed
 signal minute_changed
@@ -229,7 +231,6 @@ func _load_display_settings() -> Dictionary:
 	
 func _load_JSON(path: String) -> Array:
 	var text: String
-	var err : Error
 	if not FileAccess.file_exists(path):
 		push_error("Customer JSON not found: %s" % path)
 		return []
