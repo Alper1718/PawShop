@@ -68,9 +68,9 @@
 			"opening2": "I.. I need a pet. To, um... To keep me company, you know.. In the kitchen. Haha...",
 			"opening3": "A big dog is good, very good.. For a meal. O-Oh, I mean... I eat a lot too ― as you can see ― haha. So.. only a dog as big as me should keep me company, right? Haha.. Ha.",
 			"sad1": "Y-You don't? Oh, okay... I can get another one then. No? But.. Why? This is a petshop,  I mean.. I think I should be able to-",
-			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, thought.. ",
+			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, though.. ",
 			"happy1": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
-			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
+			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, I hope the strays won't make me ill, then.."
 		     }
 	},
 	
@@ -117,7 +117,7 @@
 			"opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
 			"opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle..",
 			"opening4": "Can I have one of your dogs, please..?",
-			"happy1": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you.",
+			"happy1": "Hehe.. Hehehe.. It's even cuter up close... We're gonna have so much fun, hehe... Thank you.",
 			"sad1": "H-huh? W-Well... I can take another then. You don't ..want me to have puppy..? B-But why?? I'll take very good care of them, I promise..!",
 			"sad2": "S-Still no..? Whatever.",
 			"pazarlik1": "M-More? I already paid so much... What's the lowest you'll go?",
@@ -200,7 +200,7 @@
 		"will_accept_paying_more": false,
 		"dialogues": {
 			"opening1": "Must eat... Hello again...",
-			"opening2": "A dog... A-Any dog. My.. My other dog gets lonely. It needs another dog. Another meat.. Give me the dog... the bigger the meati-..meerier, I meant merrier.. ",
+			"opening2": "A dog... A-Any dog. My.. My other dog gets lonely. It needs another dog. Another meat.. Give me the dog... the bigger the meati-..merrier, I meant merrier.. ",
 			"happy1": "O-Oh looks.. Looks delicious... Thank you, thank you very much... Tasty, worth a feast.. Take the money...",
 			"sad1": "Why..? My other dog will get lonely if you don't give me the dog.. Please.. No? O-Okay okay, I'll leave.. Just don't tell anybody about this. ",
 			"pazarlik1": "I told you last time that I can't pay more, but... Sigh, fine, j-just take it.. Cheaper than other stores.."
