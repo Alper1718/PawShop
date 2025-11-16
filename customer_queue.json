@@ -24,14 +24,14 @@
 		"name": "Nana",
 		"day": 1,
 		"is_first": false,
-		"feature": "",
-		"min_value": 0.0,
+		"feature": "eyes",
+		"min_value": 4.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
 			"opening1": "Hello there― goodness, I went through hell and back just trying to walk through this street. People really have no respect for their elders! Gah, if only my knees weren't hurting..",
 			"opening2": "You look very healthy though, how old are you? You remind me so much of my grandchild!",
-			"opening3": "Well, the kid’s birthday's next week. They grow up so fast nowadays, it's already been 11 years! I've been trying to find a good gift and when I passed by your store, I figured a dog would be an amazing choice. One with big eyes and a teeny tiny nose, just like my grandchild! Haha! ",
+			"opening3": "Well, the kid’s birthday's next week. They grow up so fast nowadays, it's already been 11 years! I've been trying to find a good gift and when I passed by your store, I figured a dog would be an amazing choice. One with big eyes, just like my grandchild! Haha! ",
 			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
 			"sad2": "",
 			"happy": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
@@ -44,8 +44,8 @@
 		"name": "Powy",
 		"day": 2,
 		"is_first": true,
-		"feature": "",
-		"min_value": 0.0,
+		"feature": "eyes",
+		"min_value": 5.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
@@ -64,8 +64,8 @@
 		"name": "Chinese",
 		"day": 2,
 		"is_first": false,
-		"feature": "",
-		"min_value": 0.0,
+		"feature": "size",
+		"min_value": 6.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
@@ -73,7 +73,7 @@
 			"opening2": "I.. I need a pet. To, um... To keep me company, you know.. In the kitchen. Haha...",
 			"opening3": "A big dog is good, very good.. For a meal. O-Oh, I mean... I eat a lot too ― as you can see ― haha. So.. only a dog as big as me should keep me company, right? Haha.. Ha.",
 			"sad1": "Y-You don't? Oh, okay... I can get another one then. No? But.. Why? This is a petshop,  I mean.. I think I should be able to-",
-			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, thought..",
+			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, though..",
 			"happy": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
 			"pazarlik": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
 		}
@@ -84,8 +84,8 @@
 		"name": "AnnoyingAssGuy",
 		"day": 3,
 		"is_first": true,
-		"feature": "",
-		"min_value": 0.0,
+		"feature": "cuteness",
+		"min_value": 6.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
@@ -106,18 +106,20 @@
 
 	},
 	
+
+	
 	{
 		"asset_path": "res://Assets/Customers/3g2.png",
 		"name": "MLPfan",
 		"day": 3,
 		"is_first": false,
-		"feature": "",
-		"min_value": 0.0,
+		"feature": "cuteness",
+		"min_value": 4.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			   "opening1": "Hehe... Hehehe.. I love dogs.. So much...",
-			   "opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
+		       "opening1": "Hehe... Hehehe.. I love dogs.. So much...",
+		       "opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
 			 "opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle..",
 			"opening4": "Can i have one of your dogs, please..?",
 			"happy": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you.",
@@ -127,27 +129,25 @@
 			"pazarlik2": "O-Okay, I'll take that, hehe.."
 			}
 	},
-
 	
 	{
 		"asset_path": "res://Assets/Customers/4g1.png",
-		"name": "Actualdogfanmaybe",
+		"name": "actualdogfan",
 		"day": 4,
 		"is_first": true,
-		"feature": "",
+		"feature": "cuteness",
 		"min_value": 0.0,
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			   "opening1": "Hello! Your shop looks veeerry cool!",
-			   "opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha..",
+		       "opening1": "Hello! Your shop looks veeerry cool!",
+		       "opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha..",
 			 "opening3": "They say animal's 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!",
 			 "sad": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
 			"happy": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
-			 "pazarlik": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys.",
-			 }
+			 "pazarlik": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
+		     }
 	},
-	
 
 
 ]
