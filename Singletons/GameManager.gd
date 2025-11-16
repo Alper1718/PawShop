@@ -41,6 +41,8 @@ var stillborn_count = 0
 var bankrupt_count = 0
 var ending: String = "default"
 
+var let_that_sink_in = true # to prevent the day summary from overlapping?
+
 func _ready() -> void:
 	randomize()
 	print("GameManager ready. Starting Day ", day)
@@ -65,7 +67,7 @@ func _process(delta: float) -> void:
 	while _time_accumulator >= 1.0:
 		_time_accumulator -= 1.0
 		advance_minute()
-	if hour >= WORK_HOURS_END and not has_node("/root/DaySummary"):
+	if hour >= WORK_HOURS_END and let_that_sink_in and not has_node("/root/DaySummary"):
 		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
 
 
@@ -97,7 +99,8 @@ func advance_time(delta_minutes: float) -> void:
 
 func next_day() -> void:
 	if ending == "default" and day >= 6:
-		time_speed = 0
+		time_paused = true
+		print('default ending')
 		get_tree().change_scene_to_file("res://Scenes/Endings/alternate_ending.tscn")
 		return
 	day += 1
@@ -106,7 +109,8 @@ func next_day() -> void:
 	pay_expenses()
 	if bankrupt_count >= 2:
 		ending = 'bankrupt'
-		time_speed = 0
+		print(ending, ' ending')
+		time_paused = true
 		get_tree().change_scene_to_file("res://Scenes/Endings/bankrupt_ending.tscn")
 	emit_signal("day_changed", day)
 	

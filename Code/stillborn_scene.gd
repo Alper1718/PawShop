@@ -41,6 +41,7 @@ func _on_puppy_dropped_in_bin():
 	await tween.finished
 	if GameManager.stillborn_count >= 2:
 		GameManager.ending = "stillborn"
-		GameManager.time_speed = 0
+		GameManager.time_paused = true
+		print(GameManager.ending, ' ending')
 		get_tree().change_scene_to_file('res://Scenes/Endings/still_born_ending.tscn')
 	get_tree().change_scene_to_file("res://Scenes/kennel.tscn")

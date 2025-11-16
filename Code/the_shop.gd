@@ -46,6 +46,10 @@ const TRANSITION_DURATION := 3.0
 
 
 func _ready():
+	
+	$SwitchSceneButton.visible = true
+	$ShopButtonSprite.visible = true
+	GameManager.time_paused = false
 
 	if GameManager.is_connected("day_changed", Callable(self, "_on_day_changed")):
 
@@ -113,7 +117,7 @@ func _process(_delta: float) -> void:
 
 	):
 
-		_show_day_summary()
+		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
 
 	
 
@@ -263,6 +267,8 @@ func _on_give_button_pressed():
 
 
 	customer_panel.visible = false
+	$SwitchSceneButton.visible = false
+	$ShopButtonSprite.visible = false
 
 
 func _on_kennel_back_pressed():
@@ -368,7 +374,7 @@ func _advance_to_next_customer() -> void:
 	GameManager.customers_served_today += 1
 
 	if GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY:
-		_show_day_summary()
+		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
 		return
 
 	if !GameManager.customers_queue.is_empty():
@@ -569,7 +575,7 @@ func _show_day_summary():
 		"balance": final_balance
 	}
 
-	text.get_node("DayLabel").text = "Day %d Summary" % summary.day
+	text.get_node("DayLabel").text = "Day {day} Summary".format(summary.day) 
 	
 	text.get_node("SavingsLabel").text = "€0"
 	text.get_node("RentLabel").text = "-€0"
@@ -577,7 +583,7 @@ func _show_day_summary():
 	text.get_node("NeedsLabel").text = "-€0"
 	text.get_node("TotalLabel").text = "€0"
 
-	image.modulate.a = 0.0
+	'''image.modulate.a = 0.0
 	# fade.modulate.a = 0.0
 
 	var tween = create_tween()
@@ -586,7 +592,7 @@ func _show_day_summary():
 	tween.tween_property(image, "modulate:a", 1.0, 2.0)
 	await tween.finished
 
-	await _animate_summary_numbers(text, summary)
+	await _animate_summary_numbers(text, summary)'''
 	
 func _animate_summary_numbers(text: VBoxContainer, data: Dictionary) -> void:
 	var duration := 1.0
