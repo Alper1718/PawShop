@@ -554,9 +554,9 @@ func _show_day_summary():
 	var image := overlay.get_node("SummaryImage")
 	var text := overlay.get_node("SummaryText")
 
-	GameManager.time_paused = true
+	GameManager.time_paused = true  # ZA WARUDO
 	overlay.visible = true
-	text.visible = true
+	$DaySummary/SummaryImage2.visible = true
 
 	var gm = GameManager
 	var rent = gm.RENT_COST
