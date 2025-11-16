@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://civa18rcox5ky"]
+
+[ext_resource type="Script" uid="uid://kaqsi7hc16c5" path="res://Code/Endings/still_born_ending.gd" id="1_3kq5k"]
+[ext_resource type="Texture2D" uid="uid://bdiaeynngq6uw" path="res://Assets/Endings/stillborn.jpg" id="2_dlj7e"]
+[ext_resource type="Texture2D" uid="uid://bx3d5nqpr2in2" path="res://Assets/Fade.png" id="2_m08rx"]
+
+[node name="StillBornEnding" type="Node2D"]
+script = ExtResource("1_3kq5k")
+
+[node name="Fade" type="Sprite2D" parent="."]
+texture = ExtResource("2_m08rx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(959.99994, 540)
+scale = Vector2(1.1999998, 1.1999999)
+texture = ExtResource("2_dlj7e")

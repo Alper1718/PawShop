@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbt2bqyl5h824"
-path="res://.godot/imported/DayEnd.png-91e1eb7b997f70ffb2d2659053ef92c2.ctex"
+uid="uid://bclql0u6t3qyl"
+path="res://.godot/imported/alternative3.jpg-4748bd5581a5bad8034e89f7aaeb81c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/DayEnd.png"
-dest_files=["res://.godot/imported/DayEnd.png-91e1eb7b997f70ffb2d2659053ef92c2.ctex"]
+source_file="res://Assets/Endings/alternative3.jpg"
+dest_files=["res://.godot/imported/alternative3.jpg-4748bd5581a5bad8034e89f7aaeb81c6.ctex"]
 
 [params]
 
