@@ -280,71 +280,52 @@ func _on_kennel_back_pressed():
 
 
 func _on_dog_selected(dog: Dog):
-
 	var feature = current_customer.feature
-
 	var required_value = current_customer.min_value
-
 	
-
 	var meets = false
-
 	if feature == "cuteness":
-
 		meets = dog.cuteness >= required_value
-
 	else:
-
 		meets = dog.get(feature) >= required_value
-
 	
-
 	customer_panel.visible = true
-
 	SecondPhase.visible = false
-
+	$CustomerPanel/VBoxContainer.visible = false
 
 	if meets:
-
 		var estimated_price = GameManager.estimate_doggo_price(dog)
 
-
-		await _type_text(speech_label, current_customer.dialogues.happy)
+		var happy_text = CustomerFunctions.get_happy(current_customer)
+		await _type_text(speech_label, happy_text)
 
 		GameManager.money += estimated_price
-
 		GameManager.dogs.erase(dog)
-
 		print("Customer bought the dog for $%s" % estimated_price)
-
 		
-
 		_selected_dog = null
-
 		
-
 		await get_tree().create_timer(1.0).timeout
-
 		_advance_to_next_customer()
-
 	else:
-
-		await _type_text(speech_label, current_customer.dialogues.sad)
+		var random_sad_index = CustomerFunctions.get_random_sad_index()
+		var sad_text = CustomerFunctions.get_sad(current_customer, random_sad_index)
+		await _type_text(speech_label, sad_text)
 
 		await get_tree().create_timer(1.0).timeout
-
 		_advance_to_next_customer()
 
 
 
 func _on_reject_button_pressed():
-
-	await _type_text(speech_label, current_customer.dialogues.sad)
+	$CustomerPanel/VBoxContainer.visible = false 
+	var random_sad_index = CustomerFunctions.get_random_sad_index()
+	var sad_text = CustomerFunctions.get_sad(current_customer, random_sad_index)
+	
+	await _type_text(speech_label, sad_text)
 
 	print("You told the customer you don't have a dog matching their criteria.")
-
 	await get_tree().create_timer(1.0).timeout
-
 	_advance_to_next_customer()
 
 
@@ -545,109 +526,81 @@ func _on_switch_scene_button_pressed() -> void:
 	
 
 func _show_day_summary():
-
 	var overlay := $DaySummaryOverlay
-
-	var fade := overlay.get_node("Fade")
-
+	# var fade := overlay.get_node("Fade")
 	var image := overlay.get_node("SummaryImage")
-
 	var text := overlay.get_node("SummaryText")
 
-
 	GameManager.time_paused = true
-
 	overlay.visible = true
-
 	text.visible = true
 
-
 	var gm = GameManager
-
 	var rent = gm.RENT_COST
-
 	var food = gm.FOOD_COST * gm.dogs.size()
-
 	var needs = 20
-
 	var total_expenses = rent + food + needs
-
 	var final_balance = gm.money - total_expenses
 
-
 	var summary = {
-
 		"day": gm.day,
-
 		"money": gm.money,
-
 		"rent": rent,
-
 		"food": food,
-
 		"needs": needs,
-
+		"total_expenses": total_expenses,
 		"balance": final_balance
-
 	}
 
-
 	text.get_node("DayLabel").text = "Day %d Summary" % summary.day
-
-	text.get_node("SavingsLabel").text = "Savings: €0"
-
-	text.get_node("RentLabel").text = "Rent: -€0"
-
-	text.get_node("FoodLabel").text = "Dog Care: -€0"
-
-	text.get_node("NeedsLabel").text = "Personal Needs: -€0"
-
-	text.get_node("TotalLabel").text = "Balance: €0"
-
+	
+	text.get_node("SavingsLabel").text = "€0"
+	text.get_node("RentLabel").text = "-€0"
+	text.get_node("FoodLabel").text = "-€0"
+	text.get_node("NeedsLabel").text = "-€0"
+	text.get_node("TotalLabel").text = "€0"
 
 	image.modulate.a = 0.0
-
-	fade.modulate.a = 0.0
-
+	# fade.modulate.a = 0.0
 
 	var tween = create_tween()
-
-	tween.set_parallel(true)
-
-	tween.tween_property(fade, "modulate:a", 0.6, 1.5)
-
+	# tween.set_parallel(true)
+	# tween.tween_property(fade, "modulate:a", 0.6, 1.5)
 	tween.tween_property(image, "modulate:a", 1.0, 2.0)
-
 	await tween.finished
 
-
 	await _animate_summary_numbers(text, summary)
-
-
+	
 func _animate_summary_numbers(text: VBoxContainer, data: Dictionary) -> void:
-
 	var duration := 1.0
-
 	var steps := 30
-
 	var delay := duration / steps
-
+	
+	var initial_savings = data.money
+	var initial_balance = data.money
+	var final_savings = data.money
+	var final_rent = data.rent
+	var final_food = data.food
+	var final_needs = data.needs
+	var final_balance = data.balance
 
 	for i in range(1, steps + 1):
-
 		var t = float(i) / steps
-
-		text.get_node("SavingsLabel").text = "Savings: €%d" % int(lerp(0, data.money, t))
-
-		text.get_node("RentLabel").text = "Rent: -€%d" % int(lerp(0, data.rent, t))
-
-		text.get_node("FoodLabel").text = "Dog Care: -€%d" % int(lerp(0, data.food, t))
-
-		text.get_node("NeedsLabel").text = "Personal Needs: -€%d" % int(lerp(0, data.needs, t))
-
-		text.get_node("TotalLabel").text = "Balance: €%d" % int(lerp(0, data.balance, t))
-
+		
+		text.get_node("SavingsLabel").text = "Savings: €%d" % int(lerp(0, final_savings, t))
+		
+		text.get_node("RentLabel").text = "Rent: -€%d" % int(lerp(0, final_rent, t))
+		text.get_node("FoodLabel").text = "Dog Care: -€%d" % int(lerp(0, final_food, t))
+		text.get_node("NeedsLabel").text = "Personal Needs: -€%d" % int(lerp(0, final_needs, t))
+		
+		text.get_node("TotalLabel").text = "Balance: €%d" % int(lerp(initial_balance, final_balance, t))
+		
 		await get_tree().create_timer(delay).timeout
 
+	text.get_node("SavingsLabel").text = "Savings: €%d" % final_savings
+	text.get_node("RentLabel").text = "Rent: -€%d" % final_rent
+	text.get_node("FoodLabel").text = "Dog Care: -€%d" % final_food
+	text.get_node("NeedsLabel").text = "Personal Needs: -€%d" % final_needs
+	text.get_node("TotalLabel").text = "Balance: €%d" % final_balance
 
-	GameManager.money = data.balance 
+	GameManager.money = data.balance
