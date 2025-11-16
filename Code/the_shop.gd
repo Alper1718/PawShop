@@ -116,7 +116,7 @@ func _process(_delta: float) -> void:
 		GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY
 
 	):
-
+		print('process')
 		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
 
 	
@@ -374,6 +374,7 @@ func _advance_to_next_customer() -> void:
 	GameManager.customers_served_today += 1
 
 	if GameManager.customers_served_today >= GameManager.MAX_CUSTOMERS_PER_DAY:
+		print('max')
 		get_tree().change_scene_to_file("res://Scenes/day_summary.tscn")
 		return
 
