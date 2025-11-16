@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://h57b0tmeqrf2"]
+[gd_scene load_steps=15 format=3 uid="uid://h57b0tmeqrf2"]
 
 [ext_resource type="Script" uid="uid://bae5wbvh6hhbc" path="res://Code/the_shop.gd" id="1_jd8ym"]
 [ext_resource type="Texture2D" uid="uid://bv5281gg3863s" path="res://Assets/Backgrounds/Shop_morning_background (3).jpeg" id="1_qdt25"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b7lhfssby7wqy" path="res://Assets/KennelUI/breed_button.png" id="10_2r8aa"]
 [ext_resource type="Texture2D" uid="uid://b5o7vn7yqt31f" path="res://Assets/Speech_bubble.png" id="11_fypc6"]
 [ext_resource type="Texture2D" uid="uid://bnf0yyv3sf5tt" path="res://Assets/Tezgah.png" id="12_2edsc"]
+[ext_resource type="PackedScene" uid="uid://djkeah5r6q475" path="res://Scenes/day_summary.tscn" id="13_nwkce"]
+[ext_resource type="Texture2D" uid="uid://cbt2bqyl5h824" path="res://Assets/DayEnd.png" id="14_g82ay"]
 
 [node name="TheShop" type="Node2D"]
 script = ExtResource("1_jd8ym")
@@ -196,6 +198,63 @@ scale = Vector2(1.2, 2.58)
 texture = ExtResource("10_2r8aa")
 region_enabled = true
 region_rect = Rect2(101.622, 165.02, 184.737, 81.5551)
+
+[node name="DaySummary" parent="." instance=ExtResource("13_nwkce")]
+visible = false
+z_index = 2
+
+[node name="SavingsLabel2" type="Label" parent="DaySummary"]
+offset_left = 969.0
+offset_top = 155.0
+offset_right = 1078.0
+offset_bottom = 196.0
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 36
+text = "#1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DaySummary"]
+offset_left = 939.0
+offset_top = 288.0
+offset_right = 1173.0
+offset_bottom = 961.0
+
+[node name="MoneyLabel" type="Label" parent="DaySummary/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 120.22)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 32
+text = "Savings"
+
+[node name="RentLabel" type="Label" parent="DaySummary/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 134.795)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 32
+text = "Savings"
+
+[node name="NeedsLabel" type="Label" parent="DaySummary/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 116.365)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 32
+text = "Savings"
+
+[node name="FoodLabel" type="Label" parent="DaySummary/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 90.14)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 32
+text = "Savings"
+
+[node name="TotalLabel" type="Label" parent="DaySummary/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 32
+text = "Savings"
+
+[node name="SummaryImage2" type="Sprite2D" parent="DaySummary"]
+position = Vector2(960, 540)
+texture = ExtResource("14_g82ay")
 
 [connection signal="pressed" from="Toys/ToysButton" to="." method="_on_toys_button_pressed"]
 [connection signal="pressed" from="SwitchSceneButton" to="." method="_on_switch_scene_button_pressed"]
