@@ -14,8 +14,8 @@
 			"opening3": "",
 			"sad1": "Oh, um, that’s okay. Bye",
 			"sad2": "",
-			"happy": "Aww.. It's adorable. Thank you. Um, how much does it cost?",
-			"pazarlik": "Oh.. Okay, I'm sorry.. Um, how much more do I have to pay? Alright, here you go.. Bye."
+			"happy1": "Aww.. It's adorable. Thank you. Um, how much does it cost?",
+			"pazarlik1": "Oh.. Okay, I'm sorry.. Um, how much more do I have to pay? Alright, here you go.. Bye."
 		}
 	},
 	
@@ -34,8 +34,8 @@
 			"opening3": "Well, the kid’s birthday's next week. They grow up so fast nowadays, it's already been 11 years! I've been trying to find a good gift and when I passed by your store, I figured a dog would be an amazing choice. One with big eyes, just like my grandchild! Haha! ",
 			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
 			"sad2": "",
-			"happy": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
-			"pazarlik": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go."
+			"happy1": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
+			"pazarlik1": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go."
 		}
 	},
 	
@@ -54,14 +54,14 @@
 			"opening3": "",
 			"sad1": "Now that's a shame.. still, thank you for your patience love. Seems I've got other stores I need to check...",
 			"sad2": "",
-			"happy": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
-			"pazarlik": "Oh? How much more do I need to pay? That's no problem, here you go."
+			"happy1": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
+			"pazarlik1": "Oh? How much more do I need to pay? That's no problem, here you go."
 		}
 	},
 	
 	{
 		"asset_path": "res://Assets/Customers/2g2_5g2.png",
-		"name": "Noracing",
+		"name": "Chinese",
 		"day": 2,
 		"is_first": false,
 		"feature": "size",
@@ -74,8 +74,8 @@
 			"opening3": "A big dog is good, very good.. For a meal. O-Oh, I mean... I eat a lot too ― as you can see ― haha. So.. only a dog as big as me should keep me company, right? Haha.. Ha.",
 			"sad1": "Y-You don't? Oh, okay... I can get another one then. No? But.. Why? This is a petshop,  I mean.. I think I should be able to-",
 			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, though..",
-			"happy": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
-			"pazarlik": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
+			"happy1": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
+			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, i hope the strays won't make me ill, then.."
 		}
 	},
 	
@@ -96,11 +96,11 @@
 			"opening5": "Gosh, is your brain just sitting in your skull!? That's one star down... That animal better not be below %f cuteness, I literally WON'T touch it! Beauty is the ruler for a reason, duh?",
 			"opening6": "Big eyes, petite body, small nose... The basics, you know? Did you understand? Do I need to spell it out? No?",
 			"opening7": "Okay. Now chop chop. Don't you dare keep me waiting for long.",
-			"sad": "Oh. Of course you couldn't do your one job. That's on me for walking in thinking someone like you could handle true beauty standards. Anyway, enjoy your one-star review. Bye-bye.",
-			"happy": "Ew. What's with her fur? ...I didn't walk the whole street for this. It's going straight to a groomer to fix your mess.",
+			"sad1": "Oh. Of course you couldn't do your one job. That's on me for walking in thinking someone like you could handle true beauty standards. Anyway, enjoy your one-star review. Bye-bye.",
+			"happy1": "Ew. What's with her fur? ...I didn't walk the whole street for this. It's going straight to a groomer to fix your mess.",
 			"happy2": "Beauty takes more than your bare minimum, though I wouldn't expect you to know. Duh.. Its face is cute though, I suppose..",
 			"happy3": "Whatever, where do I scan my card? Make it quick or I'm dropping you to two stars.",
-			"pazarlik": "Nuh uhh~ I don't wanna hear it! -chew chew- Bold of you ask for more. It's an accessory, not Aladdin's magic lamp?",
+			"pazarlik1": "Nuh uhh~ I don't wanna hear it! -chew chew- Bold of you ask for more. It's an accessory, not Aladdin's magic lamp?",
 			"pazarlik2": "Tch, you know what, just take this. I'm losing braincells just from looking at you.. "
 			}
 
@@ -118,11 +118,11 @@
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			   "opening1": "Hehe... Hehehe.. I love dogs.. So much...",
-			   "opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
-			 "opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle..",
+			"opening1": "Hehe... Hehehe.. I love dogs.. So much...",
+			"opening2": "Hello... You've got really cute dogs.. Hehe.. I-I love dogs, you know... More than anything.. There's something special about them..",
+			"opening3": "I like small puppies the most.. They're so cute, all energetic, hehe.. I don't like too much fur though.. Too much hassle..",
 			"opening4": "Can i have one of your dogs, please..?",
-			"happy": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you.",
+			"happy1": "Hehe.. Hehehe.. It's even cuter up closer... We're gonna have so much fun, hehe... Thank you.",
 			"sad1": "H-huh? W-Well... I can take another then. You don't ..want me to have puppy..? B-But why?? I'll take very good care of them, I promise..!",
 			"sad2": "S-Still no..? Whatever.",
 			"pazarlik1": "M-More? I already paid so much... What's the lowest you'll go?",
@@ -140,13 +140,13 @@
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-			   "opening1": "Hello! Your shop looks veeerry cool!",
-			   "opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha..",
-			 "opening3": "They say animal's 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!",
-			 "sad": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
-			"happy": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
-			 "pazarlik": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
-			 }
+			"opening1": "Hello! Your shop looks veeerry cool!",
+			"opening2": "I want a dog! I want one as a permanent friend. I have no luck with people, it's reaaaally hard to blend in when all people care about is how you look. I didn't have the best time throughout school just because of my skin, haha..",
+			"opening3": "They say animal's 'ugly' when it's not all cutesy. I disagree! What they think is ugly is the prettiest in my eyes!",
+			"sad1": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
+			"happy1": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
+			"pazarlik1": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
+		     }
 	},
 
 
