@@ -58,7 +58,7 @@
 	},
 	{
 		"asset_path": "res://Assets/Customers/2g2_5g2.png",
-		"name": "Chinese",
+		"name": "noracing",
 		"day": 2,
 		"is_first": false,
 		"feature": "size",
