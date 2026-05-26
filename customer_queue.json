@@ -33,7 +33,7 @@
 			"happy1": "Awh, that's an adorable pup! Here, come to granny! Thank you so much sweetheart, here you go. ",
 			"sad1": "Oh, not even one? Now that’s no good. Sigh, I need to think of another gift, then. Well, I’ll take a look at the other stores I suppose. Have a great day!",
 			"pazarlik1": "Oh, it costs more? Huh... Well, a few extra bucks aren't worth my grandkid's happiness now, is it? Haha, here you go. " 
-		    }
+			}
 	},
 	
 	{
@@ -46,9 +46,9 @@
 		"max_price": 0,
 		"will_accept_paying_more": false,
 		"dialogues": {
-		       "opening1": "Hello dear! Such a nice weather, isn't it? Beautiful, like my old dog's eyes.. Even thinking about it brings me to tears..",
-		       "opening2": "Oh, of course, I'm sorry... I’d gotten my dog from a petshop just like this. It had the prettiest eyes ever.. big and doe-like. This is going to sound selfish of me, but I'd really appreciate a dog with eyes like its.",
-		       "happy1": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
+			   "opening1": "Hello dear! Such a nice weather, isn't it? Beautiful, like my old dog's eyes.. Even thinking about it brings me to tears..",
+			   "opening2": "Oh, of course, I'm sorry... I’d gotten my dog from a petshop just like this. It had the prettiest eyes ever.. big and doe-like. This is going to sound selfish of me, but I'd really appreciate a dog with eyes like its.",
+			   "happy1": "Its eyes are so bright.. so similar.. Thank you honey, this means so much to me. So, how do I repay you? You deserve a generous tip for sure.",
 			"sad1": "Now that's a shame.. still, thank you for your patience love. Seems I've got other stores I need to check...",
 			"pazarlik1": "Oh? How much more do I need to pay? That's no problem, here you go."
 			}
@@ -71,7 +71,7 @@
 			"sad2": "...Whatever, strays are much cheaper anyway.. I hope it won't make me ill, though.. ",
 			"happy1": "Such a big pup, hehe.. even more meaty than I though.. Sorry, I- Um.. Nevermind. We will have a very nice dinner together.",
 			"pazarlik1": "It costs more?? I-I already paid a lot, you know... Can't you go lower? No?? Come on, it's just a dog. It's one-time use anyway... Whatever, I hope the strays won't make me ill, then.."
-		     }
+			 }
 	},
 	
 	{
@@ -97,7 +97,7 @@
 			"happy3": "Whatever, where do I scan my card? Make it quick or I'm dropping you to two stars.",
 			"pazarlik1": "Nuh uhh~ I don't wanna hear it! -chew chew- Bold of you ask for more. It's an accessory, not Aladdin's magic lamp?",
 			"pazarlik2": "Tch, you know what, just take this. I'm losing braincells just from looking at you.. "
-		    }
+			}
 
 	},
 	
@@ -141,7 +141,7 @@
 			"sad1": "Aw shucks.. No chance even with dogs? Even doggies don't wanna be my friend, you say.. ",
 			"happy1": "It's... SO PREEETTTYYYYY, I LOVE ITTTT!! THANK YOU SO SO SOSOSOOO MUCHH!! JUST TAKE MY WALLET PLEASE!!",
 			"pazarlik1": "HERE, TAKE ALL YOU NEED! Oh, leave some though, I need to get it some toys."
-		     }
+			 }
 	},
 	
 	
@@ -166,8 +166,8 @@
 			"sad2": "Can you like, call another store? Ask them instead? Tsk, whatever. This place sucks ass dude..",
 			"pazarlik1": "WHAT?? I said cheap for a reason! I-I don’t have that much! That’s like…highkey robbery!",
 			"pazarlik2": "A damn dog can’t be worth like, five video games right? Shouldn’t be! Can’t you go lower? Come on, I need it!",
-			"pazarlik3": "Ugh, fine. Damn scammer…”
-		    }
+			"pazarlik3": "Ugh, fine. Damn scammer…"
+			}
 	},
 	
 	{
@@ -186,7 +186,7 @@
 			"sad1": "Arrr, how come? Other folk be gettin' their treasure just fine! Aye, this port don't hold me treasure then..",
 			"happy1": "Aye aye aye, now that's real treasure! A keeper fo' certain, haha! Now, how be I payin' fo' me treasure?",
 			"pazarlik1": "Aye, you seek more? The beast's hard to let go of fo' shore but ye can take yer pay. The hound's mine now."
-		      }
+			  }
 	},
 	
 	{
@@ -204,7 +204,7 @@
 			"happy1": "O-Oh looks.. Looks delicious... Thank you, thank you very much... Tasty, worth a feast.. Take the money...",
 			"sad1": "Why..? My other dog will get lonely if you don't give me the dog.. Please.. No? O-Okay okay, I'll leave.. Just don't tell anybody about this. ",
 			"pazarlik1": "I told you last time that I can't pay more, but... Sigh, fine, j-just take it.. Cheaper than other stores.."
-		       }
+			   }
 	},
 	
 	{
@@ -222,7 +222,7 @@
 			"happy1": "Thanks. Feels weird, trying to protect myself from people just like me.",
 			"sad1": "You don't have a single big dog? ...Tch, should've saved money instead of... Sigh. Okay. Bye.",
 			"pazarlik1": "This is the lowest you'll go? ...Fine. Pot has to wait, I guess.."
-		     }
+			 }
 	},
 
 	{
@@ -253,7 +253,7 @@
 			"pazarlik1": "Oho, you're a brave one, aren't you? I can appreciate that. Hahaha! You're lucky I gave you money as it is. Even luckier that I don't shoot you dead right here. Dipshit.",
 			"pazarlik2": "I'll give you five more, not a penny above that. Ask for more and I'll crack your skull open. You'll get around fine here if you just do as I say, kid.",
 			"pazarlik3": "Wait 'till I teach you your last lesson. You can't escape from this that easy! HAHAHAHA!"
-		      }
+			  }
 	},
 
 ]

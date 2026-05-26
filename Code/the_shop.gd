@@ -251,7 +251,7 @@ func _on_give_button_pressed():
 	_selected_dog = null
 
 
-	var kennel_scene := preload("res://Scenes/Kennel.tscn")
+	var kennel_scene := preload("res://Scenes/kennel.tscn")
 
 	var kennel_page := kennel_scene.instantiate()
 
